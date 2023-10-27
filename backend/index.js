@@ -10,6 +10,7 @@ app.use(express.json());
 app.use(morgan('dev'));
 app.use(cors());
 
+
 // Router
 const routes = require('./routes');
 app.use('/api', routes); // Use '/api' as the base route path 

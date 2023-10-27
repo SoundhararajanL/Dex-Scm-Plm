@@ -1,8 +1,9 @@
-.container {
+.top {
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
   font-family: monospace;
+  margin-left: 20%;
  
 }
 
@@ -16,6 +17,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: normal;
+  margin-left: 20%;
 }
 
 .product-card {
@@ -31,7 +33,7 @@
 }
 
 .product-card:hover {
-  transform: scale(1.05);
+  transform: scale(1.10);
 }
 
 .product-card.selected {
@@ -89,6 +91,49 @@
 .faDatabase-icon {
   font-size: 48px; 
   margin-top: 10px; 
+}
+
+
+/* Stylish filter options and buttons CSS */
+
+.filter-options {
+  max-width: 200px;
+  margin-left: 20px;
+  float: left;
+  margin-top: 5%;
+}
+
+.filter-options h2 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #333; /* Text color */
+}
+
+.filter-options select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc; /* Border color */
+  border-radius: 5px;
+  margin-bottom: 10px;
+  background-color: #f9f9f9; /* Background color */
+  color: #333; /* Text color */
+}
+
+.filter-options select:focus {
+  border-color: #007bff; /* Highlight border color on focus */
+}
+
+
+.apply-filter-button {
+  background-color: #0A66C2;
+  /* Other button styles */
+  color: #ffffff;
+}
+
+.clear-filter-button {
+  background-color: #f13c3c;
+  /* Other button styles */
+  color: #ffffff;
 }
 
 
