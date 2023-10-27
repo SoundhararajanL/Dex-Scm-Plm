@@ -7,6 +7,7 @@ import './App.css';
 
 class GripperList extends Component {
   state = {
+    filtersApplied: false,
     grippers: [],
     selectedGripper: null,
     filterOptions: {
@@ -91,8 +92,8 @@ class GripperList extends Component {
   };
 
   filterGrippers = () => {
-    const { grippers, selectedFilters, minMaxValues } = this.state;
 
+    const { grippers, selectedFilters, minMaxValues } = this.state;
     // Validate and set minimum and maximum values for filters
     const validateFilterValue = (filterName, value) => {
       const minValue = minMaxValues[`${filterName}Min`];
@@ -113,6 +114,7 @@ class GripperList extends Component {
     const forceMax = validateFilterValue('force', selectedFilters.forceMax);
     const pressureMin = validateFilterValue('pressure', selectedFilters.pressureMin);
     const pressureMax = validateFilterValue('pressure', selectedFilters.pressureMax);
+
 
     const filteredGrippers = grippers.filter((gripper) => {
       const manufactureName = gripper.Data.find((data) => data.Property === 'ManufactureName').Value;
@@ -139,6 +141,7 @@ class GripperList extends Component {
     });
 
     this.setState({ filteredGrippers });
+    this.setState({ filtersApplied: true });
   };
 
   clearFilter = () => {
@@ -158,12 +161,13 @@ class GripperList extends Component {
       },
     }), () => {
       this.filterGrippers();
+      this.setState({ filtersApplied: false });
     });
   };
 
 
   render() {
-    const { filteredGrippers, filterOptions, selectedFilters } = this.state;
+    const { filteredGrippers, filterOptions, selectedFilters, filtersApplied } = this.state;
     const productCount = filteredGrippers.length;
 
     return (
@@ -208,20 +212,33 @@ class GripperList extends Component {
             <input
               type="number"
               placeholder={`Min (${this.state.minMaxValues.dimensionMin})`}
-              defaultValue=""
-              min={this.state.minMaxValues.dimensionMin}
-              max={this.state.minMaxValues.dimensionMax}
+              value={this.state.selectedFilters.dimensionMin}
               onChange={(e) => this.handleFilterChange('dimensionMin', e.target.value)}
             />
             <input
               type="number"
               placeholder={`Max (${this.state.minMaxValues.dimensionMax})`}
-              defaultValue=""
-              min={this.state.minMaxValues.dimensionMin}
-              max={this.state.minMaxValues.dimensionMax}
+              value={this.state.selectedFilters.dimensionMax}
               onChange={(e) => this.handleFilterChange('dimensionMax', e.target.value)}
             />
+            <div className="range-slider">
+              <input
+                type="range"
+                min={this.state.minMaxValues.dimensionMin}
+                max={this.state.minMaxValues.dimensionMax}
+                value={this.state.selectedFilters.dimensionMin}
+                onChange={(e) => this.handleFilterChange('dimensionMin', e.target.value)}
+              />
+              <input
+                type="range"
+                min={this.state.minMaxValues.dimensionMin}
+                max={this.state.minMaxValues.dimensionMax}
+                value={this.state.selectedFilters.dimensionMax}
+                onChange={(e) => this.handleFilterChange('dimensionMax', e.target.value)}
+              />
+            </div>
           </div>
+
           <div>
             <label>Payload(Kg) Range:</label>
             <input
@@ -296,6 +313,7 @@ class GripperList extends Component {
           <div className="top">Count of Products: {productCount}</div>
           {filteredGrippers.length > 0 ? (
             filteredGrippers.map((gripper, index) => (
+
               <div
                 key={index}
                 className="product-card"

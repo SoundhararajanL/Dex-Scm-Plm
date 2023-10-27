@@ -101,6 +101,9 @@
   padding: 10px;
   border: 1px solid #ccc;
   margin-right: 20px; /* Add some spacing between the filters and the product list */
+  margin-left: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 /* Style individual filter elements (selects, input fields, labels, buttons, etc.) */
@@ -291,3 +294,21 @@
   color: rgba(0, 0, 0, .3);
 }
 
+
+.top {
+  font-weight: bold;
+}
+
+.top-center {
+  text-align: center;
+}
+
+.top-right {
+  text-align: right;
+}
+
+.h3-filtered-grippers {
+  font-size: 1.2rem;
+  color: #0073e6; /* You can adjust the color to your preference */
+  margin-left: 10px; /* Add some spacing between "Count of Products" and "Filtered Grippers" */
+}

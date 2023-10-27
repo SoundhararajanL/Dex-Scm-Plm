@@ -13,7 +13,6 @@ router.get('/grippers', async (req, res) => {
   }
 });
 
-
 router.get('/grippers/minmax', async (req, res) => {
   try {
     const grippers = await Gripper.find();
@@ -22,9 +21,18 @@ router.get('/grippers/minmax', async (req, res) => {
       return res.status(500).json({ error: 'Grippers data is not an array.' });
     }
 
+    const dimensionValues = grippers.map((gripper) => {
+      const dimensionValue = gripper.Data.find((data) => data.Property === 'Dimension(MM)').Value;
+      const [min, max] = dimensionValue.split('-').map(parseFloat);
+      return { min, max };
+    });
+
+    const dimensionMin = Math.min(...dimensionValues.map((value) => value.min));
+    const dimensionMax = Math.max(...dimensionValues.map((value) => value.max));
+
     const minMaxValues = {
-      dimensionMin: Math.min(...grippers.map((gripper) => parseFloat(gripper.Data.find((data) => data.Property === 'Dimension(MM)').Value))),
-      dimensionMax: Math.max(...grippers.map((gripper) => parseFloat(gripper.Data.find((data) => data.Property === 'Dimension(MM)').Value))),
+      dimensionMin,
+      dimensionMax,
       payloadMin: Math.min(...grippers.map((gripper) => parseFloat(gripper.Data.find((data) => data.Property === 'Payload(Kg)').Value))),
       payloadMax: Math.max(...grippers.map((gripper) => parseFloat(gripper.Data.find((data) => data.Property === 'Payload(Kg)').Value))),
       forceMin: Math.min(...grippers.map((gripper) => parseFloat(gripper.Data.find((data) => data.Property === 'Gripping Force').Value))),
@@ -39,5 +47,6 @@ router.get('/grippers/minmax', async (req, res) => {
     res.status(500).json({ error: 'Error occurred while fetching grippers.' });
   }
 });
+
 
 module.exports = router;
