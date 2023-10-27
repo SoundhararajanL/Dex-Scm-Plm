@@ -63,6 +63,8 @@
 .pdf-icon {
   color: red;
 }
+
+
 .filter-modal {
   position: fixed;
   top: 0;
@@ -93,34 +95,46 @@
   margin-top: 10px; 
 }
 
-
-/* Stylish filter options and buttons CSS */
-
 .filter-options {
-  max-width: 200px;
-  margin-left: 20px;
-  float: left;
-  margin-top: 5%;
+  float: left; /* Make the filter options appear on the left side */
+  width: 250px; /* Adjust the width as needed */
+  padding: 10px;
+  border: 1px solid #ccc;
+  margin-right: 20px; /* Add some spacing between the filters and the product list */
 }
 
-.filter-options h2 {
-  font-size: 18px;
+/* Style individual filter elements (selects, input fields, labels, buttons, etc.) */
+.filter-options select,
+.filter-options input[type="number"] {
+  display: block;
   margin-bottom: 10px;
-  color: #333; /* Text color */
-}
-
-.filter-options select {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #ccc; /* Border color */
+  width: 70%;
+  padding: 5px;
+  border: 1px solid #ccc;
   border-radius: 5px;
-  margin-bottom: 10px;
-  background-color: #f9f9f9; /* Background color */
-  color: #333; /* Text color */
 }
 
-.filter-options select:focus {
-  border-color: #007bff; /* Highlight border color on focus */
+.filter-options label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.filter-options button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 5%;
+ 
+}
+
+.filter-options button:hover {
+  background-color: #0056b3;
 }
 
 

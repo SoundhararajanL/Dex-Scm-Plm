@@ -174,7 +174,7 @@ class GripperList extends Component {
             value={selectedFilters.manufactureName}
             onChange={(e) => this.handleFilterChange('manufactureName', e.target.value)}
           >
-            <option value="">Filter by ManufactureName</option>
+            <option hidden value="">Filter by ManufactureName</option>
             {filterOptions.manufactureNames.map((option, index) => (
               <option key={index} value={option}>
                 {option}
@@ -185,7 +185,7 @@ class GripperList extends Component {
             value={selectedFilters.type}
             onChange={(e) => this.handleFilterChange('type', e.target.value)}
           >
-            <option value="">Filter by Type</option>
+            <option hidden value="">Filter by Type</option>
             {filterOptions.types.map((option, index) => (
               <option key={index} value={option}>
                 {option}
@@ -196,7 +196,7 @@ class GripperList extends Component {
             value={selectedFilters.category}
             onChange={(e) => this.handleFilterChange('category', e.target.value)}
           >
-            <option value="">Filter by Category</option>
+            <option hidden value="">Filter by Category</option>
             {filterOptions.categories.map((option, index) => (
               <option key={index} value={option}>
                 {option}
