@@ -30,6 +30,8 @@ class GripperList extends Component {
     },
     minMaxValues: {}, // Initialize minMaxValues as an empty object
     filteredGrippers: [],
+    selectedGripperDetails: null,
+    isModalOpen: false,
   };
 
   componentDidMount() {
@@ -166,7 +168,21 @@ class GripperList extends Component {
   };
 
 
+  handleGripperClick = (gripper) => {
+    this.setState({
+      selectedGripperDetails: gripper,
+      isModalOpen: true, // Open the modal
+    });
+  };
+  
+  closeGripperDetails = () => {
+    this.setState({
+      selectedGripperDetails: null,
+      isModalOpen: false, // Close the modal
+    });
+  };
   render() {
+    const { isModalOpen, selectedGripperDetails } = this.state;
     const { filteredGrippers, filterOptions, selectedFilters, filtersApplied } = this.state;
     const productCount = filteredGrippers.length;
 
@@ -307,6 +323,7 @@ class GripperList extends Component {
 
         </div>
         <div className="product-list">
+          
           <h1 className="top">
             Grippers List <FontAwesomeIcon icon={faDatabase} />
           </h1>
@@ -317,7 +334,7 @@ class GripperList extends Component {
               <div
                 key={index}
                 className="product-card"
-              // onClick={() => this.handleGripperClick(gripper)}
+              onClick={() => this.handleGripperClick(gripper)}
               >
                 {gripper.Data.find((data) => data.Property === 'ImageURL') ? (
                   <img
@@ -353,6 +370,32 @@ class GripperList extends Component {
               <FontAwesomeIcon icon={faDatabase} className="faDatabase-icon" />
             </div>
           )}
+    {selectedGripperDetails && (
+  <div className="modal">
+    <div className="modal-content">
+      <span className="close" onClick={this.closeGripperDetails}>&times;</span>
+      <h2>Selected Gripper: {selectedGripperDetails['Model Name']}</h2>
+      <table className="gripper-table">
+        <thead>
+          <tr>
+            <th>Property</th>
+            <th>Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          {selectedGripperDetails.Data.filter(data => data.Property !== 'ImageURL' && data.Property !== 'Datasheet').map((data, dataIndex) => (
+            <tr key={dataIndex}>
+              <td>{data.Property}</td>
+              <td>{data.Value}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div>
+)}
+
+
         </div>
 
       </div>
