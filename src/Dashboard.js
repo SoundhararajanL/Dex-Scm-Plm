@@ -167,14 +167,19 @@ class GripperList extends Component {
     });
   };
 
-
+  openGripperDetails = (gripper) => {
+    this.setState({
+      selectedGripperDetails: gripper,
+      isModalOpen: true, // Open the modal
+    });
+  };
   handleGripperClick = (gripper) => {
     this.setState({
       selectedGripperDetails: gripper,
       isModalOpen: true, // Open the modal
     });
   };
-  
+
   closeGripperDetails = () => {
     this.setState({
       selectedGripperDetails: null,
@@ -323,28 +328,28 @@ class GripperList extends Component {
 
         </div>
         <div className="product-list">
-          
+
           <h1 className="top">
             Grippers List <FontAwesomeIcon icon={faDatabase} />
           </h1>
           <div className="top">Count of Products: {productCount}</div>
           {filteredGrippers.length > 0 ? (
             filteredGrippers.map((gripper, index) => (
-
               <div
                 key={index}
                 className="product-card"
-              onClick={() => this.handleGripperClick(gripper)}
               >
-                {gripper.Data.find((data) => data.Property === 'ImageURL') ? (
-                  <img
-                    src={gripper.Data.find((data) => data.Property === 'ImageURL').Value}
-                    alt={gripper['Model Name']}
-                  />
-                ) : (
-                  <p>Image not available</p>
-                )}
-                <h2>{gripper['Model Name']}</h2>
+                <div onClick={() => this.openGripperDetails(gripper)}>
+                  {gripper.Data.find((data) => data.Property === 'ImageURL') ? (
+                    <img
+                      src={gripper.Data.find((data) => data.Property === 'ImageURL').Value}
+                      alt={gripper['Model Name']}
+                    />
+                  ) : (
+                    <p>Image not available</p>
+                  )}
+                  <h2>{gripper['Model Name']}</h2>
+                </div>
                 {gripper.Data.find(
                   (data) => data.Property === 'Datasheet' && data.Value !== ''
                 ) ? (
@@ -370,34 +375,31 @@ class GripperList extends Component {
               <FontAwesomeIcon icon={faDatabase} className="faDatabase-icon" />
             </div>
           )}
-    {selectedGripperDetails && (
-  <div className="modal">
-    <div className="modal-content">
-      <span className="close" onClick={this.closeGripperDetails}>&times;</span>
-      <h2>Selected Gripper: {selectedGripperDetails['Model Name']}</h2>
-      <table className="gripper-table">
-        <thead>
-          <tr>
-            <th>Property</th>
-            <th>Value</th>
-          </tr>
-        </thead>
-        <tbody>
-          {selectedGripperDetails.Data.filter(data => data.Property !== 'ImageURL' && data.Property !== 'Datasheet').map((data, dataIndex) => (
-            <tr key={dataIndex}>
-              <td>{data.Property}</td>
-              <td>{data.Value}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  </div>
-)}
-
-
+          {selectedGripperDetails && (
+            <div className={`modal ${isModalOpen ? 'show' : ''}`}>
+              <div className="modal-content">
+                <span className="close" onClick={this.closeGripperDetails}>&times;</span>
+                <h2>Selected Gripper: {selectedGripperDetails['Model Name']}</h2>
+                <table className="gripper-table">
+                  <thead>
+                    <tr>
+                      <th>Property</th>
+                      <th>Value</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {selectedGripperDetails.Data.filter(data => data.Property !== 'ImageURL' && data.Property !== 'Datasheet').map((data, dataIndex) => (
+                      <tr key={dataIndex}>
+                        <td>{data.Property}</td>
+                        <td>{data.Value}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
         </div>
-
       </div>
     );
   }
