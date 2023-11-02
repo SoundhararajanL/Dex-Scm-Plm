@@ -1,11 +1,11 @@
 
 import './App.css';
-import ProductList from './Dashboard';
+import GripperList from './Dashboard';
 
 function App() {
   return (
     <div className="App">
-      <ProductList />
+      <GripperList />
     </div>
   );
 }

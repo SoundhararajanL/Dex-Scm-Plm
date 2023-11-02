@@ -10,6 +10,7 @@ router.get('/grippers', async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Error occurred while fetching grippers.' });
+  
   }
 });
 
@@ -23,14 +24,18 @@ router.get('/grippers/minmax', async (req, res) => {
 
     const dimensionValues = grippers.map((gripper) => {
       const dimensionValue = gripper.Data.find((data) => data.Property === 'Dimension(MM)').Value;
+
+      if (!dimensionValue) {
+        return null; 
+      }
+
       const [min, max] = dimensionValue.split('-').map(parseFloat);
       return { min, max };
-      
-    });
+    }).filter(Boolean); // Remove null entries (dimensions with empty ranges)
 
     const dimensionMin = Math.min(...dimensionValues.map((value) => value.min));
     const dimensionMax = Math.max(...dimensionValues.map((value) => value.max));
- 
+
     const minMaxValues = {
       dimensionMin,
       dimensionMax,
@@ -48,6 +53,5 @@ router.get('/grippers/minmax', async (req, res) => {
     res.status(500).json({ error: 'Error occurred while fetching grippers.' });
   }
 });
-
 
 module.exports = router;
