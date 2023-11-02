@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFilePdf, faDatabase } from '@fortawesome/free-solid-svg-icons';
-
+import { Range } from 'react-slider';
 import axios from 'axios';
 import './App.css';
 
 class GripperList extends Component {
+
+  
   state = {
     filtersApplied: false,
     grippers: [],
@@ -34,6 +36,8 @@ class GripperList extends Component {
     isModalOpen: false,
   };
 
+
+  
   componentDidMount() {
     // Fetch gripper data from the server
     axios.get('http://localhost:3000/api/grippers')
@@ -170,15 +174,15 @@ class GripperList extends Component {
   openGripperDetails = (gripper) => {
     this.setState({
       selectedGripperDetails: gripper,
-      isModalOpen: true, // Open the modal
+      isModalOpen: true, 
     });
   };
   handleGripperClick = (gripper) => {
     this.setState({
       selectedGripperDetails: gripper,
-      isModalOpen: true, // Open the modal
+      isModalOpen: true, 
     });
-  };
+  }; 
 
   closeGripperDetails = () => {
     this.setState({
@@ -186,10 +190,26 @@ class GripperList extends Component {
       isModalOpen: false, // Close the modal
     });
   };
+
+  handleDimensionRangeChange = (values) => {
+    this.setState((prevState) => ({
+      selectedFilters: {
+        ...prevState.selectedFilters,
+        dimensionMin: values[0],
+        dimensionMax: values[1],
+      },
+    }));
+  };
+  
   render() {
     const { isModalOpen, selectedGripperDetails } = this.state;
     const { filteredGrippers, filterOptions, selectedFilters, filtersApplied } = this.state;
     const productCount = filteredGrippers.length;
+    const {  minMaxValues } = this.state;
+
+    
+    const dimensionMin = selectedFilters.dimensionMin;
+    const dimensionMax = selectedFilters.dimensionMax;
 
     return (
       <div className="gripper-list-container">

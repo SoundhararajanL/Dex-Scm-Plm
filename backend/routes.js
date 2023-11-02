@@ -25,11 +25,12 @@ router.get('/grippers/minmax', async (req, res) => {
       const dimensionValue = gripper.Data.find((data) => data.Property === 'Dimension(MM)').Value;
       const [min, max] = dimensionValue.split('-').map(parseFloat);
       return { min, max };
+      
     });
 
     const dimensionMin = Math.min(...dimensionValues.map((value) => value.min));
     const dimensionMax = Math.max(...dimensionValues.map((value) => value.max));
-
+ 
     const minMaxValues = {
       dimensionMin,
       dimensionMax,
