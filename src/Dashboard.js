@@ -99,73 +99,53 @@ class GripperList extends Component {
   };
 
   filterGrippers = () => {
-    const { grippers, selectedFilters, minMaxValues } = this.state;
+    const { grippers, selectedFilters } = this.state;
   
-    // Define a function to validate and filter a numeric property
     const validateAndFilterNumeric = (property) => {
       const minKey = `${property}Min`;
       const maxKey = `${property}Max`;
   
-      // Convert the filter values to numbers
       const minValue = parseFloat(selectedFilters[minKey]);
       const maxValue = parseFloat(selectedFilters[maxKey]);
+      
   
-      // If the values are not valid numbers, set them to NaN
-      if (isNaN(minValue) || isNaN(maxValue)) {
-        selectedFilters[minKey] = '';
-        selectedFilters[maxKey] = '';
-      }
-  
-      return (gripper) => {
-        const value = parseFloat(gripper.Data.find((data) => data.Property === property).Value);
-  
-        
-        return (
-          (isNaN(minValue) || value >= minValue) &&
-          (isNaN(maxValue) || value <= maxValue)
-        );
-      };
+      return (isNaN(minValue) || isNaN(maxValue)) || (minValue <= maxValue);
     };
   
-   
-const filteredGrippers = grippers.filter((gripper) => {
-  const manufactureName = gripper.Data.find((data) => data.Property === 'ManufactureName');
-  const type = gripper.Data.find((data) => data.Property === 'Type');
-  const category = gripper.Data.find((data) => data.Property === 'Category');
-
-  const validateAndFilterNumeric = (property) => {
-    const minKey = `${property}Min`;
-    const maxKey = `${property}Max`;
-
-    const minValue = parseFloat(selectedFilters[minKey]);
-    const maxValue = parseFloat(selectedFilters[maxKey]);
-
-    if (isNaN(minValue) || isNaN(maxValue)) {
-      return true; // Don't filter this gripper if the filter values are not valid numbers
-    }
-
-    const valueData = gripper.Data.find((data) => data.Property === property);
-
-    if (!valueData || isNaN(parseFloat(valueData.Value))) {
-      return false; // Don't filter this gripper if the property doesn't exist or is not a valid number
-    }
-
-    const value = parseFloat(valueData.Value);
-
-    return value >= minValue && value <= maxValue;
-  };
-
-  return (
-    (!selectedFilters.manufactureName || manufactureName.Value === selectedFilters.manufactureName) &&
-    (!selectedFilters.type || type.Value === selectedFilters.type) &&
-    (!selectedFilters.category || category.Value === selectedFilters.category) &&
-    validateAndFilterNumeric('Dimension') &&
-    validateAndFilterNumeric('Payload') &&
-    validateAndFilterNumeric('Gripping Force') &&
-    validateAndFilterNumeric('Feed pressure Max')
-  );
-});
-
+    const filteredGrippers = grippers.filter((gripper) => {
+      const manufactureName = gripper.Data.find((data) => data.Property === 'ManufactureName');
+      const type = gripper.Data.find((data) => data.Property === 'Type');
+      const category = gripper.Data.find((data) => data.Property === 'Category');
+      
+      const dimensionData = gripper.Data.find((data) => data.Property === 'Dimension(MM)');
+      const payloadData = gripper.Data.find((data) => data.Property === 'Payload(Kg)');
+      const forceData = gripper.Data.find((data) => data.Property === 'Gripping Force');
+      const pressureData = gripper.Data.find((data) => data.Property === 'Feed pressure Max');
+      
+      const dimension = dimensionData ? parseFloat(dimensionData.Value) : null;
+      const payload = payloadData ? parseFloat(payloadData.Value) : null;
+      const force = forceData ? parseFloat(forceData.Value) : null;
+      const pressure = pressureData ? parseFloat(pressureData.Value) : null;
+  
+      return (
+        (!selectedFilters.manufactureName || manufactureName.Value === selectedFilters.manufactureName) &&
+        (!selectedFilters.type || type.Value === selectedFilters.type) &&
+        (!selectedFilters.category || category.Value === selectedFilters.category) &&
+        (validateAndFilterNumeric('Dimension') ? 
+          (!dimension || (dimension >= parseFloat(selectedFilters.dimensionMin) && dimension <= parseFloat(selectedFilters.dimensionMax))) : true
+        ) &&
+        (validateAndFilterNumeric('Payload') ? 
+          (!payload || (payload >= parseFloat(selectedFilters.payloadMin) && payload <= parseFloat(selectedFilters.payloadMax))) : true
+        ) &&
+        (validateAndFilterNumeric('Gripping Force') ? 
+          (!force || (force >= parseFloat(selectedFilters.forceMin) && force <= parseFloat(selectedFilters.forceMax))) : true
+        ) &&
+        (validateAndFilterNumeric('Feed pressure Max') ? 
+          (!pressure || (pressure >= parseFloat(selectedFilters.pressureMin) && pressure <= parseFloat(selectedFilters.pressureMax))) : true
+        )
+      );
+    });
+  
     this.setState({ filteredGrippers });
     this.setState({ filtersApplied: true });
     console.log("Filtered data", filteredGrippers);
@@ -376,12 +356,12 @@ const filteredGrippers = grippers.filter((gripper) => {
           </h1>
           <div className="top">Count of Products: {productCount}</div>
           {filteredGrippers.length > 0 ? (
-            filteredGrippers.map((gripper, index) => (
-              <div
-                key={index}
-                className="product-card"
-              >
-                <div onClick={() => this.openGripperDetails(gripper)}>
+  filteredGrippers.map((gripper, index) => (
+                <div
+                  key={index}
+                  className="product-card"
+                >
+                  <div onClick={() => this.openGripperDetails(gripper)}>
                   {gripper.Data.find((data) => data.Property === 'ImageURL') ? (
                     <img
                       src={gripper.Data.find((data) => data.Property === 'ImageURL').Value}
