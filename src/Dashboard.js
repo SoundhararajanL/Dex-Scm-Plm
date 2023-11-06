@@ -96,10 +96,10 @@ class GripperList extends Component {
       !isNaN(forceMax) && forceMax > minMaxValues.forceMax ||
       !isNaN(pressureMax) && pressureMax > minMaxValues.pressureMax ||
 
-      !isNaN(dimensionMin) && dimensionMin > minMaxValues.dimensionMinm ||
-      !isNaN(payloadMin) && payloadMin > minMaxValues.payloadMin ||
-      !isNaN(forceMin) && forceMin > minMaxValues.forceMin ||
-      !isNaN(pressureMin) && pressureMin > minMaxValues.pressureMin ||
+      !isNaN(dimensionMin) && dimensionMin > minMaxValues.dimensionMax ||
+      !isNaN(payloadMin) && payloadMin > minMaxValues.payloadMax ||
+      !isNaN(forceMin) && forceMin > minMaxValues.forceMax ||
+      !isNaN(pressureMin) && pressureMin > minMaxValues.pressureMax ||
 
 
 
