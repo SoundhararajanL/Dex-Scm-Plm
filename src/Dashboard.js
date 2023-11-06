@@ -138,7 +138,26 @@ class GripperList extends Component {
     }
   };
   
-  
+  clearFilter = () => {
+    this.setState({
+      selectedFilters: {
+        manufactureName: '',
+        type: '',
+        category: '',
+        dimensionMin: '',
+        dimensionMax: '',
+        payloadMin: '',
+        payloadMax: '',
+        forceMin: '',
+        forceMax: '',
+        pressureMin: '',
+        pressureMax: '',
+      },
+    }, () => {
+      // Call the filterGrippers function inside the callback to ensure it's called after state is updated
+      this.filterGrippers();
+    });
+  }
 
   handleFilterChange = (filterName, value) => {
     this.setState((prevState) => ({
@@ -149,26 +168,7 @@ class GripperList extends Component {
     }));
   };
 
-  clearFilter = () => {
-    this.setState((prevState) => ({
-      selectedFilters: {
-        manufactureName: '',
-        type: '',
-        category: '',
-        dimensionMin: prevState.minMaxValues.dimensionMin,
-        dimensionMax: prevState.minMaxValues.dimensionMax,
-        payloadMin: prevState.minMaxValues.payloadMin,
-        payloadMax: prevState.minMaxValues.payloadMax,
-        forceMin: prevState.minMaxValues.forceMin,
-        forceMax: prevState.minMaxValues.forceMax,
-        pressureMin: prevState.minMaxValues.pressureMin,
-        pressureMax: prevState.minMaxValues.pressureMax,
-      },
-      filteredGrippers: this.state.grippers,
-    }), () => {
-      this.setState({ filtersApplied: false });
-    });
-  };
+  
 
   openGripperDetails = (gripper) => {
     this.setState({
