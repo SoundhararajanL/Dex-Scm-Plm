@@ -10,7 +10,7 @@ router.get('/grippers', async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Error occurred while fetching grippers.' });
-  
+
   }
 });
 
@@ -18,66 +18,66 @@ router.get('/grippers/minmax', async (req, res) => {
   try {
     const grippers = await Gripper.find();
 
-if (!Array.isArray(grippers)) {
-  return res.status(500).json({ error: 'Grippers data is not an array.' });
-}
-
-const extractNumericValue = (data, property) => {
-  const valueData = data.find((item) => item.Property === property);
-  if (valueData) {
-    const numericValue = parseFloat(valueData.Value);
-    if (!isNaN(numericValue)) {
-      return numericValue;
+    if (!Array.isArray(grippers)) {
+      return res.status(500).json({ error: 'Grippers data is not an array.' });
     }
-  }
-  return null; // Handle missing or non-numeric values as null
-};
 
-const payloadValues = grippers.map((gripper) =>
-  extractNumericValue(gripper.Data, 'Payload(Kg)')
-);
+    const extractNumericValue = (data, property) => {
+      const valueData = data.find((item) => item.Property === property);
+      if (valueData) {
+        const numericValue = parseFloat(valueData.Value);
+        if (!isNaN(numericValue)) {
+          return numericValue;
+        }
+      }
+      return null; // Handle missing or non-numeric values as null
+    };
 
-const forceValues = grippers.map((gripper) =>
-  extractNumericValue(gripper.Data, 'Gripping Force')
-);
+    const payloadValues = grippers.map((gripper) =>
+      extractNumericValue(gripper.Data, 'Payload(Kg)')
+    );
 
-const pressureValues = grippers.map((gripper) =>
-  extractNumericValue(gripper.Data, 'Feed pressure Max')
-);
+    const forceValues = grippers.map((gripper) =>
+      extractNumericValue(gripper.Data, 'Gripping Force')
+    );
 
-const payloadMin = Math.min(...payloadValues.filter((value) => value !== null));
-const payloadMax = Math.max(...payloadValues.filter((value) => value !== null));
+    const pressureValues = grippers.map((gripper) =>
+      extractNumericValue(gripper.Data, 'Feed pressure Max')
+    );
 
-const forceMin = Math.min(...forceValues.filter((value) => value !== null));
-const forceMax = Math.max(...forceValues.filter((value) => value !== null));
+    const payloadMin = Math.min(...payloadValues.filter((value) => value !== null));
+    const payloadMax = Math.max(...payloadValues.filter((value) => value !== null));
 
-const pressureMin = Math.min(...pressureValues.filter((value) => value !== null));
-const pressureMax = Math.max(...pressureValues.filter((value) => value !== null));
-const dimensionValues = grippers.map((gripper) => {
-  const dimensionValue = gripper.Data.find((data) => data.Property === 'Dimension(MM)').Value;
+    const forceMin = Math.min(...forceValues.filter((value) => value !== null));
+    const forceMax = Math.max(...forceValues.filter((value) => value !== null));
 
-  if (!dimensionValue) {
-    return null; 
-  }
+    const pressureMin = Math.min(...pressureValues.filter((value) => value !== null));
+    const pressureMax = Math.max(...pressureValues.filter((value) => value !== null));
+    const dimensionValues = grippers.map((gripper) => {
+      const dimensionValue = gripper.Data.find((data) => data.Property === 'Dimension(MM)').Value;
 
-  const [min, max] = dimensionValue.split('-').map(parseFloat);
-  return { min, max };
-}).filter(Boolean); // Remove null entries (dimensions with empty ranges)
+      if (!dimensionValue) {
+        return null;
+      }
 
-const dimensionMin = Math.min(...dimensionValues.map((value) => value.min));
-const dimensionMax = Math.max(...dimensionValues.map((value) => value.max));
-const minMaxValues = {
-  dimensionMin,
-  dimensionMax,
-  payloadMin,
-  payloadMax,
-  forceMin,
-  forceMax,
-  pressureMin,
-  pressureMax,
-};
+      const [min, max] = dimensionValue.split('-').map(parseFloat);
+      return { min, max };
+    }).filter(Boolean); // Remove null entries (dimensions with empty ranges)
 
-res.status(200).json(minMaxValues);
+    const dimensionMin = Math.min(...dimensionValues.map((value) => value.min));
+    const dimensionMax = Math.max(...dimensionValues.map((value) => value.max));
+    const minMaxValues = {
+      dimensionMin,
+      dimensionMax,
+      payloadMin,
+      payloadMax,
+      forceMin,
+      forceMax,
+      pressureMin,
+      pressureMax,
+    };
+
+    res.status(200).json(minMaxValues);
 
   } catch (error) {
     console.error(error);

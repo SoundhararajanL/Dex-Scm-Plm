@@ -5,14 +5,14 @@ import { faFilePdf, faDatabase } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import './App.css';
 
-class GripperList extends Component {
+class GripperList extends Component { 
 
   state = {
     filtersApplied: false,
     grippers: [],
     selectedGripper: null,
     filterOptions: {
-      manufactureNames: [],
+      manufactureNames: [], 
       types: [],
       categories: [],
     },
@@ -72,7 +72,43 @@ class GripperList extends Component {
   }
 
   filterGrippers = () => {
-    const { grippers, selectedFilters } = this.state;
+    const { grippers, selectedFilters, minMaxValues } = this.state; 
+  
+    
+    const dimensionMin = parseFloat(selectedFilters.dimensionMin);
+    const dimensionMax = parseFloat(selectedFilters.dimensionMax);
+    const payloadMin = parseFloat(selectedFilters.payloadMin);
+    const payloadMax = parseFloat(selectedFilters.payloadMax);
+    const forceMin = parseFloat(selectedFilters.forceMin);
+    const forceMax = parseFloat(selectedFilters.forceMax);
+    const pressureMin = parseFloat(selectedFilters.pressureMin);
+    const pressureMax = parseFloat(selectedFilters.pressureMax);
+  
+    
+    if (
+      
+      !isNaN(dimensionMin) && dimensionMin < minMaxValues.dimensionMin ||
+      !isNaN(payloadMin) && payloadMin < minMaxValues.payloadMin ||
+      !isNaN(forceMin) && forceMin < minMaxValues.forceMin ||
+      !isNaN(pressureMin) && pressureMin < minMaxValues.pressureMin ||
+      !isNaN(dimensionMax) && dimensionMax > minMaxValues.dimensionMax ||
+      !isNaN(payloadMax) && payloadMax > minMaxValues.payloadMax ||
+      !isNaN(forceMax) && forceMax > minMaxValues.forceMax ||
+      !isNaN(pressureMax) && pressureMax > minMaxValues.pressureMax 
+
+      
+
+       
+    ) {
+      
+      this.setState({
+        filterError: alert('Invalid range filter  Minimum & minimum values.'),
+      });
+      return;
+    }
+  
+    // Clear the error message if the filters are valid
+    this.setState({ filterError: '' });
   
     if (Object.values(selectedFilters).every((value) => !value)) {
       // No filters are set, return all grippers
@@ -203,7 +239,7 @@ class GripperList extends Component {
 
   render() {
     const { isModalOpen, selectedGripperDetails } = this.state;
-    const { filteredGrippers, filterOptions, selectedFilters, filtersApplied } = this.state;
+    const { filteredGrippers, filterOptions, selectedFilters } = this.state;
     const productCount = filteredGrippers.length;
     const { minMaxValues } = this.state;
 
