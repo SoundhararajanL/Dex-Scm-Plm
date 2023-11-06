@@ -73,8 +73,7 @@ class GripperList extends Component {
 
   filterGrippers = () => {
     const { grippers, selectedFilters, minMaxValues } = this.state; 
-  
-    
+ 
     const dimensionMin = parseFloat(selectedFilters.dimensionMin);
     const dimensionMax = parseFloat(selectedFilters.dimensionMax);
     const payloadMin = parseFloat(selectedFilters.payloadMin);
@@ -91,11 +90,28 @@ class GripperList extends Component {
       !isNaN(payloadMin) && payloadMin < minMaxValues.payloadMin ||
       !isNaN(forceMin) && forceMin < minMaxValues.forceMin ||
       !isNaN(pressureMin) && pressureMin < minMaxValues.pressureMin ||
+
       !isNaN(dimensionMax) && dimensionMax > minMaxValues.dimensionMax ||
       !isNaN(payloadMax) && payloadMax > minMaxValues.payloadMax ||
       !isNaN(forceMax) && forceMax > minMaxValues.forceMax ||
-      !isNaN(pressureMax) && pressureMax > minMaxValues.pressureMax 
+      !isNaN(pressureMax) && pressureMax > minMaxValues.pressureMax ||
 
+      !isNaN(dimensionMin) && dimensionMin > minMaxValues.dimensionMinm ||
+      !isNaN(payloadMin) && payloadMin > minMaxValues.payloadMin ||
+      !isNaN(forceMin) && forceMin > minMaxValues.forceMin ||
+      !isNaN(pressureMin) && pressureMin > minMaxValues.pressureMin ||
+
+
+
+
+
+      !isNaN(dimensionMax) && dimensionMax < minMaxValues.dimensionMin ||
+      !isNaN(payloadMax) && payloadMax < minMaxValues.payloadMin  ||
+      !isNaN(forceMax) && forceMax < minMaxValues.forceMin ||
+      !isNaN(pressureMax) && pressureMax < minMaxValues.pressureMin 
+
+
+      
       
 
        
@@ -117,7 +133,6 @@ class GripperList extends Component {
         filtersApplied: false,
       });
     } else {
-      // Filter the grippers based on selected filters
       const filteredGrippers = grippers.filter((gripper) => {
         const manufactureName = selectedFilters.manufactureName;
         const type = selectedFilters.type;
