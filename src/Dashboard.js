@@ -209,7 +209,7 @@ class GripperList extends Component {
       this.filterGrippers();
     });
   }
-
+// new command
   handleFilterChange = (filterName, value) => {
     this.setState((prevState) => ({
       selectedFilters: {
