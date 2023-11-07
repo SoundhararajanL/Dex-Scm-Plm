@@ -5,14 +5,14 @@ import { faFilePdf, faDatabase } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import './App.css';
 
-class GripperList extends Component { 
+class GripperList extends Component {
 
   state = {
     filtersApplied: false,
     grippers: [],
     selectedGripper: null,
     filterOptions: {
-      manufactureNames: [], 
+      manufactureNames: [],
       types: [],
       categories: [],
     },
@@ -72,8 +72,8 @@ class GripperList extends Component {
   }
 
   filterGrippers = () => {
-    const { grippers, selectedFilters, minMaxValues } = this.state; 
- 
+    const { grippers, selectedFilters, minMaxValues } = this.state;
+
     const dimensionMin = parseFloat(selectedFilters.dimensionMin);
     const dimensionMax = parseFloat(selectedFilters.dimensionMax);
     const payloadMin = parseFloat(selectedFilters.payloadMin);
@@ -82,10 +82,10 @@ class GripperList extends Component {
     const forceMax = parseFloat(selectedFilters.forceMax);
     const pressureMin = parseFloat(selectedFilters.pressureMin);
     const pressureMax = parseFloat(selectedFilters.pressureMax);
-  
-    
+
+
     if (
-      
+
       !isNaN(dimensionMin) && dimensionMin < minMaxValues.dimensionMin ||
       !isNaN(payloadMin) && payloadMin < minMaxValues.payloadMin ||
       !isNaN(forceMin) && forceMin < minMaxValues.forceMin ||
@@ -106,26 +106,26 @@ class GripperList extends Component {
 
 
       !isNaN(dimensionMax) && dimensionMax < minMaxValues.dimensionMin ||
-      !isNaN(payloadMax) && payloadMax < minMaxValues.payloadMin  ||
+      !isNaN(payloadMax) && payloadMax < minMaxValues.payloadMin ||
       !isNaN(forceMax) && forceMax < minMaxValues.forceMin ||
-      !isNaN(pressureMax) && pressureMax < minMaxValues.pressureMin 
+      !isNaN(pressureMax) && pressureMax < minMaxValues.pressureMin
 
 
-      
-      
 
-       
+
+
+
     ) {
-      
+
       this.setState({
         filterError: alert('Invalid range filter  Minimum & minimum values.'),
       });
       return;
     }
-  
+
     // Clear the error message if the filters are valid
     this.setState({ filterError: '' });
-  
+
     if (Object.values(selectedFilters).every((value) => !value)) {
       // No filters are set, return all grippers
       this.setState({
@@ -139,40 +139,51 @@ class GripperList extends Component {
         const category = selectedFilters.category;
         const dimensionMin = parseFloat(selectedFilters.dimensionMin);
         const dimensionMax = parseFloat(selectedFilters.dimensionMax);
-  
-        // Check if 'Dimension(MM)' is empty before parsing
-        const dimensionData = gripper.Data.find((data) => data.Property === 'Dimension(MM)');
-        const dimensionValue = dimensionData ? parseFloat(dimensionData.Value) : NaN;
-  
+
+        const dimensionValues = grippers.map((gripper) => {
+          const dimensionValue = gripper.Data.find((data) => data.Property === 'Dimension(MM)').Value;
+
+          if (!dimensionValue) {
+            return null;
+          }
+
+          const [min, max] = dimensionValue.split('-').map(parseFloat);
+          return { min, max };
+        }).filter(Boolean);
+
         // Check if 'Payload(Kg)' is empty before parsing
         const payloadData = gripper.Data.find((data) => data.Property === 'Payload(Kg)');
         const payloadValue = payloadData ? parseFloat(payloadData.Value) : NaN;
-  
+
         // Check if 'Gripping Force' is empty before parsing
         const forceData = gripper.Data.find((data) => data.Property === 'Gripping Force');
         const forceValue = forceData ? parseFloat(forceData.Value) : NaN;
-  
+
         // Check if 'Feed pressure Max' is empty before parsing
         const pressureData = gripper.Data.find((data) => data.Property === 'Feed pressure Max');
         const pressureValue = pressureData ? parseFloat(pressureData.Value) : NaN;
-  
-      
+
+
         const payloadMin = parseFloat(selectedFilters.payloadMin);
         const payloadMax = parseFloat(selectedFilters.payloadMax);
         const forceMin = parseFloat(selectedFilters.forceMin);
         const forceMax = parseFloat(selectedFilters.forceMax);
         const pressureMin = parseFloat(selectedFilters.pressureMin);
         const pressureMax = parseFloat(selectedFilters.pressureMax);
-  
-        
-  
+
+
+        // Extract the dimension range values
+        const dimensionData = gripper.Data.find((data) => data.Property === 'Dimension(MM)');
+        const dimensionValue = dimensionData ? dimensionData.Value : '';
+        const [minDimension, maxDimension] = dimensionValue.split('-').map(parseFloat);
+
         // Check if the gripper matches the filter criteria
         return (
           (!manufactureName || gripper.Data.find((data) => data.Property === 'ManufactureName')?.Value === manufactureName) &&
           (!type || gripper.Data.find((data) => data.Property === 'Type')?.Value === type) &&
           (!category || gripper.Data.find((data) => data.Property === 'Category')?.Value === category) &&
-          (isNaN(dimensionMin) || (dimensionValue >= dimensionMin)) &&
-          (isNaN(dimensionMax) || (dimensionValue <= dimensionMax)) &&
+          (isNaN(selectedFilters.dimensionMin) || (minDimension >= selectedFilters.dimensionMin)) &&
+          (isNaN(selectedFilters.dimensionMax) || (maxDimension <= selectedFilters.dimensionMax)) &&
           (isNaN(payloadMin) || (payloadValue >= payloadMin)) &&
           (isNaN(payloadMax) || (payloadValue <= payloadMax)) &&
           (isNaN(forceMin) || (forceValue >= forceMin)) &&
@@ -181,14 +192,14 @@ class GripperList extends Component {
           (isNaN(pressureMax) || (pressureValue <= pressureMax))
         );
       });
-  console.log("filter data" , filteredGrippers)
+      console.log("filter data", filteredGrippers)
       this.setState({
         filteredGrippers: filteredGrippers,
         filtersApplied: true,
       });
     }
   };
-  
+
   clearFilter = () => {
     this.setState({
       selectedFilters: {
@@ -219,7 +230,7 @@ class GripperList extends Component {
     }));
   };
 
-  
+
 
   openGripperDetails = (gripper) => {
     this.setState({
