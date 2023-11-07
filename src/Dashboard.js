@@ -36,7 +36,7 @@ class GripperList extends Component {
   };
 
   componentDidMount() {
-    // Fetch gripper data from the server
+    
     axios.get('http://localhost:3000/api/grippers')
       .then((response) => {
         const grippers = response.data;
@@ -45,12 +45,11 @@ class GripperList extends Component {
         const types = [...new Set(grippers.map((gripper) => gripper.Data.find((data) => data.Property === 'Type')?.Value).filter(Boolean))];
         const categories = [...new Set(grippers.map((gripper) => gripper.Data.find((data) => data.Property === 'Category')?.Value).filter(Boolean))];
 
-        // Fetch minimum and maximum values for numeric filters
+       
         axios.get('http://localhost:3000/api/grippers/minmax')
           .then((minMaxResponse) => {
             const minMaxValues = minMaxResponse.data;
 
-            // Set the initial state of selectedFilters after fetching minMaxValues
             this.setState({
               grippers,
               filterOptions: {
@@ -59,7 +58,7 @@ class GripperList extends Component {
                 categories,
               },
               minMaxValues,
-              filteredGrippers: grippers, // Set filteredGrippers initially to the full data
+              filteredGrippers: grippers,
             });
           })
           .catch((minMaxError) => {
@@ -123,11 +122,11 @@ class GripperList extends Component {
       return;
     }
 
-    // Clear the error message if the filters are valid
+   
     this.setState({ filterError: '' });
 
     if (Object.values(selectedFilters).every((value) => !value)) {
-      // No filters are set, return all grippers
+      
       this.setState({
         filteredGrippers: grippers,
         filtersApplied: false,
@@ -137,21 +136,20 @@ class GripperList extends Component {
         const manufactureName = selectedFilters.manufactureName;
         const type = selectedFilters.type;
         const category = selectedFilters.category;
-        const dimensionMin = parseFloat(selectedFilters.dimensionMin);
-        const dimensionMax = parseFloat(selectedFilters.dimensionMax);
 
-        const dimensionValues = grippers.map((gripper) => {
-          const dimensionValue = gripper.Data.find((data) => data.Property === 'Dimension(MM)').Value;
+      
+        // const dimensionValues = grippers.map((gripper) => {
+        //   const dimensionValue = gripper.Data.find((data) => data.Property === 'Dimension(MM)').Value;
 
-          if (!dimensionValue) {
-            return null;
-          }
+        //   if (!dimensionValue) {
+        //     return null;
+        //   }
 
-          const [min, max] = dimensionValue.split('-').map(parseFloat);
-          return { min, max };
-        }).filter(Boolean);
+        //   const [min, max] = dimensionValue.split('-').map(parseFloat);
+        //   return { min, max };
+        // }).filter(Boolean);
 
-        // Check if 'Payload(Kg)' is empty before parsing
+       
         const payloadData = gripper.Data.find((data) => data.Property === 'Payload(Kg)');
         const payloadValue = payloadData ? parseFloat(payloadData.Value) : NaN;
 
@@ -172,12 +170,12 @@ class GripperList extends Component {
         const pressureMax = parseFloat(selectedFilters.pressureMax);
 
 
-        // Extract the dimension range values
+       
         const dimensionData = gripper.Data.find((data) => data.Property === 'Dimension(MM)');
         const dimensionValue = dimensionData ? dimensionData.Value : '';
         const [minDimension, maxDimension] = dimensionValue.split('-').map(parseFloat);
 
-        // Check if the gripper matches the filter criteria
+        
         return (
           (!manufactureName || gripper.Data.find((data) => data.Property === 'ManufactureName')?.Value === manufactureName) &&
           (!type || gripper.Data.find((data) => data.Property === 'Type')?.Value === type) &&
@@ -216,7 +214,7 @@ class GripperList extends Component {
         pressureMax: '',
       },
     }, () => {
-      // Call the filterGrippers function inside the callback to ensure it's called after state is updated
+      
       this.filterGrippers();
     });
   }
@@ -249,7 +247,7 @@ class GripperList extends Component {
   closeGripperDetails = () => {
     this.setState({
       selectedGripperDetails: null,
-      isModalOpen: false, // Close the modal
+      isModalOpen: false, 
     });
   };
 
