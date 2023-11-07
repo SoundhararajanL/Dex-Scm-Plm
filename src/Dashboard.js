@@ -153,11 +153,11 @@ class GripperList extends Component {
         const payloadData = gripper.Data.find((data) => data.Property === 'Payload(Kg)');
         const payloadValue = payloadData ? parseFloat(payloadData.Value) : NaN;
 
-        // Check if 'Gripping Force' is empty before parsing
+      
         const forceData = gripper.Data.find((data) => data.Property === 'Gripping Force');
         const forceValue = forceData ? parseFloat(forceData.Value) : NaN;
 
-        // Check if 'Feed pressure Max' is empty before parsing
+       
         const pressureData = gripper.Data.find((data) => data.Property === 'Feed pressure Max');
         const pressureValue = pressureData ? parseFloat(pressureData.Value) : NaN;
 
