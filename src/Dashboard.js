@@ -43,6 +43,33 @@ class GripperList extends Component {
   showAddGripperForm: false,
   };
 
+  validateDimension(dimension) {
+    if (!dimension) {
+      return true;
+    }
+
+    const dimensionPattern = /^\d+-\d+$/;
+    if (!dimensionPattern.test(dimension)) {
+      alert('Invalid "Dimension" format. Please use "min-max" format (e.g., 120-230).');
+      return false;
+    }
+
+    const [dimensionMin, dimensionMax] = dimension.split('-').map(value => parseFloat(value));
+
+    if (isNaN(dimensionMin) || isNaN(dimensionMax)) {
+      alert('Invalid "Dimension" format. Please use numbers in "min-max" format.');
+      return false;
+    }
+
+    if (dimensionMin >= dimensionMax) {
+      alert('The "min" value of "Dimension" should be less than the "max" value.');
+      return false;
+    }
+
+    return true;
+  }
+  
+
   handleAddGripper = () => {
     const {
       modelName,
@@ -74,27 +101,11 @@ class GripperList extends Component {
     return;
   }
 
-  const dimensionPattern = /^\d+-\d+$/;
-  if (!dimensionPattern.test(dimension)) {
-    alert('Invalid "Dimension" format. Please use "min-max" format (e.g., 120-230).');
+  // Validate the dimension field
+  if (!this.validateDimension(dimension)) {
     return;
   }
-
-  // Split the "Dimension" input into min and max values
-  const [dimensionMin, dimensionMax] = dimension.split('-').map(value => parseFloat(value));
-
-  // Check if both min and max values are numbers
-  if (isNaN(dimensionMin) || isNaN(dimensionMax)) {
-    alert('Invalid "Dimension" format. Please use numbers in "min-max" format.');
-    return;
-  }
-
-  // Check if min value is less than max value
-  if (dimensionMin >= dimensionMax) {
-    alert('The "min" value of "Dimension" should be less than the "max" value.');
-    return;
-  }
-
+  
     const newData = [
       {
         Property: "ImageURL",
