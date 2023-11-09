@@ -85,4 +85,17 @@ router.get('/grippers/minmax', async (req, res) => {
   }
 });
 
+
+// Create a new gripper
+router.post('/grippers', async (req, res) => {
+  try {
+    const newGripper = new Gripper(req.body);
+    await newGripper.save();
+    res.status(201).json(newGripper);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Error occurred while creating a gripper.' });
+  }
+});
+
 module.exports = router;
