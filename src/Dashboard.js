@@ -17,6 +17,9 @@ class GripperList extends Component {
       types: [],
       categories: [],
     },
+    displayManufactureNames: 10,
+    displayTypes: 10,
+    displayCategories: 10,
     selectedFilters: {
       manufactureName: '',
       type: '',
@@ -175,7 +178,7 @@ class GripperList extends Component {
       })
       .catch((error) => {
         console.error('Error adding a gripper:', error);
-        // Handle error, show an error message, etc.
+
       });
   };
 
@@ -189,7 +192,7 @@ class GripperList extends Component {
         const manufactureNames = [...new Set(grippers.map((gripper) => gripper.Data.find((data) => data.Property === 'ManufactureName')?.Value).filter(Boolean))];
         const types = [...new Set(grippers.map((gripper) => gripper.Data.find((data) => data.Property === 'Type')?.Value).filter(Boolean))];
         const categories = [...new Set(grippers.map((gripper) => gripper.Data.find((data) => data.Property === 'Category')?.Value).filter(Boolean))];
-
+        console.log("Manufacture Names:", manufactureNames);
         // Fetch minimum and maximum values for numeric filters
         axios.get('http://localhost:3000/api/grippers/minmax')
           .then((minMaxResponse) => {
@@ -236,39 +239,39 @@ class GripperList extends Component {
     const pressureMax = parseFloat(selectedFilters.pressureMax);
 
 
-    if (
+    // if (
 
-      !isNaN(dimensionMin) && dimensionMin < minMaxValues.dimensionMin ||
-      !isNaN(payloadMin) && payloadMin < minMaxValues.payloadMin ||
-      !isNaN(forceMin) && forceMin < minMaxValues.forceMin ||
-      !isNaN(pressureMin) && pressureMin < minMaxValues.pressureMin ||
+    //   !isNaN(dimensionMin) && dimensionMin < minMaxValues.dimensionMin ||
+    //   !isNaN(payloadMin) && payloadMin < minMaxValues.payloadMin ||
+    //   !isNaN(forceMin) && forceMin < minMaxValues.forceMin ||
+    //   !isNaN(pressureMin) && pressureMin < minMaxValues.pressureMin ||
 
-      !isNaN(dimensionMax) && dimensionMax > minMaxValues.dimensionMax ||
-      !isNaN(payloadMax) && payloadMax > minMaxValues.payloadMax ||
-      !isNaN(forceMax) && forceMax > minMaxValues.forceMax ||
-      !isNaN(pressureMax) && pressureMax > minMaxValues.pressureMax ||
+    //   !isNaN(dimensionMax) && dimensionMax > minMaxValues.dimensionMax ||
+    //   !isNaN(payloadMax) && payloadMax > minMaxValues.payloadMax ||
+    //   !isNaN(forceMax) && forceMax > minMaxValues.forceMax ||
+    //   !isNaN(pressureMax) && pressureMax > minMaxValues.pressureMax ||
 
-      !isNaN(dimensionMin) && dimensionMin > minMaxValues.dimensionMax ||
-      !isNaN(payloadMin) && payloadMin > minMaxValues.payloadMax ||
-      !isNaN(forceMin) && forceMin > minMaxValues.forceMax ||
-      !isNaN(pressureMin) && pressureMin > minMaxValues.pressureMax ||
+    //   !isNaN(dimensionMin) && dimensionMin > minMaxValues.dimensionMax ||
+    //   !isNaN(payloadMin) && payloadMin > minMaxValues.payloadMax ||
+    //   !isNaN(forceMin) && forceMin > minMaxValues.forceMax ||
+    //   !isNaN(pressureMin) && pressureMin > minMaxValues.pressureMax ||
 
-      !isNaN(dimensionMax) && dimensionMax < minMaxValues.dimensionMin ||
-      !isNaN(payloadMax) && payloadMax < minMaxValues.payloadMin ||
-      !isNaN(forceMax) && forceMax < minMaxValues.forceMin ||
-      !isNaN(pressureMax) && pressureMax < minMaxValues.pressureMin
-
-
-    ) {
-
-      this.setState({
-        filterError: alert('Invalid range filter  Minimum & minimum values.'),
-      });
-      return;
-    }
+    //   !isNaN(dimensionMax) && dimensionMax < minMaxValues.dimensionMin ||
+    //   !isNaN(payloadMax) && payloadMax < minMaxValues.payloadMin ||
+    //   !isNaN(forceMax) && forceMax < minMaxValues.forceMin ||
+    //   !isNaN(pressureMax) && pressureMax < minMaxValues.pressureMin
 
 
-    this.setState({ filterError: '' });
+    // ) {
+
+    //   this.setState({
+    //     filterError: alert('Invalid range filter  Minimum & minimum values.'),
+    //   });
+    //   return;
+    // }  
+
+
+    // this.setState({ filterError: '' });
 
     if (Object.values(selectedFilters).every((value) => !value)) {
 
@@ -303,9 +306,9 @@ class GripperList extends Component {
 
 
         return (
-          (!manufactureName || gripper.Data.find((data) => data.Property === 'ManufactureName')?.Value === manufactureName) &&
-          (!type || gripper.Data.find((data) => data.Property === 'Type')?.Value === type) &&
-          (!category || gripper.Data.find((data) => data.Property === 'Category')?.Value === category) &&
+          (!manufactureName || manufactureName.includes(gripper.Data.find((data) => data.Property === 'ManufactureName')?.Value)) &&
+          (!type || type.includes(gripper.Data.find((data) => data.Property === 'Type')?.Value)) &&
+          (!category || category.includes(gripper.Data.find((data) => data.Property === 'Category')?.Value)) &&
 
           (isNaN(dimensionMin) || (dimensionValue.min >= dimensionMin)) &&
           (isNaN(dimensionMax) || (dimensionValue.max <= dimensionMax)) &&
@@ -347,16 +350,32 @@ class GripperList extends Component {
     });
   }
 
+
   handleFilterChange = (filterName, value) => {
-    this.setState((prevState) => ({
-      selectedFilters: {
-        ...prevState.selectedFilters,
-        [filterName]: value,
-      },
-    }));
+    this.setState((prevState) => {
+      const currentValues = prevState.selectedFilters[filterName] || [];
+
+      // Toggle the value in the array
+      const updatedValues = currentValues.includes(value)
+        ? currentValues.filter((v) => v !== value)
+        : [...currentValues, value];
+
+      const updatedFilters = { ...prevState.selectedFilters, [filterName]: updatedValues };
+
+      return {
+        selectedFilters: updatedFilters,
+      };
+    });
   };
 
 
+  componentDidUpdate(prevProps, prevState) {
+    // Check if the selectedFilters have changed
+    if (this.state.selectedFilters !== prevState.selectedFilters) {
+      // Call filterGrippers to automatically filter data
+      this.filterGrippers();
+    }
+  }
 
   openGripperDetails = (gripper) => {
     this.setState({
@@ -394,6 +413,25 @@ class GripperList extends Component {
     }));
   };
 
+  handleLoadMoreManufactureNames = () => {
+    this.setState((prevState) => ({
+      displayManufactureNames: prevState.displayManufactureNames + 10,
+    }));
+  };
+
+  handleLoadMoreTypes = () => {
+    this.setState((prevState) => ({
+      displayTypes: prevState.displayTypes + 10,
+    }));
+  };
+
+  handleLoadMoreCategories = () => {
+    this.setState((prevState) => ({
+      displayCategories: prevState.displayCategories + 10,
+    }));
+  };
+
+
   render() {
     const { isModalOpen, selectedGripperDetails } = this.state;
     const { filteredGrippers, filterOptions, selectedFilters } = this.state;
@@ -417,39 +455,72 @@ class GripperList extends Component {
       <div className="gripper-list-container">
         <div className="filter-options">
           <h2>Filters:</h2>
-          <select
-            value={selectedFilters.manufactureName}
-            onChange={(e) => this.handleFilterChange('manufactureName', e.target.value)}
-          >
-            <option hidden value="">Filter by ManufactureName</option>
-            {filterOptions.manufactureNames.map((option, index) => (
-              <option key={index} value={option}>
-                {option}
-              </option>
+
+          {/* Checkbox inputs for Manufacture Name */}
+          <div className="checkbox-section">
+            <label>Manufacture Name:</label>
+            {filterOptions.manufactureNames.slice(0, this.state.displayManufactureNames).map((option, index) => (
+              <div key={index} className="checkbox-item">
+                <input
+                  type="checkbox"
+                  id={`manufactureNameCheckbox${index}`}
+                  value={option}
+                  checked={selectedFilters.manufactureName.includes(option)}
+                  onChange={() => this.handleFilterChange('manufactureName', option)}
+                />
+                <label htmlFor={`manufactureNameCheckbox${index}`}>{option}</label>
+              </div>
             ))}
-          </select>
-          <select
-            value={selectedFilters.type}
-            onChange={(e) => this.handleFilterChange('type', e.target.value)}
-          >
-            <option hidden value="">Filter by Type</option>
-            {filterOptions.types.map((option, index) => (
-              <option key={index} value={option}>
-                {option}
-              </option>
+            {filterOptions.manufactureNames.length > this.state.displayManufactureNames && (
+              <button className="load-more-button" onClick={this.handleLoadMoreManufactureNames}>
+                Load More
+              </button>
+            )}
+          </div>
+
+          {/* Checkbox inputs for Type */}
+          <div className="checkbox-section">
+            <label>Type:</label>
+            {filterOptions.types.slice(0, this.state.displayTypes).map((option, index) => (
+              <div key={index} className="checkbox-item">
+                <input
+                  type="checkbox"
+                  id={`typeCheckbox${index}`}
+                  value={option}
+                  checked={selectedFilters.type.includes(option)}
+                  onChange={() => this.handleFilterChange('type', option)}
+                />
+                <label htmlFor={`typeCheckbox${index}`}>{option}</label>
+              </div>
             ))}
-          </select>
-          <select
-            value={selectedFilters.category}
-            onChange={(e) => this.handleFilterChange('category', e.target.value)}
-          >
-            <option hidden value="">Filter by Category</option>
-            {filterOptions.categories.map((option, index) => (
-              <option key={index} value={option}>
-                {option}
-              </option>
+            {filterOptions.types.length > this.state.displayTypes && (
+              <button className="load-more-button" onClick={this.handleLoadMoreTypes}>
+                Load More
+              </button>
+            )}
+          </div>
+
+          {/* Checkbox inputs for Category */}
+          <div className="checkbox-section">
+            <label>Category:</label>
+            {filterOptions.categories.slice(0, this.state.displayCategories).map((option, index) => (
+              <div key={index} className="checkbox-item">
+                <input
+                  type="checkbox"
+                  id={`categoryCheckbox${index}`}
+                  value={option}
+                  checked={selectedFilters.category.includes(option)}
+                  onChange={() => this.handleFilterChange('category', option)}
+                />
+                <label htmlFor={`categoryCheckbox${index}`}>{option}</label>
+              </div>
             ))}
-          </select>
+            {filterOptions.categories.length > this.state.displayCategories && (
+              <button className="load-more-button" onClick={this.handleLoadMoreCategories}>
+                Load More
+              </button>
+            )}
+          </div>
           <div>
             <label>Dimension(MM) Range:</label>
             <input
@@ -526,9 +597,7 @@ class GripperList extends Component {
               onChange={(e) => this.handleFilterChange('pressureMax', e.target.value)}
             />
           </div>
-          <button className="apply-filter-button" onClick={this.filterGrippers}>
-            Apply Filter
-          </button>
+
           <button className="clear-filter-button" onClick={this.clearFilter}>
             Clear Filter
           </button>
