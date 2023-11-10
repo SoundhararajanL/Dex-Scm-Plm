@@ -21,9 +21,9 @@ class GripperList extends Component {
     displayTypes: 10,
     displayCategories: 10,
     selectedFilters: {
-      manufactureName: '',
-      type: '',
-      category: '',
+      manufactureName: [],
+      type: [],
+      category: [],
       dimensionMin: '',
       dimensionMax: '',
       payloadMin: '',
@@ -306,9 +306,9 @@ class GripperList extends Component {
 
 
         return (
-          (!manufactureName || manufactureName.includes(gripper.Data.find((data) => data.Property === 'ManufactureName')?.Value)) &&
-          (!type || type.includes(gripper.Data.find((data) => data.Property === 'Type')?.Value)) &&
-          (!category || category.includes(gripper.Data.find((data) => data.Property === 'Category')?.Value)) &&
+          (!manufactureName.length || manufactureName.includes(gripper.Data.find((data) => data.Property === 'ManufactureName')?.Value)) &&
+          (!type.length || type.includes(gripper.Data.find((data) => data.Property === 'Type')?.Value)) &&
+          (!category.length || category.includes(gripper.Data.find((data) => data.Property === 'Category')?.Value)) &&
 
           (isNaN(dimensionMin) || (dimensionValue.min >= dimensionMin)) &&
           (isNaN(dimensionMax) || (dimensionValue.max <= dimensionMax)) &&
@@ -349,24 +349,23 @@ class GripperList extends Component {
       this.filterGrippers();
     });
   }
-
-
   handleFilterChange = (filterName, value) => {
     this.setState((prevState) => {
-      const currentValues = prevState.selectedFilters[filterName] || [];
+      const updatedFilters = { ...prevState.selectedFilters };
 
-      // Toggle the value in the array
-      const updatedValues = currentValues.includes(value)
-        ? currentValues.filter((v) => v !== value)
-        : [...currentValues, value];
-
-      const updatedFilters = { ...prevState.selectedFilters, [filterName]: updatedValues };
+      // Toggle the value in the array if the same checkbox is clicked again
+      if (updatedFilters[filterName].includes(value)) {
+        updatedFilters[filterName] = updatedFilters[filterName].filter((item) => item !== value);
+      } else {
+        updatedFilters[filterName] = [...updatedFilters[filterName], value];
+      }
 
       return {
         selectedFilters: updatedFilters,
       };
     });
   };
+
 
 
   componentDidUpdate(prevProps, prevState) {
@@ -430,7 +429,14 @@ class GripperList extends Component {
       displayCategories: prevState.displayCategories + 10,
     }));
   };
-
+  handleIntegerFilterChange = (filterName, value) => {
+    this.setState((prevState) => ({
+      selectedFilters: {
+        ...prevState.selectedFilters,
+        [filterName]: value,
+      },
+    }));
+  };
 
   render() {
     const { isModalOpen, selectedGripperDetails } = this.state;
@@ -527,13 +533,13 @@ class GripperList extends Component {
               type="number"
               placeholder={`Min (${minMaxValues.dimensionMin})`}
               value={selectedFilters.dimensionMin}
-              onChange={(e) => this.handleFilterChange('dimensionMin', e.target.value)}
+              onChange={(e) => this.handleIntegerFilterChange('dimensionMin', e.target.value)}
             />
             <input
               type="number"
               placeholder={`Max (${minMaxValues.dimensionMax})`}
               value={selectedFilters.dimensionMax}
-              onChange={(e) => this.handleFilterChange('dimensionMax', e.target.value)}
+              onChange={(e) => this.handleIntegerFilterChange('dimensionMax', e.target.value)}
             />
             <div className="range-slider">
               <input
@@ -541,14 +547,14 @@ class GripperList extends Component {
                 min={minMaxValues.dimensionMin}
                 max={minMaxValues.dimensionMax}
                 value={selectedFilters.dimensionMin}
-                onChange={(e) => this.handleFilterChange('dimensionMin', e.target.value)}
+                onChange={(e) => this.handleIntegerFilterChange('dimensionMin', e.target.value)}
               />
               <input
                 type="range"
                 min={minMaxValues.dimensionMin}
                 max={minMaxValues.dimensionMax}
                 value={selectedFilters.dimensionMax}
-                onChange={(e) => this.handleFilterChange('dimensionMax', e.target.value)}
+                onChange={(e) => this.handleIntegerFilterChange('dimensionMax', e.target.value)}
               />
             </div>
           </div>
@@ -558,13 +564,13 @@ class GripperList extends Component {
               type="number"
               placeholder={`Min (${minMaxValues.payloadMin})`}
               value={selectedFilters.payloadMin}
-              onChange={(e) => this.handleFilterChange('payloadMin', e.target.value)}
+              onChange={(e) => this.handleIntegerFilterChange('payloadMin', e.target.value)}
             />
             <input
               type="number"
               placeholder={`Max (${minMaxValues.payloadMax})`}
               value={selectedFilters.payloadMax}
-              onChange={(e) => this.handleFilterChange('payloadMax', e.target.value)}
+              onChange={(e) => this.handleIntegerFilterChange('payloadMax', e.target.value)}
             />
           </div>
           <div>
@@ -573,13 +579,13 @@ class GripperList extends Component {
               type="number"
               placeholder={`Min (${minMaxValues.forceMin})`}
               value={selectedFilters.forceMin}
-              onChange={(e) => this.handleFilterChange('forceMin', e.target.value)}
+              onChange={(e) => this.handleIntegerFilterChange('forceMin', e.target.value)}
             />
             <input
               type="number"
               placeholder={`Max (${minMaxValues.forceMax})`}
               value={selectedFilters.forceMax}
-              onChange={(e) => this.handleFilterChange('forceMax', e.target.value)}
+              onChange={(e) => this.handleIntegerFilterChange('forceMax', e.target.value)}
             />
           </div>
           <div>
@@ -588,13 +594,13 @@ class GripperList extends Component {
               type="number"
               placeholder={`Min (${minMaxValues.pressureMin})`}
               value={selectedFilters.pressureMin}
-              onChange={(e) => this.handleFilterChange('pressureMin', e.target.value)}
+              onChange={(e) => this.handleIntegerFilterChange('pressureMin', e.target.value)}
             />
             <input
               type="number"
               placeholder={`Max (${minMaxValues.pressureMax})`}
               value={selectedFilters.pressureMax}
-              onChange={(e) => this.handleFilterChange('pressureMax', e.target.value)}
+              onChange={(e) => this.handleIntegerFilterChange('pressureMax', e.target.value)}
             />
           </div>
 
