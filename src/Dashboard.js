@@ -24,14 +24,21 @@ class GripperList extends Component {
       manufactureName: [],
       type: [],
       category: [],
-      dimensionMin: '',
-      dimensionMax: '',
+     
       payloadMin: '',
       payloadMax: '',
       forceMin: '',
       forceMax: '',
       pressureMin: '',
       pressureMax: '',
+      DimensionHeightValuesMin:'',
+      DimensionHeightValuesMax:'',
+      DimensionDepthValuesMin:'',
+      DimensionDepthValuesMax:'',
+      DimensionWidthValuesMin:'',
+      DimensionWidthValuesMax:'',
+
+
     },
     minMaxValues: {},
     filteredGrippers: [],
@@ -219,18 +226,12 @@ class GripperList extends Component {
       });
   }
 
-  extractDimensionRange(dimension) {
-    const [min, max] = dimension.split('-').map(value => parseFloat(value));
-    return { min, max };
-
-  };
-
+ 
 
   filterGrippers = () => {
     const { grippers, selectedFilters, minMaxValues } = this.state;
 
-    const dimensionMin = parseFloat(selectedFilters.dimensionMin);
-    const dimensionMax = parseFloat(selectedFilters.dimensionMax);
+   
     const payloadMin = parseFloat(selectedFilters.payloadMin);
     const payloadMax = parseFloat(selectedFilters.payloadMax);
     const forceMin = parseFloat(selectedFilters.forceMin);
@@ -238,6 +239,13 @@ class GripperList extends Component {
     const pressureMin = parseFloat(selectedFilters.pressureMin);
     const pressureMax = parseFloat(selectedFilters.pressureMax);
 
+
+    const DimensionHeightValuesMin = parseFloat(selectedFilters.DimensionHeightValuesMin);
+    const DimensionHeightValuesMax = parseFloat(selectedFilters.DimensionHeightValuesMax);
+    const DimensionDepthValuesMin = parseFloat(selectedFilters.DimensionDepthValuesMin);
+    const DimensionDepthValuesMax = parseFloat(selectedFilters.DimensionDepthValuesMax);
+    const DimensionWidthValuesMin = parseFloat(selectedFilters.DimensionWidthValuesMin);
+    const DimensionWidthValuesMax = parseFloat(selectedFilters.DimensionWidthValuesMax);
 
     // if (
 
@@ -285,10 +293,7 @@ class GripperList extends Component {
         const type = selectedFilters.type;
         const category = selectedFilters.category;
 
-        const dimensionData = gripper.Data.find((data) => data.Property === 'Dimension(MM)');
-        const dimensionValue = dimensionData ? this.extractDimensionRange(dimensionData.Value) : { min: NaN, max: NaN };
-
-
+       
         const payloadData = gripper.Data.find((data) => data.Property === 'Payload(Kg)');
         const payloadValue = payloadData ? parseFloat(payloadData.Value) : NaN;
 
@@ -301,6 +306,16 @@ class GripperList extends Component {
         const pressureValue = pressureData ? parseFloat(pressureData.Value) : NaN;
 
 
+        const DimensionHeightData = gripper.Data.find((data) => data.Property === 'DimensionHeight(MM)');
+        const DimensionHeightValue = DimensionHeightData ? parseFloat(DimensionHeightData.Value) : NaN;
+
+
+        const DimensionDepthData = gripper.Data.find((data) => data.Property === 'DimensionDepth(MM)');
+        const DimensionDepthValue = DimensionDepthData ? parseFloat(DimensionDepthData.Value) : NaN;
+
+        const DimensionWidthData = gripper.Data.find((data) => data.Property === 'DimensionWidth(MM)');
+        const DimensionWidthValue = DimensionWidthData ? parseFloat(DimensionWidthData.Value) : NaN;
+
 
 
 
@@ -310,14 +325,21 @@ class GripperList extends Component {
           (!type.length || type.includes(gripper.Data.find((data) => data.Property === 'Type')?.Value)) &&
           (!category.length || category.includes(gripper.Data.find((data) => data.Property === 'Category')?.Value)) &&
 
-          (isNaN(dimensionMin) || (dimensionValue.min >= dimensionMin)) &&
-          (isNaN(dimensionMax) || (dimensionValue.max <= dimensionMax)) &&
+         
           (isNaN(payloadMin) || (payloadValue >= payloadMin)) &&
           (isNaN(payloadMax) || (payloadValue <= payloadMax)) &&
           (isNaN(forceMin) || (forceValue >= forceMin)) &&
           (isNaN(forceMax) || (forceValue <= forceMax)) &&
           (isNaN(pressureMin) || (pressureValue >= pressureMin)) &&
-          (isNaN(pressureMax) || (pressureValue <= pressureMax))
+          (isNaN(pressureMax) || (pressureValue <= pressureMax))&&
+
+          (isNaN(DimensionHeightValuesMin) || (DimensionHeightValue >= DimensionHeightValuesMin)) &&
+          (isNaN(DimensionHeightValuesMax) || (DimensionHeightValue <= DimensionHeightValuesMax))&&
+          (isNaN(DimensionDepthValuesMin) || (DimensionDepthValue >= DimensionDepthValuesMin)) &&
+          (isNaN(DimensionDepthValuesMax) || (DimensionDepthValue <= DimensionDepthValuesMax))&&
+          (isNaN(DimensionWidthValuesMin) || (DimensionWidthValue >= DimensionWidthValuesMin)) &&
+          (isNaN(DimensionWidthValuesMax) || (DimensionWidthValue <= DimensionWidthValuesMax))
+          
         );
       });
       console.log("filter data", filteredGrippers)
@@ -335,8 +357,12 @@ class GripperList extends Component {
         manufactureName: '',
         type: '',
         category: '',
-        dimensionMin: '',
-        dimensionMax: '',
+        DimensionHeightValuesMin:'',
+        DimensionHeightValuesMax:'',
+        DimensionDepthValuesMin:'',
+        DimensionDepthValuesMax:'',
+        DimensionWidthValuesMin:'',
+        DimensionWidthValuesMax:'',
         payloadMin: '',
         payloadMax: '',
         forceMin: '',
@@ -397,15 +423,7 @@ class GripperList extends Component {
     });
   };
 
-  handleDimensionRangeChange = (values) => {
-    this.setState((prevState) => ({
-      selectedFilters: {
-        ...prevState.selectedFilters,
-        dimensionMin: values[0],
-        dimensionMax: values[1],
-      },
-    }));
-  };
+
   toggleAddGripperForm = () => {
     this.setState((prevState) => ({
       showAddGripperForm: !prevState.showAddGripperForm,
@@ -527,37 +545,7 @@ class GripperList extends Component {
               </button>
             )}
           </div>
-          <div>
-            <label>Dimension(MM) Range:</label>
-            <input
-              type="number"
-              placeholder={`Min (${minMaxValues.dimensionMin})`}
-              value={selectedFilters.dimensionMin}
-              onChange={(e) => this.handleIntegerFilterChange('dimensionMin', e.target.value)}
-            />
-            <input
-              type="number"
-              placeholder={`Max (${minMaxValues.dimensionMax})`}
-              value={selectedFilters.dimensionMax}
-              onChange={(e) => this.handleIntegerFilterChange('dimensionMax', e.target.value)}
-            />
-            <div className="range-slider">
-              <input
-                type="range"
-                min={minMaxValues.dimensionMin}
-                max={minMaxValues.dimensionMax}
-                value={selectedFilters.dimensionMin}
-                onChange={(e) => this.handleIntegerFilterChange('dimensionMin', e.target.value)}
-              />
-              <input
-                type="range"
-                min={minMaxValues.dimensionMin}
-                max={minMaxValues.dimensionMax}
-                value={selectedFilters.dimensionMax}
-                onChange={(e) => this.handleIntegerFilterChange('dimensionMax', e.target.value)}
-              />
-            </div>
-          </div>
+         
           <div>
             <label>Payload(Kg) Range:</label>
             <input
@@ -601,6 +589,58 @@ class GripperList extends Component {
               placeholder={`Max (${minMaxValues.pressureMax})`}
               value={selectedFilters.pressureMax}
               onChange={(e) => this.handleIntegerFilterChange('pressureMax', e.target.value)}
+            />
+          </div>
+
+          {/* dimensionHeight */}
+          <div>
+            <h2>Dimension</h2>
+            <label>Height:</label>
+            <input
+              type="number"
+              placeholder={`Min (${minMaxValues.DimensionHeightValuesMin})`}
+              value={selectedFilters.DimensionHeightValuesMin}
+              onChange={(e) => this.handleIntegerFilterChange('DimensionHeightValuesMin', e.target.value)}
+            />
+            <input
+              type="number"
+              placeholder={`Max (${minMaxValues.DimensionHeightValuesMax})`}
+              value={selectedFilters.DimensionHeightValuesMax}
+              onChange={(e) => this.handleIntegerFilterChange('DimensionHeightValuesMax', e.target.value)}
+            />
+          </div>
+
+          {/* dimensionDepth */}
+          <div>
+            <label>Depth</label>
+            <input
+              type="number"
+              placeholder={`Min (${minMaxValues.DimensionDepthValuesMin})`}
+              value={selectedFilters.DimensionDepthValuesMin}
+              onChange={(e) => this.handleIntegerFilterChange('DimensionDepthValuesMin', e.target.value)}
+            />
+            <input
+              type="number"
+              placeholder={`Max (${minMaxValues.DimensionDepthValuesMax})`}
+              value={selectedFilters.DimensionDepthValuesMax}
+              onChange={(e) => this.handleIntegerFilterChange('DimensionDepthValuesMax', e.target.value)}
+            />
+          </div>
+
+          {/* dimensionWidth */}
+          <div>
+            <label>Width</label>
+            <input
+              type="number"
+              placeholder={`Min (${minMaxValues.DimensionWidthValuesMin})`}
+              value={selectedFilters.DimensionWidthValuesMin}
+              onChange={(e) => this.handleIntegerFilterChange('DimensionWidthValuesMin', e.target.value)}
+            />
+            <input
+              type="number"
+              placeholder={`Max (${minMaxValues.DimensionWidthValuesMax})`}
+              value={selectedFilters.DimensionWidthValuesMax}
+              onChange={(e) => this.handleIntegerFilterChange('DimensionWidthValuesMax', e.target.value)}
             />
           </div>
 

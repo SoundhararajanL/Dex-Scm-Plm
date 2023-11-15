@@ -1,0 +1,124 @@
+[
+    {
+        "Model Name": "KSL",
+        "Data": [
+          {
+            "Property": "ImageURL",
+            
+            "Value": "https://www.piab.com/globalassets/inriver-ipmc/resources/singel_shot_ksl.240.120.n241.fr15.s1.1sth.50.534.jpeg?ts=8dbbcb2fa253480&width=556&height=400&format=webp"
+          },
+            {
+              "Property": "Datasheet",
+              
+              "Value": "https://drive.google.com/file/d/1SPIr2n4Co2P20XBfOxfTvgnQMD7OOBUP/view"
+            } ,
+            {
+                "Property": "ManufactureName",
+                
+                "Value": "Kenos"
+              }  ,
+              {
+                "Property": "Type",
+                
+                "Value": "Vacuum"
+              }  ,
+              {
+                "Property": "Category",
+                
+                "Value": "Flexi Gripper"
+              },
+             
+                {
+                  "Property": "Payload(Kg)",
+                  
+                  "Value": 30
+                },
+                {
+                  "Property": "Gripping Force",
+                  
+                  "Value": ""
+                },
+                {
+                  "Property": "Feed pressure Max",
+                  
+                  "Value": ""
+                } ,
+                {
+                  "Property": "DimensionHeight(MM)",
+                  
+                  "Value": 100
+                },
+                {
+                  "Property": "DimensionDepth(MM)",
+                  
+                  "Value": 200
+                },
+                {
+                  "Property": "DimensionWidth(MM)",
+                  
+                  "Value": 300
+                }                
+        ]
+       },
+       {
+        "Model Name": "Msd",
+        "Data": [
+          {
+            "Property": "ImageURL",
+            
+            "Value": "https://www.piab.com/globalassets/inriver-ipmc/resources/singel_shot_ksl.240.120.n241.fr15.s1.1sth.50.534.jpeg?ts=8dbbcb2fa253480&width=556&height=400&format=webp"
+          },
+            {
+              "Property": "Datasheet",
+              
+              "Value": "https://drive.google.com/file/d/1SPIr2n4Co2P20XBfOxfTvgnQMD7OOBUP/view"
+            } ,
+            {
+              "Property": "ManufactureName",
+              
+              "Value": "Kenos"
+            }  ,
+            {
+              "Property": "Type",
+              
+              "Value": "Vacuum"
+            }  ,
+            {
+              "Property": "Category",
+              
+              "Value": "Flexi Gripper"
+            },
+           
+              {
+                "Property": "Payload(Kg)",
+                
+                "Value": 30
+              },
+              {
+                "Property": "Gripping Force",
+                
+                "Value": ""
+              },
+              {
+                "Property": "Feed pressure Max",
+                
+                "Value": ""
+              } ,
+              {
+                "Property": "DimensionHeight(MM)",
+                
+                "Value": 200
+              },
+              {
+                "Property": "DimensionDepth(MM)",
+                
+                "Value": 300
+              },
+              {
+                "Property": "DimensionWidth(MM)",
+                
+                "Value": 400
+              }              
+        ]
+       }
+]
