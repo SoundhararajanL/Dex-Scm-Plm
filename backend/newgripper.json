@@ -1,0 +1,1237 @@
+[
+    {
+        "Model Name": "KSL",
+        "Data": [
+            {
+                "Property": "ImageURL",
+                
+                "Value": "https://www.piab.com/globalassets/inriver-ipmc/resources/singel_shot_ksl.240.120.n241.fr15.s1.1sth.50.534.jpeg?ts=8dbbcb2fa253480&width=556&height=400&format=webp"
+              },
+                {
+                  "Property": "Datasheet",
+                  
+                  "Value": "https://drive.google.com/file/d/1SPIr2n4Co2P20XBfOxfTvgnQMD7OOBUP/view"
+                } ,
+                {
+                  "Property": "ManufactureName",
+                  
+                  "Value": "Kenos"
+                }  ,
+                {
+                  "Property": "Type",
+                  
+                  "Value": "Vacuum"
+                }  ,
+                {
+                  "Property": "Category",
+                  
+                  "Value": "Flexi Gripper"
+                },
+                
+                  {
+                    "Property": "Payload(Kg)",
+                    
+                    "Value": 30
+                  },
+                  {
+                    "Property": "Gripping Force",
+                    
+                    "Value": ""
+                  },
+                  {
+                    "Property": "Feed pressure Max",
+                    
+                    "Value": ""
+                  } ,
+                {
+                  "Property": "DimensionHeight(MM)",
+                  
+                  "Value": 100
+                },
+                {
+                  "Property": "DimensionDepth(MM)",
+                  
+                  "Value": 200
+                },
+                {
+                  "Property": "DimensionWidth(MM)",
+                  
+                  "Value": 300
+                }                
+        ]
+       },
+       {
+        "Model Name": "PGL Plus P 25",
+        "Data": [
+          {
+            "Property": "ImageURL",
+            
+            "Value": "https://d16vz4puxlsxm1.cloudfront.net/image/076200133045-Prod/image_dlfaeks9bt1c502fcarsl24e6k/-FWEBP-B2000"
+          },
+            {
+              "Property": "Datasheet",
+              
+              "Value": "https://drive.google.com/file/d/1uYl3wvfRsYQWSv1eVg7JMvfDWmBQOCfD/view"
+            }  ,
+            {
+              "Property": "ManufactureName",
+              
+              "Value": "Schunk"
+            }       ,
+            {
+              "Property": "Type",
+              
+              "Value": "Electric"
+            }  ,
+            {
+              "Property": "Category",
+              
+              "Value": "Parallel Gripper"
+            } ,
+            {
+                "Property": "Payload(Kg)",
+                
+                "Value": ""
+              },
+              {
+                "Property": "Gripping Force",
+                
+                "Value": 220
+              },
+              {
+                "Property": "Feed pressure Max",
+                
+                "Value": ""
+              },
+              {
+                "Property": "DimensionHeight(MM)",
+                
+                "Value": 150
+              },
+              {
+                "Property": "DimensionDepth(MM)",
+                
+                "Value": 300
+              },
+              {
+                "Property": "DimensionWidth(MM)",
+                
+                "Value": 200
+              }             
+        ]
+       },
+       {
+        "Model Name": "SGM-HPm",
+        "Data": [
+          {
+            "Property": "ImageURL",
+            
+            "Value": "https://pimmedia.schmalz.com/assets/Produktfamilienbild/PF_PGE-06081.jpg"
+          },
+            {
+              "Property": "Datasheet",
+              
+              "Value": "https://drive.google.com/file/d/1JnRzqAux7TMzeHoGhdKrLS_5uD5fTtdK/view"
+            }  ,
+            {
+              "Property": "ManufactureName",
+              
+              "Value": "Schmalz"
+            }         ,
+            {
+              "Property": "Type",
+              
+              "Value": "Electric"
+            }  ,
+            {
+              "Property": "Category",
+              
+              "Value": "Magnetic Gripper" 
+            },
+            
+              {
+                "Property": "Payload(Kg)",
+                
+                "Value": 0.278 
+              },
+              {
+                "Property": "Gripping Force",
+                
+                "Value": 160
+              },
+              {
+                "Property": "Feed pressure Max",
+                
+                "Value": ""
+              }  ,
+              {
+                "Property": "DimensionHeight(MM)",
+                
+                "Value": 250
+              },
+              {
+                "Property": "DimensionDepth(MM)",
+                
+                "Value": 380
+              },
+              {
+                "Property": "DimensionWidth(MM)",
+                
+                "Value": 130
+              }              
+        ]
+       },
+       {
+        "Model Name": "LBG-50",
+        "Data": [
+          {
+            "Property": "ImageURL",
+            
+            "Value": "https://www.piab.com/globalassets/inriver-ipmc/resources/lbg-50-productcard.jpg?ts=8dbbcbb2fce1b80&width=556&height=400&format=webp"
+          },
+            {
+              "Property": "Datasheet",
+              
+              "Value": "https://drive.google.com/file/d/1xwIalZLRZovZ_9dXoGp3cGD3js_K2IOn/view"
+            }  ,
+            {
+              "Property": "ManufactureName",
+              
+              "Value": "Piab"
+            }         ,
+            {
+              "Property": "Type",
+              
+              "Value": "Electric"
+            }  ,
+            {
+              "Property": "Category",
+              
+              "Value": "Bag Gripper" 
+            } ,
+            
+              {
+                "Property": "Payload(Kg)",
+                
+                "Value": 50
+              },
+              {
+                "Property": "Gripping Force",
+                
+                "Value": ""
+              },
+              {
+                "Property": "Feed pressure Max",
+                
+                "Value": ""
+              }   ,
+              {
+                "Property": "DimensionHeight(MM)",
+                
+                "Value": 120
+              },
+              {
+                "Property": "DimensionDepth(MM)",
+                
+                "Value": 240
+              },
+              {
+                "Property": "DimensionWidth(MM)",
+                
+                "Value": 370
+              }               
+        ]
+       },
+       {
+        "Model Name": "DBG",
+        "Data": [
+          {
+            "Property": "ImageURL",
+            
+            "Value": "https://www.destaco.com/assets/image/products/end_effectors/DBG-50_Bag_Gripper-1202.tif.thumb.1280.1280.png.rendition.src.m.1637154566107.png"
+          },
+            {
+              "Property": "Datasheet",
+              
+              "Value": "https://drive.google.com/file/d/14pmbOtm7A_-m7jO5dOot5C8oVbxpqXqC/view"
+            }  ,
+            {
+              "Property": "ManufactureName",
+              
+              "Value": "Destaco"
+            }         ,
+            {
+              "Property": "Type",
+              
+              "Value": "Electric"
+            }  ,
+            {
+              "Property": "Category",
+              
+              "Value": "Bag Gripper" 
+            }   ,
+            
+              {
+                "Property": "Payload(Kg)",
+                
+                "Value": 50
+              },
+              {
+                "Property": "Gripping Force",
+                
+                "Value": ""
+              },
+              {
+                "Property": "Feed pressure Max",
+                
+                "Value": ""
+              }   ,
+              {
+                "Property": "DimensionHeight(MM)",
+                
+                "Value": 320
+              },
+              {
+                "Property": "DimensionDepth(MM)",
+                
+                "Value": 210
+              },
+              {
+                "Property": "DimensionWidth(MM)",
+                
+                "Value": 260
+              }             
+        ]
+       },
+       {
+        "Model Name": "Soft Gripper",
+        "Data": [
+          {
+            "Property": "ImageURL",
+            
+            "Value": "https://onrobot.com/sites/default/files/styles/500x500/public/2020-04/Product_Subpage_Picture_SG.jpg?h=2a479378&itok=HMs-MG34"
+          },
+            {
+              "Property": "Datasheet",
+              
+              "Value": "https://drive.google.com/file/d/1-v6CX8WKYBXROAQ-r2ColI0jWki7oFjF/view"
+            }  ,
+            {
+              "Property": "ManufactureName",
+              
+              "Value": "Onrobot"
+            }         ,
+            {
+              "Property": "Type",
+              
+              
+              "Value": "Electric"
+            }  ,
+            {
+              "Property": "Category",
+              
+              "Value": "Soft Gripper" 
+            }  ,
+           
+              {
+                "Property": "Payload(Kg)",
+                
+                "Value": 2.2
+              },
+              {
+                "Property": "Gripping Force",
+                
+                "Value": ""
+              },
+              {
+                "Property": "Feed pressure Max",
+                
+                "Value": ""
+              }  ,
+              {
+                "Property": "DimensionHeight(MM)",
+                
+                "Value": 260
+              },
+              {
+                "Property": "DimensionDepth(MM)",
+                
+                "Value": 110
+              },
+              {
+                "Property": "DimensionWidth(MM)",
+                
+                "Value": 360
+              }
+                
+        ]
+       },
+       {
+        "Model Name": "KVG60C",
+        "Data": [
+          {
+            "Property": "ImageURL",
+            
+            "Value": "https://www.piab.com/globalassets/inriver-ipmc/resources/image3.jpg?ts=8dbbcb01673a200&width=556&height=400&format=webp"
+          },
+            {
+              "Property": "Datasheet",
+              
+              "Value": "https://drive.google.com/file/d/1ZrW5X_4hldD6Ew1-o8wiLNZFwg9BcvpW/view"
+            } ,
+            {
+              "Property": "ManufactureName",
+              
+              "Value": "Kenos"
+            }    ,
+            {
+              "Property": "Type",
+              
+              "Value": "Vacuum"
+            }  ,
+            {
+              "Property": "Category",
+              
+              "Value": "Vacuum Gripper"
+            } ,
+           
+              {
+                "Property": "Payload(Kg)",
+                
+                "Value": ""
+              },
+              {
+                "Property": "Gripping Force",
+                
+                "Value":"" 
+              },
+              {
+                "Property": "Feed pressure Max",
+                
+                "Value": ""
+              } ,
+              {
+                "Property": "DimensionHeight(MM)",
+                
+                "Value": 440
+              },
+              {
+                "Property": "DimensionDepth(MM)",
+                
+                "Value": 130
+              },
+              {
+                "Property": "DimensionWidth(MM)",
+                
+                "Value": 50
+              }
+                
+        ]
+       },
+       {
+        "Model Name": "KVGL-CJ",
+        "Data": [
+          {
+            "Property": "ImageURL",
+            
+            "Value": "https://www.piab.com/globalassets/inriver-ipmc/resources/kvgl-cj.jpg?ts=8dbbcafa533ef00&width=556&height=400&format=webp"
+          },
+            {
+              "Property": "Datasheet",
+              
+              "Value": "https://drive.google.com/file/d/1h61Oo5LUrRuoIpfdHosK8vOW6DnrgtU8/view"
+            }  ,
+            {
+              "Property": "ManufactureName",
+              
+              "Value": "Kenos"
+            }  ,
+            {
+              "Property": "Type",
+              
+              "Value": "Vacuum"
+            }  ,
+            {
+              "Property": "Category",
+              
+              "Value": "Layer Gripper"
+            } ,
+            
+              {
+                "Property": "Payload(Kg)",
+                
+                "Value": ""
+              },
+              {
+                "Property": "Gripping Force",
+                
+                "Value": ""
+              },
+              {
+                "Property": "Feed pressure Max",
+                
+                "Value": ""
+              }  ,
+              {
+                "Property": "DimensionHeight(MM)",
+                
+                "Value": 300
+              },
+              {
+                "Property": "DimensionDepth(MM)",
+                
+                "Value": 160
+              },
+              {
+                "Property": "DimensionWidth(MM)",
+                
+                "Value": 570
+              }
+                
+        ]
+       },
+       {
+        "Model Name": "KCS",
+        "Data": [
+          {
+            "Property": "ImageURL",
+            
+            "Value": "https://www.piab.com/globalassets/inriver-ipmc/resources/kcs_datasheet.jpg?ts=8dbbcb0681c2c80&width=556&height=400&format=webp"
+          },
+            {
+              "Property": "Datasheet",
+              
+              "Value": "https://drive.google.com/file/d/1XyC3RdUSt49xO_pwN95sSljesFF7USzk/view"
+            }   ,
+            {
+              "Property": "ManufactureName",
+              
+              "Value": "Kenos"
+            }  ,
+            {
+              "Property": "Type",
+              
+              "Value": "Vacuum"
+            }  ,
+            {
+              "Property": "Category",
+              
+              "Value": "Small Gripper"
+            } ,
+           
+              {
+                "Property": "Payload(Kg)",
+                
+                "Value": ""
+              },
+              {
+                "Property": "Gripping Force",
+                
+                "Value": 54.9
+              },
+              {
+                "Property": "Feed pressure Max",
+                
+                "Value": 101.5
+              }  ,
+              {
+                "Property": "DimensionHeight(MM)",
+                
+                "Value": 450
+              },
+              {
+                "Property": "DimensionDepth(MM)",
+                
+                "Value": 190
+              },
+              {
+                "Property": "DimensionWidth(MM)",
+                
+                "Value": 280
+              }
+                
+        ]
+       },
+       {
+        "Model Name": "KHVG",
+        "Data": [
+          {
+            "Property": "ImageURL",
+            
+            "Value": "https://www.piab.com/globalassets/inriver-ipmc/resources/khvg-45-15.jpg?ts=8dbbcafa402c200&width=556&height=400&format=webp"
+          },
+            {
+              "Property": "Datasheet",
+              
+              "Value": "https://drive.google.com/file/d/1uwrP1Plo2hnXcPnmYVlLJ5IbCQ8oEadA/view"
+            }  ,
+            {
+              "Property": "ManufactureName",
+              
+              "Value": "Kenos"
+            }         ,
+            {
+              "Property": "Type",
+              
+              "Value": "Vacuum"
+            }  ,
+            {
+              "Property": "Category",
+              
+              "Value": "Vacuum Gripper" 
+            } ,
+            
+              {
+                "Property": "Payload(Kg)",
+                
+                "Value": ""
+              },
+              {
+                "Property": "Gripping Force",
+                
+                "Value": ""
+              },
+              {
+                "Property": "Feed pressure Max",
+                
+                "Value": ""
+              }  ,
+              {
+                "Property": "DimensionHeight(MM)",
+                
+                "Value": 120
+              },
+              {
+                "Property": "DimensionDepth(MM)",
+                
+                "Value": 340
+              },
+              {
+                "Property": "DimensionWidth(MM)",
+                
+                "Value": 276
+              }
+                
+        ]
+       },
+       {
+        "Model Name": "KSG",
+        "Data": [
+          {
+            "Property": "ImageURL",
+            
+            "Value": "https://www.piab.com/globalassets/inriver-ipmc/resources/ksg.jpg?ts=8dbbcafffcd4b00&width=556&height=400&format=webp"
+          },
+            {
+              "Property": "Datasheet",
+              
+              "Value": "https://drive.google.com/file/d/1XCn5Z2pctz_qKP2Llrmoayk-Pl95xQ3R/view"
+            }   ,
+            {
+              "Property": "ManufactureName",
+              
+              "Value": "Kenos"
+            }        ,
+            {
+              "Property": "Type",
+              
+              "Value": "Vacuum"
+            }  ,
+            {
+              "Property": "Category",
+              
+              "Value": "Sack Gripper"
+            },
+           
+              {
+                "Property": "Payload(Kg)",
+                
+                "Value": ""
+              },
+              {
+                "Property": "Gripping Force",
+                
+                "Value": 1897.4
+              },
+              {
+                "Property": "Feed pressure Max",
+                
+                "Value": 101.5
+              } ,
+              {
+                "Property": "DimensionHeight(MM)",
+                
+                "Value": 230
+              },
+              {
+                "Property": "DimensionDepth(MM)",
+                
+                "Value": 546
+              },
+              {
+                "Property": "DimensionWidth(MM)",
+                
+                "Value": 278
+              }
+                
+        ]
+       },
+       {
+        "Model Name": "KBC",
+        "Data": [
+          {
+            "Property": "ImageURL",
+            
+            "Value": "https://www.piab.com/globalassets/inriver-ipmc/resources/kbc.jpg?ts=8dbbcafff34b480&width=556&height=400&format=webp"
+          },
+            {
+              "Property": "Datasheet",
+              
+              "Value": "https://drive.google.com/file/d/1GH0tjD_r_5ZswJ6VzAUjALs6h6o8QpZh/view"
+            }  ,
+            {
+              "Property": "ManufactureName",
+              
+              "Value": "Kenos"
+            }        ,
+            {
+              "Property": "Type",
+              
+              "Value": "Vacuum"
+            }  ,
+            {
+              "Property": "Category",
+              
+              "Value": "Bag Cup Gripper"
+            },
+            
+              {
+                "Property": "Payload(Kg)",
+                
+                "Value": ""
+              },
+              {
+                "Property": "Gripping Force",
+                
+                "Value": ""
+              },
+              {
+                "Property": "Feed pressure Max",
+                
+                "Value": ""
+              }  ,
+              {
+                "Property": "DimensionHeight(MM)",
+                
+                "Value": 290
+              },
+              {
+                "Property": "DimensionDepth(MM)",
+                
+                "Value": 876
+              },
+              {
+                "Property": "DimensionWidth(MM)",
+                
+                "Value": 853
+              }
+                
+        ]
+       },
+       {
+        "Model Name": "KVG120C",
+        "Data": [
+          {
+            "Property": "ImageURL",
+            
+            "Value": "https://www.piab.com/globalassets/inriver-ipmc/resources/kvgc_products.jpg?ts=8dbbcb174ed5000&width=556&height=400&format=webp"
+          },
+            {
+              "Property": "Datasheet",
+              
+              "Value": "https://drive.google.com/file/d/1omeJYrfQs-KdAf2bSsNOaBxIhHsSCE2S/view"
+            }  ,
+            {
+              "Property": "ManufactureName",
+              
+              "Value": "Kenos"
+            }  ,
+            {
+              "Property": "Type",
+              
+              "Value": "Vacuum"
+            }  ,
+            {
+              "Property": "Category",
+              
+              "Value": "Area Gripper"
+            },
+           
+              {
+                "Property": "Payload(Kg)",
+                
+                "Value": ""
+              },
+              {
+                "Property": "Gripping Force",
+                
+                "Value": ""
+              },
+              {
+                "Property": "Feed pressure Max",
+                
+                "Value": ""
+              } ,
+              {
+                "Property": "DimensionHeight(MM)",
+                
+                "Value": 547
+              },
+              {
+                "Property": "DimensionDepth(MM)",
+                
+                "Value": 738
+              },
+              {
+                "Property": "DimensionWidth(MM)",
+                
+                "Value": 383
+              }
+                
+        ]
+       } ,
+       {
+        "Model Name": "EGS",
+        "Data": [
+          {
+            "Property": "ImageURL",
+            
+            "Value": "https://d16vz4puxlsxm1.cloudfront.net/image/076200133045-Prod/image_7p5a27blj90n15iufl2q21fb4m/-FWEBP-B2000"
+          },
+            {
+              "Property": "Datasheet",
+              
+              "Value": "https://drive.google.com/file/d/1Pp68lXfhCXLbJgvu6kwWpDgLesu4HEjC/view"
+            }  ,
+            {
+              "Property": "ManufactureName",
+              
+              "Value": "Schunk"
+            }  ,
+            {
+              "Property": "Type",
+              
+              "Value": "Electric"
+            }  ,
+            {
+              "Property": "Category",
+              
+              "Value": "Rotary Gripper"
+            },
+            
+              {
+                "Property": "Payload(Kg)",
+                
+                "Value": ""
+              },
+              {
+                "Property": "Gripping Force",
+                
+                "Value": 30
+              },
+              {
+                "Property": "Feed pressure Max",
+                
+                "Value": ""
+              } ,
+              {
+                "Property": "DimensionHeight(MM)",
+                
+                "Value": 425
+              },
+              {
+                "Property": "DimensionDepth(MM)",
+                
+                "Value": 373
+              },
+              {
+                "Property": "DimensionWidth(MM)",
+                
+                "Value": 373
+              }
+                
+        ]
+       },
+       {
+        "Model Name": "GSW-V",
+        "Data": [
+          {
+            "Property": "ImageURL",
+            
+            "Value": "https://d16vz4puxlsxm1.cloudfront.net/image/076200133045-Prod/image_tconnpggrl7pjfnk0pqmogsm69/-FWEBP-B2000"
+          },
+            {
+              "Property": "Datasheet",
+              
+              "Value": "https://drive.google.com/file/d/1cn7c6EU-8Noftq4g0vmtqDvqZorVYIXr/view"
+            }   ,
+            {
+              "Property": "ManufactureName",
+              
+              "Value": "Schunk"
+            }     ,
+            {
+              "Property": "Type",
+              
+              "Value": "Vacuum"
+            }  ,
+            {
+              "Property": "Category",
+              
+              "Value": "Vacuum Gripper"
+            },
+            
+              {
+                "Property": "Payload(Kg)",
+                
+                "Value": ""
+              },
+              {
+                "Property": "Gripping Force",
+                
+                "Value": 980
+              },
+              {
+                "Property": "Feed pressure Max",
+                
+                "Value": ""
+              }  ,
+              {
+                "Property": "DimensionHeight(MM)",
+                
+                "Value": 324
+              },
+              {
+                "Property": "DimensionDepth(MM)",
+                
+                "Value": 764
+              },
+              {
+                "Property": "DimensionWidth(MM)",
+                
+                "Value": 738
+              }
+                
+        ]
+       },
+       {
+        "Model Name": "EGM",
+        "Data": [
+          {
+            "Property": "ImageURL",
+            
+            "Value": "https://d16vz4puxlsxm1.cloudfront.net/image/076200133045-Prod/image_mjd7rveo7p1s53pm2c1fiucf6s/-FWEBP-B2000"
+          },
+            {
+              "Property": "Datasheet",
+              
+              "Value": "https://drive.google.com/file/d/1ItAYOOSc-ak8y6_il3tAOuO2VteLVgdY/view"
+            }  ,
+            {
+              "Property": "ManufactureName",
+              
+              "Value": "Schunk"
+            }         ,
+            {
+              "Property": "Type",
+              
+              "Value": "Electric"
+            }  ,
+            {
+              "Property": "Category",
+              
+              "Value": "Magnetic Gripper" 
+            },
+            
+              {
+                "Property": "Payload(Kg)",
+                
+                "Value": 18
+              },
+              {
+                "Property": "Gripping Force",
+                
+                "Value": ""
+              },
+              {
+                "Property": "Feed pressure Max",
+                
+                "Value": ""
+              } ,
+              {
+                "Property": "DimensionHeight(MM)",
+                
+                "Value": 654
+              },
+              {
+                "Property": "DimensionDepth(MM)",
+                
+                "Value": 742
+              },
+              {
+                "Property": "DimensionWidth(MM)",
+                
+                "Value": 123
+              }
+                
+        ]
+       },
+       {
+        "Model Name": "ADHESO G-3-50-H",
+        "Data": [
+          {
+            "Property": "ImageURL",
+            
+            "Value": "https://d16vz4puxlsxm1.cloudfront.net/image/076200133045-Prod/image_60tqb4081l4q1c968e420vsm2h/-FWEBP-B2000"
+          },
+            {
+              "Property": "Datasheet",
+              
+              "Value": "https://drive.google.com/file/d/1Yba9G9y6khQKcwXlv27DNoIUJ8DvjOMQ/view"
+            }  ,
+            {
+              "Property": "ManufactureName",
+              
+              "Value": "Schunk"
+            }         ,
+            {
+              "Property": "Type",
+              
+              "Value": "Electric"
+            }  ,
+            {
+              "Property": "Category",
+              
+              "Value": "Adhesive gripper" 
+            },
+           
+              {
+                "Property": "Payload(Kg)",
+                
+                "Value": 20.5
+              },
+              {
+                "Property": "Gripping Force",
+                
+                "Value": 70
+              },
+              {
+                "Property": "Feed pressure Max",
+                
+                "Value": ""
+              }  ,
+              {
+                "Property": "DimensionHeight(MM)",
+                
+                "Value": 234
+              },
+              {
+                "Property": "DimensionDepth(MM)",
+                
+                "Value": 938
+              },
+              {
+                "Property": "DimensionWidth(MM)",
+                
+                "Value": 342
+              }
+                
+        ]
+       },
+       {
+        "Model Name": "SGW",
+        "Data": [
+          {
+            "Property": "ImageURL",
+            
+            "Value": "https://d16vz4puxlsxm1.cloudfront.net/image/076200133045-Prod/image_0su8rv2pcp2lrb315qsvhr231n/-FWEBP-B2000"
+          },
+            {
+              "Property": "Datasheet",
+              
+              "Value": "https://drive.google.com/file/d/1x86sQcLUrRUn0LnFE_Soe59ub3lKpl8z/view"
+            }  ,
+            {
+              "Property": "ManufactureName",
+              
+              "Value": "Schunk"
+            }         ,
+            {
+              "Property": "Type",
+              
+              "Value": "Electric"
+            }  ,
+            {
+              "Property": "Category",
+              
+              "Value": "Angular Gripper" 
+            },
+            
+              {
+                "Property": "Payload(Kg)",
+                
+                "Value":  0.05
+              },
+              {
+                "Property": "Gripping Force",
+                
+                "Value": ""
+              },
+              {
+                "Property": "Feed pressure Max",
+                
+                "Value": ""
+              } ,
+              {
+                "Property": "DimensionHeight(MM)",
+                
+                "Value": 637
+              },
+              {
+                "Property": "DimensionDepth(MM)",
+                
+                "Value": 872
+              },
+              {
+                "Property": "DimensionWidth(MM)",
+                
+                "Value": 734
+              }
+                
+        ]
+       },
+       {
+        "Model Name": "ZLW",
+        "Data": [
+          {
+            "Property": "ImageURL",
+            
+            "Value": "https://media.schmalz.com/MAM_Library2/Products/Anwendungsbilder/Vacuum%20Automation/Vacuum%20Systems/Applications/Logistics/72b3f88e1825_Picture_VA-CO_ZLW_2023_02.jpg"
+          },
+            {
+              "Property": "Datasheet",
+              
+              "Value": "https://drive.google.com/file/d/16wRR0l6SMffP5L340OBqPsMtehLTPAoK/view"
+            }  ,
+            {
+              "Property": "ManufactureName",
+              
+              "Value": "Schmalz"
+            }         ,
+            {
+              "Property": "Type",
+              
+              "Value": "Vacuum"
+            }  ,
+            {
+              "Property": "Category",
+              
+              "Value": "Layer Gripper" 
+            },
+            
+              {
+                "Property": "Payload(Kg)",
+                
+                "Value": 9.15
+              },
+              {
+                "Property": "Gripping Force",
+                
+                "Value": ""
+              },
+              {
+                "Property": "Feed pressure Max",
+                
+                "Value": ""
+              } ,
+              {
+                "Property": "DimensionHeight(MM)",
+                
+                "Value": 635
+              },
+              {
+                "Property": "DimensionDepth(MM)",
+                
+                "Value": 837
+              },
+              {
+                "Property": "DimensionWidth(MM)",
+                
+                "Value": 352
+              }
+                
+        ]
+       },
+       {
+        "Model Name": "PXT",
+        "Data": [
+          {
+            "Property": "ImageURL",
+            
+            "Value": "https://media.schmalz.com/MAM_Library2/Products/Anwendungsbilder/0_/059/05954/ec4efe7c477c_A_PGE-05954_001.jpg"
+          },
+            {
+              "Property": "Datasheet",
+              
+              "Value": "https://drive.google.com/file/d/1ezA12gDOE-t_Yuql-W7M4xCUjO8wINbD/view"
+            }  ,
+            {
+              "Property": "ManufactureName",
+              
+              "Value": "Schmalz"
+            }         ,
+            {
+              "Property": "Type",
+              
+              "Value": "Vacuum"
+            }  ,
+            {
+              "Property": "Category",
+              
+              "Value": "Modular Gripper" 
+            },
+            
+              {
+                "Property": "Payload(Kg)",
+                
+                "Value": 25
+              },
+              {
+                "Property": "Gripping Force",
+                
+                "Value": ""
+              },
+              {
+                "Property": "Feed pressure Max",
+                
+                "Value": ""
+              } ,
+              {
+                "Property": "DimensionHeight(MM)",
+                
+                "Value": 876
+              },
+              {
+                "Property": "DimensionDepth(MM)",
+                
+                "Value": 234
+              },
+              {
+                "Property": "DimensionWidth(MM)",
+                
+                "Value": 376
+              }
+                
+        ]
+       }
+]

@@ -11,4 +11,4 @@ const gripperSchema = new mongoose.Schema({
   Data: [gripperDataSchema],
 });
 
-module.exports = mongoose.model('Gripper', gripperSchema);
+module.exports = mongoose.model('Newdata', gripperSchema);

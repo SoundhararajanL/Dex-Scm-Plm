@@ -30,7 +30,7 @@ router.get('/grippers/minmax', async (req, res) => {
           return numericValue;
         }
       }
-      return null; // Handle missing or non-numeric values as null
+      return null; 
     };
 
     const payloadValues = grippers.map((gripper) =>
@@ -45,6 +45,19 @@ router.get('/grippers/minmax', async (req, res) => {
       extractNumericValue(gripper.Data, 'Feed pressure Max')
     );
 
+    const DimensionHeightValues = grippers.map((gripper) =>
+      extractNumericValue(gripper.Data, 'DimensionHeight(MM)')
+    );
+
+
+    const DimensionDepthValues = grippers.map((gripper) =>
+      extractNumericValue(gripper.Data, 'DimensionDepth(MM)')
+    );
+
+    const DimensionWidthValues = grippers.map((gripper) =>
+      extractNumericValue(gripper.Data, 'DimensionWidth(MM)')
+    );
+
     const payloadMin = Math.min(...payloadValues.filter((value) => value !== null));
     const payloadMax = Math.max(...payloadValues.filter((value) => value !== null));
 
@@ -53,32 +66,40 @@ router.get('/grippers/minmax', async (req, res) => {
 
     const pressureMin = Math.min(...pressureValues.filter((value) => value !== null));
     const pressureMax = Math.max(...pressureValues.filter((value) => value !== null));
-    const dimensionValues = grippers.map((gripper) => {
-      const dimensionValue = gripper.Data.find((data) => data.Property === 'Dimension(MM)').Value;
 
-      if (!dimensionValue) {
-        return null;
-      }
+    const DimensionHeightValuesMin = Math.min(...DimensionHeightValues.filter((value) => value !== null));
+    const DimensionHeightValuesMax = Math.max(...DimensionHeightValues.filter((value) => value !== null));
 
-      const [min, max] = dimensionValue.split('-').map(parseFloat);
-      return { min, max };
-    }).filter(Boolean); // Remove null entries (dimensions with empty ranges)
+    const DimensionDepthValuesMin = Math.min(...DimensionDepthValues.filter((value) => value !== null));
+    const DimensionDepthValuesMax = Math.max(...DimensionDepthValues.filter((value) => value !== null));
 
-    const dimensionMin = Math.min(...dimensionValues.map((value) => value.min));
-    const dimensionMax = Math.max(...dimensionValues.map((value) => value.max));
+    const DimensionWidthValuesMin = Math.min(...DimensionWidthValues.filter((value) => value !== null));
+    const DimensionWidthValuesMax = Math.max(...DimensionWidthValues.filter((value) => value !== null));
+
+
+
+
     const minMaxValues = {
-      dimensionMin,
-      dimensionMax,
+
       payloadMin,
       payloadMax,
       forceMin,
       forceMax,
       pressureMin,
       pressureMax,
+      DimensionHeightValuesMin,
+      DimensionHeightValuesMax,
+      DimensionDepthValuesMin,
+      DimensionDepthValuesMax,
+      DimensionWidthValuesMin,
+      DimensionWidthValuesMax
+
+
     };
 
     res.status(200).json(minMaxValues);
 
+   
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Error occurred while fetching grippers.' });
@@ -97,7 +118,5 @@ router.post('/grippers', async (req, res) => {
     res.status(500).json({ error: 'Error occurred while creating a gripper.' });
   }
 });
-
-
 
 module.exports = router;
