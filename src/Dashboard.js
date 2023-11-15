@@ -24,19 +24,19 @@ class GripperList extends Component {
       manufactureName: [],
       type: [],
       category: [],
-     
+
       payloadMin: '',
       payloadMax: '',
       forceMin: '',
       forceMax: '',
       pressureMin: '',
       pressureMax: '',
-      DimensionHeightValuesMin:'',
-      DimensionHeightValuesMax:'',
-      DimensionDepthValuesMin:'',
-      DimensionDepthValuesMax:'',
-      DimensionWidthValuesMin:'',
-      DimensionWidthValuesMax:'',
+      DimensionHeightValuesMin: '',
+      DimensionHeightValuesMax: '',
+      DimensionDepthValuesMin: '',
+      DimensionDepthValuesMax: '',
+      DimensionWidthValuesMin: '',
+      DimensionWidthValuesMax: '',
 
 
     },
@@ -47,38 +47,16 @@ class GripperList extends Component {
     manufactureName: '',
     manufactureType: '',
     manufactureCategory: '',
-    dimension: '',
+   
     payload: '',
     grippingForce: '',
     feedGrippingForce: '',
+    dimensionHeight: '',
+    dimensionDepth: '',
+    dimensionWidth: '',
     showAddGripperForm: false,
   };
 
-  validateDimension(dimension) {
-    if (!dimension) {
-      return true;
-    }
-
-    const dimensionPattern = /^\d+-\d+$/;
-    if (!dimensionPattern.test(dimension)) {
-      alert('Invalid "Dimension" format. Please use "min-max" format (e.g., 120-230).');
-      return false;
-    }
-
-    const [dimensionMin, dimensionMax] = dimension.split('-').map(value => parseFloat(value));
-
-    if (isNaN(dimensionMin) || isNaN(dimensionMax)) {
-      alert('Invalid "Dimension" format. Please use numbers in "min-max" format.');
-      return false;
-    }
-
-    if (dimensionMin >= dimensionMax) {
-      alert('The "min" value of "Dimension" should be less than the "max" value.');
-      return false;
-    }
-
-    return true;
-  }
 
 
   handleAddGripper = () => {
@@ -89,10 +67,13 @@ class GripperList extends Component {
       manufactureName,
       manufactureType,
       manufactureCategory,
-      dimension,
+      
       payload,
       grippingForce,
       feedGrippingForce,
+      dimensionHeight,
+      dimensionDepth,
+      dimensionWidth,
     } = this.state;
 
     // Check if at least one field is filled
@@ -103,19 +84,19 @@ class GripperList extends Component {
       !manufactureName &&
       !manufactureType &&
       !manufactureCategory &&
-      !dimension &&
+     
       !payload &&
       !grippingForce &&
-      !feedGrippingForce
+      !feedGrippingForce&&
+      !dimensionHeight &&
+      !dimensionDepth &&
+      !dimensionWidth
     ) {
       alert('At least one field is required');
       return;
     }
 
-    // Validate the dimension field
-    if (!this.validateDimension(dimension)) {
-      return;
-    }
+
 
     const newData = [
       {
@@ -138,10 +119,7 @@ class GripperList extends Component {
         Property: "Category",
         Value: manufactureCategory,
       },
-      {
-        Property: "Dimension(MM)",
-        Value: dimension,
-      },
+
       {
         Property: "Payload(Kg)",
         Value: payload,
@@ -153,6 +131,19 @@ class GripperList extends Component {
       {
         Property: "Feed pressure Max",
         Value: feedGrippingForce,
+      },
+      // dimension:
+      {
+        Property: "DimensionHeight(MM)",
+        Value: dimensionHeight,
+      },
+      {
+        Property: "DimensionDepth(MM)",
+        Value: dimensionDepth,
+      },
+      {
+        Property: "DimensionWidth(MM)",
+        Value: dimensionWidth,
       },
     ];
 
@@ -170,10 +161,13 @@ class GripperList extends Component {
           manufactureName: '',
           manufactureType: '',
           manufactureCategory: '',
-          dimension: '',
+
           payload: '',
           grippingForce: '',
           feedGrippingForce: '',
+          dimensionHeight: '',
+          dimensionDepth: '',
+          dimensionWidth: '',
           showAddGripperForm: false,
         });
 
@@ -226,12 +220,12 @@ class GripperList extends Component {
       });
   }
 
- 
+
 
   filterGrippers = () => {
     const { grippers, selectedFilters, minMaxValues } = this.state;
 
-   
+
     const payloadMin = parseFloat(selectedFilters.payloadMin);
     const payloadMax = parseFloat(selectedFilters.payloadMax);
     const forceMin = parseFloat(selectedFilters.forceMin);
@@ -293,7 +287,7 @@ class GripperList extends Component {
         const type = selectedFilters.type;
         const category = selectedFilters.category;
 
-       
+
         const payloadData = gripper.Data.find((data) => data.Property === 'Payload(Kg)');
         const payloadValue = payloadData ? parseFloat(payloadData.Value) : NaN;
 
@@ -325,21 +319,21 @@ class GripperList extends Component {
           (!type.length || type.includes(gripper.Data.find((data) => data.Property === 'Type')?.Value)) &&
           (!category.length || category.includes(gripper.Data.find((data) => data.Property === 'Category')?.Value)) &&
 
-         
+
           (isNaN(payloadMin) || (payloadValue >= payloadMin)) &&
           (isNaN(payloadMax) || (payloadValue <= payloadMax)) &&
           (isNaN(forceMin) || (forceValue >= forceMin)) &&
           (isNaN(forceMax) || (forceValue <= forceMax)) &&
           (isNaN(pressureMin) || (pressureValue >= pressureMin)) &&
-          (isNaN(pressureMax) || (pressureValue <= pressureMax))&&
+          (isNaN(pressureMax) || (pressureValue <= pressureMax)) &&
 
           (isNaN(DimensionHeightValuesMin) || (DimensionHeightValue >= DimensionHeightValuesMin)) &&
-          (isNaN(DimensionHeightValuesMax) || (DimensionHeightValue <= DimensionHeightValuesMax))&&
+          (isNaN(DimensionHeightValuesMax) || (DimensionHeightValue <= DimensionHeightValuesMax)) &&
           (isNaN(DimensionDepthValuesMin) || (DimensionDepthValue >= DimensionDepthValuesMin)) &&
-          (isNaN(DimensionDepthValuesMax) || (DimensionDepthValue <= DimensionDepthValuesMax))&&
+          (isNaN(DimensionDepthValuesMax) || (DimensionDepthValue <= DimensionDepthValuesMax)) &&
           (isNaN(DimensionWidthValuesMin) || (DimensionWidthValue >= DimensionWidthValuesMin)) &&
           (isNaN(DimensionWidthValuesMax) || (DimensionWidthValue <= DimensionWidthValuesMax))
-          
+
         );
       });
       console.log("filter data", filteredGrippers)
@@ -357,12 +351,12 @@ class GripperList extends Component {
         manufactureName: '',
         type: '',
         category: '',
-        DimensionHeightValuesMin:'',
-        DimensionHeightValuesMax:'',
-        DimensionDepthValuesMin:'',
-        DimensionDepthValuesMax:'',
-        DimensionWidthValuesMin:'',
-        DimensionWidthValuesMax:'',
+        DimensionHeightValuesMin: '',
+        DimensionHeightValuesMax: '',
+        DimensionDepthValuesMin: '',
+        DimensionDepthValuesMax: '',
+        DimensionWidthValuesMin: '',
+        DimensionWidthValuesMax: '',
         payloadMin: '',
         payloadMax: '',
         forceMin: '',
@@ -469,7 +463,9 @@ class GripperList extends Component {
       manufactureName,
       manufactureType,
       manufactureCategory,
-      dimension,
+      dimensionHeight,
+      dimensionDepth,
+      dimensionWidth,
       payload,
       grippingForce,
       feedGrippingForce,
@@ -545,7 +541,7 @@ class GripperList extends Component {
               </button>
             )}
           </div>
-         
+
           <div>
             <label>Payload(Kg) Range:</label>
             <input
@@ -715,18 +711,7 @@ class GripperList extends Component {
                   />
                 </div>
                 <div className="form-row">
-                  <label>Dimension:</label>
-                  <input
-                    type="text"
-                    value={dimension}
-                    onChange={(e) => this.setState({ dimension: e.target.value })}
-                    placeholder="Enter in min-max format 
-          (e.g., 120-230)"
-                    style={{ width: '250px' }}
-                  />
-                </div>
-                <div className="form-row">
-                  <label>Payload:</label>
+                  <label>Payload(Kg) :</label>
                   <input
                     type="text"
                     value={payload}
@@ -747,6 +732,35 @@ class GripperList extends Component {
                     type="text"
                     value={feedGrippingForce}
                     onChange={(e) => this.setState({ feedGrippingForce: e.target.value })}
+                  />
+                </div>
+                <h4>Dimension</h4>
+                {/* dimensionHeight */}
+                <div className="form-row">
+
+                  <label>Height</label>
+                  <input
+                    type="text"
+                    value={dimensionHeight}
+                    onChange={(e) => this.setState({ dimensionHeight: e.target.value })}
+                  />
+                </div>
+                {/* dimensionDepth */}
+                <div className="form-row">
+                  <label>Depth</label>
+                  <input
+                    type="text"
+                    value={dimensionDepth}
+                    onChange={(e) => this.setState({ dimensionDepth: e.target.value })}
+                  />
+                </div>
+                {/* dimensionwidth */}
+                <div className="form-row">
+                  <label>width</label>
+                  <input
+                    type="text"
+                    value={dimensionWidth}
+                    onChange={(e) => this.setState({ dimensionWidth: e.target.value })}
                   />
                 </div>
                 <div className="form-row">
