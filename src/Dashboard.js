@@ -5,7 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 import './App.css';
-
+ 
 class GripperList extends Component {
 
   state = {
@@ -474,7 +474,7 @@ class GripperList extends Component {
     return (
       <div className="gripper-list-container">
         <div className="filter-options">
-          <h2>sorryupdated:</h2>
+          <h2>tamilselvan:</h2>
 
           {/* Checkbox inputs for Manufacture Name */}
           <div className="checkbox-section">
