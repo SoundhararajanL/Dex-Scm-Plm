@@ -474,7 +474,7 @@ class GripperList extends Component {
     return (
       <div className="gripper-list-container">
         <div className="filter-options">
-          <h2>Filters:</h2>
+          <h2>fill_ters:</h2>
 
           {/* Checkbox inputs for Manufacture Name */}
           <div className="checkbox-section">
