@@ -1233,5 +1233,875 @@
               }
                 
         ]
+       },
+       {
+        "Model Name": "piSOFTGRIP",
+        "Data": [
+          {
+            "Property": "ImageURL",
+            
+            "Value": "https://www.piab.com/globalassets/inriver-ipmc/resources/pisoftgirp-fittings-small.png?ts=8dbbcb30ad5aa80&width=556&height=400&format=webp"
+          },
+            {
+              "Property": "Datasheet",
+              
+              "Value": ""
+            }  ,
+            {
+              "Property": "ManufactureName",
+              
+              "Value": "Piab"
+            }         ,
+            {
+              "Property": "Type",
+              
+              "Value": "Electric"
+            }  ,
+            {
+              "Property": "Category",
+              
+              "Value": "Soft Gripper" 
+            },
+            
+              {
+                "Property": "Payload(Kg)",
+                
+                "Value": ""
+              },
+              {
+                "Property": "Gripping Force",
+                
+                "Value": ""
+              },
+              {
+                "Property": "Feed pressure Max",
+                
+                "Value": ""
+              }  ,
+              {
+                "Property": "DimensionHeight(MM)",
+                
+                "Value": 321
+              },
+              {
+                "Property": "DimensionDepth(MM)",
+                
+                "Value": 738
+              },
+              {
+                "Property": "DimensionWidth(MM)",
+                
+                "Value": 839
+              }
+                
+        ]
+       },
+       {
+        "Model Name": "84L2-1",
+        "Data": [
+          {
+            "Property": "ImageURL",
+            
+            "Value": "https://www.destaco.com/assets/image/products/sheet_metal_grippers/84L2-11-Sheet-Metal-Gripper-3593.tif.thumb.1280.1280.png.rendition.src.m.1637092899616.png"
+          },
+            {
+              "Property": "Datasheet",
+              
+              "Value": "https://drive.google.com/file/d/1UHGh3EzIR4byLJhjywrQTSKpitCfWnpN/view"
+            }  ,
+            {
+              "Property": "ManufactureName",
+              
+              "Value": "Destaco"
+            }         ,
+            {
+              "Property": "Type",
+              
+              "Value": "Electric"
+            }  ,
+            {
+              "Property": "Category",
+              
+              "Value": "Sheet Metal Gripper" 
+            },
+           
+              {
+                "Property": "Payload(Kg)",
+                
+                "Value": 4
+              },
+              {
+                "Property": "Gripping Force",
+                
+                "Value": 74
+              },
+              {
+                "Property": "Feed pressure Max",
+                
+                "Value": ""
+              } ,
+              {
+                "Property": "DimensionHeight(MM)",
+                
+                "Value": 736
+              },
+              {
+                "Property": "DimensionDepth(MM)",
+                
+                "Value": 837
+              },
+              {
+                "Property": "DimensionWidth(MM)",
+                
+                "Value": 387
+              }
+                
+        ]
+       },
+       {
+        "Model Name": "DPE-400",
+        "Data": [
+          {
+            "Property": "ImageURL",
+            
+            "Value": "https://s3.amazonaws.com/assetbank-us-east-1-repurposed/destaco_a0a4525ffa98f8c42a1a29b3ae26cb32%2F1dc%2Fh5P6L9CBa9HCbQVht79A8qdLSMWeEIwr.jpg"
+          },
+            {
+              "Property": "Datasheet",
+              
+              "Value": "https://drive.google.com/file/d/14ucfMWls90uuCZIyQmMDrRTuejqkPzSf/view"
+            }  ,
+            {
+              "Property": "ManufactureName",
+              
+              "Value": "Destaco"
+            }         ,
+            {
+              "Property": "Type",
+              
+              "Value": "Electric"
+            }  ,
+            {
+              "Property": "Category",
+              
+              "Value": "Parallel Gripper" 
+            },
+            
+              {
+                "Property": "Payload(Kg)",
+                
+                "Value": 2.52
+              },
+              {
+                "Property": "Gripping Force",
+                
+                "Value": 889.6
+              },
+              {
+                "Property": "Feed pressure Max",
+                
+                "Value": ""
+              }  ,
+              {
+                "Property": "DimensionHeight(MM)",
+                
+                "Value": 126
+              },
+              {
+                "Property": "DimensionDepth(MM)",
+                
+                "Value": 846
+              },
+              {
+                "Property": "DimensionWidth(MM)",
+                
+                "Value": 863
+              }
+                
+        ]
+       },
+       {
+        "Model Name": "Gecko Gripper",
+        "Data": [
+          {
+            "Property": "ImageURL",
+            
+            "Value": "https://onrobot.com/sites/default/files/styles/500x500/public/2023-06/onrobot_gecko_gripper.png?h=2a479378&itok=ZgMSMBKK"
+          },
+            {
+              "Property": "Datasheet",
+              
+              "Value": "https://drive.google.com/file/d/1c2ibSC1xzzmTV06lHaogjUUKAMDnDgGm/view"
+            }  ,
+            {
+              "Property": "ManufactureName",
+              
+              "Value": "Onrobot"
+            }         ,
+            {
+              "Property": "Type",
+              
+              "Value": "Electric"
+            }  ,
+            {
+              "Property": "Category",
+              
+              "Value": "Gecko Gripper" 
+            } ,
+           
+              {
+                "Property": "Payload(Kg)",
+                
+                "Value": 5
+              },
+              {
+                "Property": "Gripping Force",
+                
+                "Value": ""
+              },
+              {
+                "Property": "Feed pressure Max",
+                
+                "Value": ""
+              } ,
+              {
+                "Property": "DimensionHeight(MM)",
+                
+                "Value": 654
+              },
+              {
+                "Property": "DimensionDepth(MM)",
+                
+                "Value": 231
+              },
+              {
+                "Property": "DimensionWidth(MM)",
+                
+                "Value": 982
+              }
+                
+        ]
+       },
+       {
+        "Model Name": "2FGP-20",
+        "Data": [
+          {
+            "Property": "ImageURL",
+            
+            "Value": "https://onrobot.com/sites/default/files/styles/500x500/public/2021-12/onrobot_2fgp20_gripper.jpg?h=2a479378&itok=QyntRHO0"
+          },
+            {
+              "Property": "Datasheet",
+              
+              "Value": "https://drive.google.com/file/d/1VQ2YWm-Dz1IP6yAT7piZB6m5qv5FMMZL/view"
+            }  ,
+            {
+              "Property": "ManufactureName",
+              
+              "Value": "Onrobot"
+            }         ,
+            {
+              "Property": "Type",
+              
+              "Value": "Electric"
+            }  ,
+            {
+              "Property": "Category",
+              
+              "Value": "Electric Gripper" 
+            } ,
+            
+              {
+                "Property": "Payload(Kg)",
+                
+                "Value": 20
+              },
+              {
+                "Property": "Gripping Force",
+                
+                "Value": 400
+              },
+              {
+                "Property": "Feed pressure Max",
+                
+                "Value": ""
+              } ,
+              {
+                "Property": "DimensionHeight(MM)",
+                
+                "Value": 345
+              },
+              {
+                "Property": "DimensionDepth(MM)",
+                
+                "Value": 765
+              },
+              {
+                "Property": "DimensionWidth(MM)",
+                
+                "Value": 439
+              }
+                
+        ]
+       },
+       {
+        "Model Name": "VG-10",
+        "Data": [
+          {
+            "Property": "ImageURL",
+            
+            "Value": "https://onrobot.com/sites/default/files/styles/500x500/public/2019-06/VG10%20CROSS.jpg?h=2a479378&itok=Rx1h7gmk"
+          },
+            {
+              "Property": "Datasheet",
+              
+              "Value": "https://drive.google.com/file/d/1eEvBonupttIJaJm-ZYj0w1HkdIXflFvU/view"
+            }  ,
+            {
+              "Property": "ManufactureName",
+              
+              "Value": "Onrobot"
+            }         ,
+            {
+              "Property": "Type",
+              
+              "Value": "Electric"
+            }  ,
+            {
+              "Property": "Category",
+              
+              "Value": "Vacuum Gripper" 
+            } ,
+            
+              {
+                "Property": "Payload(Kg)",
+                
+                "Value": 15
+              },
+              {
+                "Property": "Gripping Force",
+                
+                "Value": ""
+              },
+              {
+                "Property": "Feed pressure Max",
+                
+                "Value": ""
+              }  ,
+              {
+                "Property": "DimensionHeight(MM)",
+                
+                "Value": 543
+              },
+              {
+                "Property": "DimensionDepth(MM)",
+                
+                "Value": 876
+              },
+              {
+                "Property": "DimensionWidth(MM)",
+                
+                "Value": 345
+              }
+                
+        ]
+       },
+       {
+        "Model Name": "MG-10",
+        "Data": [
+          {
+            "Property": "ImageURL",
+            
+            "Value": "https://onrobot.com/sites/default/files/styles/500x500/public/2021-03/mg10_product%20card_0.jpg?h=2a479378&itok=hkkCfwi3"
+          },
+            {
+              "Property": "Datasheet",
+              
+              "Value": "https://drive.google.com/file/d/1rO1tC6ibOweZy-VgnTjaBUBiP3X-i6h5/view"
+            }  ,
+            {
+              "Property": "ManufactureName",
+              
+              "Value": "Onrobot"
+            }         ,
+            {
+              "Property": "Type",
+              
+              "Value": "Electric"
+            }  ,
+            {
+              "Property": "Category",
+              
+              "Value": "Magnetic Gripper" 
+            } ,
+            
+              {
+                "Property": "Payload(Kg)",
+                
+                "Value": 10
+              },
+              {
+                "Property": "Gripping Force",
+                
+                "Value": ""
+              },
+              {
+                "Property": "Feed pressure Max",
+                
+                "Value": ""
+              }  ,
+              {
+                "Property": "DimensionHeight(MM)",
+                
+                "Value": 354
+              },
+              {
+                "Property": "DimensionDepth(MM)",
+                
+                "Value": 657
+              },
+              {
+                "Property": "DimensionWidth(MM)",
+                
+                "Value": 756
+              }
+                
+        ]
+       },
+       {
+        "Model Name": "3FG-15",
+        "Data": [
+          {
+            "Property": "ImageURL",
+            
+            "Value": "https://onrobot.com/sites/default/files/styles/500x500/public/2020-02/3FG15_Picture_Product_Subpage_0.jpg?h=2a479378&itok=YiDnwJoq"
+          },
+            {
+              "Property": "Datasheet",
+              
+              "Value": "https://drive.google.com/file/d/1ZAo9cpmR6iwcxprv79fqXEF_Tb-JOfeG/view"
+            }  ,
+            {
+              "Property": "ManufactureName",
+              
+              "Value": "Onrobot"
+            }         ,
+            {
+              "Property": "Type",
+              
+              "Value": "Electric"
+            }  ,
+            {
+              "Property": "Category",
+              
+              "Value": "Three finger gripper" 
+            } ,
+           
+              {
+                "Property": "Payload(Kg)",
+                
+                "Value": 15
+              },
+              {
+                "Property": "Gripping Force",
+                
+                "Value": 240
+              },
+              {
+                "Property": "Feed pressure Max",
+                
+                "Value": ""
+              }  ,
+              {
+                "Property": "DimensionHeight(MM)",
+                
+                "Value": 543
+              },
+              {
+                "Property": "DimensionDepth(MM)",
+                
+                "Value": 784
+              },
+              {
+                "Property": "DimensionWidth(MM)",
+                
+                "Value": 980
+              }
+                
+        ]
+       },
+       {
+        "Model Name": "TXH",
+        "Data": [
+          {
+            "Property": "ImageURL",
+            
+            "Value": "https://www.airbest.com/uploads/image/20220509/14/vacuum-grippers-txh-series.jpg"
+          },
+            {
+              "Property": "Datasheet",
+              
+              "Value": "https://drive.google.com/file/d/1ReApMYnfKAQ2Y62t7h7eoyZdHbRU7QnE/view"
+            }  ,
+            {
+              "Property": "ManufactureName",
+              
+              "Value": "Airbest"
+            }         ,
+            {
+              "Property": "Type",
+              
+              "Value": "Vacuum"
+            }  ,
+            {
+              "Property": "Category",
+              
+              "Value": "Layer Gripper" 
+            } ,
+           
+              {
+                "Property": "Payload(Kg)",
+                
+                "Value": 36.5 
+              },
+              {
+                "Property": "Gripping Force",
+                
+                "Value": ""
+              },
+              {
+                "Property": "Feed pressure Max",
+                
+                "Value": ""
+              } ,
+              {
+                "Property": "DimensionHeight(MM)",
+                
+                "Value": 453
+              },
+              {
+                "Property": "DimensionDepth(MM)",
+                
+                "Value": 769
+              },
+              {
+                "Property": "DimensionWidth(MM)",
+                
+                "Value": 180
+              }
+                
+        ]
+       },
+       {
+        "Model Name": "SLW",
+        "Data": [
+          {
+            "Property": "ImageURL",
+            
+            "Value": "https://www.airbest.com/uploads/image/20220506/16/suction-cups-slw-series.jpg"
+          },
+            {
+              "Property": "Datasheet",
+              
+              "Value": "https://drive.google.com/file/d/1wexavrR0M8l1NtHFYCdUQ3Esj4v9el3E/view"
+            }  ,
+            {
+              "Property": "ManufactureName",
+              
+              "Value": "Airbest"
+            }         ,
+            {
+              "Property": "Type",
+              
+              "Value": "Vacuum"
+            }  ,
+            {
+              "Property": "Category",
+              
+              "Value": "Wafer Gripper" 
+            } ,
+           
+              {
+                "Property": "Payload(Kg)",
+                
+                "Value": ""
+              },
+              {
+                "Property": "Gripping Force",
+                
+                "Value":"" 
+              },
+              {
+                "Property": "Feed pressure Max",
+                
+                "Value":"" 
+              }  ,
+              {
+                "Property": "DimensionHeight(MM)",
+                
+                "Value": 478
+              },
+              {
+                "Property": "DimensionDepth(MM)",
+                
+                "Value": 800
+              },
+              {
+                "Property": "DimensionWidth(MM)",
+                
+                "Value": 210
+              }
+                
+        ]
+       },
+       {
+        "Model Name": "Guardian Gripper",
+        "Data": [
+          {
+            "Property": "ImageURL",
+            
+            "Value": "https://www.phdinc.com/images/Product/Grippers/GRR/GRR_Gripper.png"
+          },
+            {
+              "Property": "Datasheet",
+              
+              "Value": "https://drive.google.com/file/d/1A00TbdKS3H66ngfIwZ0ar-rs3RVX6V-_/view"
+            }  ,
+            {
+              "Property": "ManufactureName",
+              
+              "Value": "PHD"
+            }         ,
+            {
+              "Property": "Type",
+              
+              "Value": "Electric"
+            }  ,
+            {
+              "Property": "Category",
+              
+              "Value": "Parallel Gripper" 
+            } ,
+            
+              {
+                "Property": "Payload(Kg)",
+                
+                "Value": 12.7
+              },
+              {
+                "Property": "Gripping Force",
+                
+                "Value": ""
+              },
+              {
+                "Property": "Feed pressure Max",
+                
+                "Value": ""
+              }  ,
+              {
+                "Property": "DimensionHeight(MM)",
+                
+                "Value": 230
+              },
+              {
+                "Property": "DimensionDepth(MM)",
+                
+                "Value": 190
+              },
+              {
+                "Property": "DimensionWidth(MM)",
+                
+                "Value": 470
+              }
+                
+        ]
+       },
+       {
+        "Model Name": "Amila Vacuum Gripper",
+        "Data": [
+          {
+            "Property": "ImageURL",
+            
+            "Value": "https://www.foamvacuumgripper.com/photo/pl26629332-highly_optimized_anti_collision_suction_cups_with_adaptable_sealing_lip_atc_mx39.jpg"
+          },
+            {
+              "Property": "Datasheet",
+              
+              "Value": "https://drive.google.com/file/d/1dA7FkHJ952DvhV9bGRN_Ta-md8LuIfc4/view"
+            }  ,
+            {
+              "Property": "ManufactureName",
+              
+              "Value": "Amila (China)"
+            }         ,
+            {
+              "Property": "Type",
+              
+              "Value": "Vacuum"
+            }  ,
+            {
+              "Property": "Category",
+              
+              "Value": "Area Gripper" 
+            } ,
+           
+              {
+                "Property": "Payload(Kg)",
+                
+                "Value": 2.4
+              },
+              {
+                "Property": "Gripping Force",
+                
+                "Value": 210
+              },
+              {
+                "Property": "Feed pressure Max",
+                
+                "Value": ""
+              }  ,
+              {
+                "Property": "DimensionHeight(MM)",
+                
+                "Value": 320
+              },
+              {
+                "Property": "DimensionDepth(MM)",
+                
+                "Value": 543
+              },
+              {
+                "Property": "DimensionWidth(MM)",
+                
+                "Value": 970
+              }
+                
+        ]
+       },
+       {
+        "Model Name": "MATD, Large Size custom vacuum gripper",
+        "Data": [
+          {
+            "Property": "ImageURL",
+            
+            "Value": "https://www.foamvacuumgripper.com/photo/pl27193687-various_size_vacuum_gripper_matd_with_low_maintenance_costs_adjustable_lifting_capacity.jpg"
+          },
+            {
+              "Property": "Datasheet",
+              
+              "Value": "https://drive.google.com/file/d/1r0ogCMqBONGClMgWJodaHKpROn486_Dp/view"
+            }  ,
+            {
+              "Property": "ManufactureName",
+              
+              "Value": "Amila (China)"
+            }         ,
+            {
+              "Property": "Type",
+              
+              "Value": "Vacuum"
+            }  ,
+            {
+              "Property": "Category",
+              
+              "Value": "Layer Gripper" 
+            } ,
+           
+              {
+                "Property": "Payload(Kg)",
+                
+                "Value": ""
+              },
+              {
+                "Property": "Gripping Force",
+                
+                "Value": ""
+              },
+              {
+                "Property": "Feed pressure Max",
+                
+                "Value": ""
+              }  ,
+              {
+                "Property": "DimensionHeight(MM)",
+                
+                "Value": 437
+              },
+              {
+                "Property": "DimensionDepth(MM)",
+                
+                "Value": 980
+              },
+              {
+                "Property": "DimensionWidth(MM)",
+                
+                "Value": 218
+              }
+                
+        ]
+       },
+       {
+        "Model Name": "CRK-SUS304",
+        "Data": [
+          {
+            "Property": "ImageURL",
+            
+            "Value": "https://convum.co.jp/products/wp-content/uploads/crk_sus304_1.png"
+          },
+            {
+              "Property": "Datasheet",
+              
+              "Value": "https://drive.google.com/file/d/1oktpDpea2cIexJzDI_ZX4nymheH42P13/view"
+            }  ,
+            {
+              "Property": "ManufactureName",
+              
+              "Value": "Convum(Japan)"
+            }         ,
+            {
+              "Property": "Type",
+              
+              "Value": "Vacuum"
+            }  ,
+            {
+              "Property": "Category",
+              
+              "Value": "Vacuum Gripper" 
+            } ,
+            
+              {
+                "Property": "Payload(Kg)",
+                
+                "Value": 5.0 
+              },
+              {
+                "Property": "Gripping Force",
+                
+                "Value": ""
+              },
+              {
+                "Property": "Feed pressure Max",
+                
+                "Value": ""
+              }  ,
+              {
+                "Property": "DimensionHeight(MM)",
+                
+                "Value": 654
+              },
+              {
+                "Property": "DimensionDepth(MM)",
+                
+                "Value": 760
+              },
+              {
+                "Property": "DimensionWidth(MM)",
+                
+                "Value": 1000
+              }
+                
+        ]
        }
+  
+  
 ]

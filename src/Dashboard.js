@@ -478,15 +478,27 @@ class GripperList extends Component {
         const modelName = gripper['Model Name'].toLowerCase();
         const imageUrl = gripper.Data.find((data) => data.Property === 'ImageURL')?.Value.toLowerCase();
         const datasheet = gripper.Data.find((data) => data.Property === 'Datasheet')?.Value.toLowerCase();
+        
   
         // Check if any property includes the search term
         return (
           modelName.includes(searchTerm.toLowerCase()) ||
           imageUrl.includes(searchTerm.toLowerCase()) ||
           datasheet.includes(searchTerm.toLowerCase()) ||
-          Object.values(gripper.Data)
-            .filter((data) => typeof data.Value === 'string') // Filter out non-string values
-            .some((data) => data.Value.toLowerCase().includes(searchTerm.toLowerCase()))
+          Object.values(gripper.Data).some((data) => {
+            if (typeof data.Value === 'number' && data.Value === parseFloat(searchTerm)) {
+              return true;
+            }
+            if (
+              typeof data.Value === 'string' &&
+              data.Value.toLowerCase().includes(searchTerm.toLowerCase())
+            ) {
+              return true;
+            }
+            return false;
+          })
+          
+
         );
       });
   

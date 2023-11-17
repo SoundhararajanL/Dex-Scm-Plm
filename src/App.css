@@ -389,6 +389,10 @@
   height: 10%;
   margin-top: 2%;
   margin-right: 2%;
+  position: absolute;
+  top: 0; /* Align to the top of gripper-section */
+  right: 1;
+  
 
   
 }
@@ -490,6 +494,36 @@
 .search-section {
  margin-left: 500px;
 }
+
+
+
+label {
+  margin-right: 10px;
+}
+
+input {
+  padding: 8px;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.search-button,
+.clear-search-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.search-button:hover,
+.clear-search-button:hover {
+  background-color: #0056b3;
+}
+
 
 
 
