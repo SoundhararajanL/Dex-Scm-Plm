@@ -520,7 +520,7 @@ class GripperList extends Component {
             )}
           </div>
 
-          {/* Checkbox inputs for Category */}
+          {/* Checkbox inputs for Category */} 
           <div className="checkbox-section">
             <label>Category:</label>
             {filterOptions.categories.slice(0, this.state.displayCategories).map((option, index) => (
