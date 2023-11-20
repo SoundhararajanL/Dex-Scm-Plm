@@ -502,7 +502,7 @@ class GripperList extends Component {
     return (
       <div className="gripper-list-container">
         <div className="filter-options">
-          <h2>filters </h2>
+          <h2>Filters :</h2>
 
           {/* Checkbox inputs for Manufacture Name */}
           <div className="checkbox-section">
@@ -577,21 +577,11 @@ class GripperList extends Component {
           </div>
 
           <div>
-            <label>Payload(Kg) Range:</label>
-            <input
-              type="number"
-              placeholder={`Min (${minMaxValues.payloadMin})`}
-              value={selectedFilters.payloadMin}
-              onChange={(e) => this.handleIntegerFilterChange('payloadMin', e.target.value)}
-            />
-            <input
-              type="number"
-              placeholder={`Max (${minMaxValues.payloadMax})`}
-              value={selectedFilters.payloadMax}
-              onChange={(e) => this.handleIntegerFilterChange('payloadMax', e.target.value)}
-            />
+            <label>Payload(Kg) Range:  {minMaxValues.payloadMin} to  {minMaxValues.payloadMax}</label>
+           
             {/* range slider */}
             <div className="range-slider">
+             
               <input
                 type="range"
                 min={minMaxValues.payloadMin}
@@ -599,6 +589,9 @@ class GripperList extends Component {
                 value={selectedFilters.payloadMin}
                 onChange={(e) => this.handleIntegerFilterChange('payloadMin', e.target.value)}
               />
+              <span>
+                Min:{selectedFilters.payloadMin}
+              </span>
               <input
                 type="range"
                 min={minMaxValues.payloadMin}
@@ -606,71 +599,65 @@ class GripperList extends Component {
                 value={selectedFilters.payloadMax}
                 onChange={(e) => this.handleIntegerFilterChange('payloadMax', e.target.value)}
               />
+               <span>
+                Max:{selectedFilters.payloadMax}
+              </span>
             </div>
 
           </div>
           <div>
-            <label>Gripping Force Range:</label>
-            <input
-              type="number"
-              placeholder={`Min (${minMaxValues.forceMin})`}
-              value={selectedFilters.forceMin}
-              onChange={(e) => this.handleIntegerFilterChange('forceMin', e.target.value)}
-            />
-            <input
-              type="number"
-              placeholder={`Max (${minMaxValues.forceMax})`}
-              value={selectedFilters.forceMax}
-              onChange={(e) => this.handleIntegerFilterChange('forceMax', e.target.value)}
-            />
-
-            <div className="range-slider">
-              <input
-                type="range"
-                min={minMaxValues.forceMin}
-                max={minMaxValues.forceMax}
-                value={selectedFilters.forceMin}
-                onChange={(e) => this.handleIntegerFilterChange('forceMin', e.target.value)}
-              />
-              <input
-                type="range"
-                min={minMaxValues.forceMin}
-                max={minMaxValues.forceMax}
-                value={selectedFilters.forceMax}
-                onChange={(e) => this.handleIntegerFilterChange('forceMax', e.target.value)}
-              />
-            </div>
+            <label>Gripping Force Range:   {minMaxValues.forceMin} to  {minMaxValues.forceMax}</label>
+             {/* range slider */}
+             <div className="range-slider">
+             
+             <input
+               type="range"
+               min={minMaxValues.forceMin}
+               max={minMaxValues.forceMax}
+               value={selectedFilters.forceMin}
+               onChange={(e) => this.handleIntegerFilterChange('forceMin', e.target.value)}
+             />
+             <span>
+               Min:{selectedFilters.forceMin}
+             </span>
+             <input
+               type="range"
+               min={minMaxValues.forceMin}
+               max={minMaxValues.forceMax}
+               value={selectedFilters.forceMax}
+               onChange={(e) => this.handleIntegerFilterChange('forceMax', e.target.value)}
+             />
+              <span>
+               Max:{selectedFilters.forceMax}
+             </span>
+           </div>
           </div>
           <div>
-            <label>Feed pressure Max Range:</label>
-            <input
-              type="number"
-              placeholder={`Min (${minMaxValues.pressureMin})`}
-              value={selectedFilters.pressureMin}
-              onChange={(e) => this.handleIntegerFilterChange('pressureMin', e.target.value)}
-            />
-            <input
-              type="number"
-              placeholder={`Max (${minMaxValues.pressureMax})`}
-              value={selectedFilters.pressureMax}
-              onChange={(e) => this.handleIntegerFilterChange('pressureMax', e.target.value)}
-            />
-            <div className="range-slider">
-              <input
-                type="range"
-                min={minMaxValues.pressureMin}
-                max={minMaxValues.pressureMax}
-                value={selectedFilters.pressureMin}
-                onChange={(e) => this.handleIntegerFilterChange('pressureMin', e.target.value)}
-              />
-              <input
-                type="range"
-                min={minMaxValues.pressureMin}
-                max={minMaxValues.pressureMax}
-                value={selectedFilters.pressureMax}
-                onChange={(e) => this.handleIntegerFilterChange('pressureMax', e.target.value)}
-              />
-            </div>
+            <label>Feed pressure Max Range: {minMaxValues.pressureMin} to  {minMaxValues.pressureMax}</label>
+             {/* range slider */}
+             <div className="range-slider">
+             
+             <input
+               type="range"
+               min={minMaxValues.pressureMin}
+               max={minMaxValues.pressureMax}
+               value={selectedFilters.pressureMin}
+               onChange={(e) => this.handleIntegerFilterChange('pressureMin', e.target.value)}
+             />
+             <span>
+               Min:{selectedFilters.pressureMin}
+             </span>
+             <input
+               type="range"
+               min={minMaxValues.pressureMin}
+               max={minMaxValues.pressureMax}
+               value={selectedFilters.pressureMax}
+               onChange={(e) => this.handleIntegerFilterChange('pressureMax', e.target.value)}
+             />
+              <span>
+               Max:{selectedFilters.pressureMax}
+             </span>
+           </div>
 
           </div>
 
