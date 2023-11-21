@@ -2,51 +2,62 @@
   {
       "Model Name": "KSL",
       "Data": [
-        {
-          "Property": "ImageURL",
-          
-          "Value": "https://www.piab.com/globalassets/inriver-ipmc/resources/singel_shot_ksl.240.120.n241.fr15.s1.1sth.50.534.jpeg?ts=8dbbcb2fa253480&width=556&height=400&format=webp"
-        },
           {
-            "Property": "Datasheet",
-            
-            "Value": "https://drive.google.com/file/d/1SPIr2n4Co2P20XBfOxfTvgnQMD7OOBUP/view"
-          } ,
-          {
-            "Property": "ManufactureName",
-            
-            "Value": "Kenos"
-          }  ,
-          {
-            "Property": "Type",
-            
-            "Value": "Vacuum"
-          }  ,
-          {
-            "Property": "Category",
-            
-            "Value": "Flexi Gripper"
-          },
-          {
-              "Property": "Dimension(MM)",
+              "Property": "ImageURL",
               
-              "Value": "120-240"
+              "Value": "https://www.piab.com/globalassets/inriver-ipmc/resources/singel_shot_ksl.240.120.n241.fr15.s1.1sth.50.534.jpeg?ts=8dbbcb2fa253480&width=556&height=400&format=webp"
             },
-            {
-              "Property": "Payload(Kg)",
+              {
+                "Property": "Datasheet",
+                
+                "Value": "https://drive.google.com/file/d/1SPIr2n4Co2P20XBfOxfTvgnQMD7OOBUP/view"
+              } ,
+              {
+                "Property": "ManufactureName",
+                
+                "Value": "Kenos"
+              }  ,
+              {
+                "Property": "Type",
+                
+                "Value": "Vacuum"
+              }  ,
+              {
+                "Property": "Category",
+                
+                "Value": "Flexi Gripper"
+              },
               
-              "Value": 30
-            },
-            {
-              "Property": "Gripping Force",
-              
-              "Value": ""
-            },
-            {
-              "Property": "Feed pressure Max",
-              
-              "Value": ""
-            }               
+                {
+                  "Property": "Payload(Kg)",
+                  
+                  "Value": 30
+                },
+                {
+                  "Property": "Gripping Force",
+                  
+                  "Value": ""
+                },
+                {
+                  "Property": "Feed pressure Max",
+                  
+                  "Value": ""
+                } ,
+              {
+                "Property": "DimensionHeight(MM)",
+                
+                "Value": 100
+              },
+              {
+                "Property": "DimensionDepth(MM)",
+                
+                "Value": 200
+              },
+              {
+                "Property": "DimensionWidth(MM)",
+                
+                "Value": 300
+              }                
       ]
      },
      {
@@ -78,11 +89,6 @@
             "Value": "Parallel Gripper"
           } ,
           {
-              "Property": "Dimension(MM)",
-              
-              "Value": ""
-            },
-            {
               "Property": "Payload(Kg)",
               
               "Value": ""
@@ -96,7 +102,22 @@
               "Property": "Feed pressure Max",
               
               "Value": ""
-            }               
+            },
+            {
+              "Property": "DimensionHeight(MM)",
+              
+              "Value": 150
+            },
+            {
+              "Property": "DimensionDepth(MM)",
+              
+              "Value": 300
+            },
+            {
+              "Property": "DimensionWidth(MM)",
+              
+              "Value": 200
+            }             
       ]
      },
      {
@@ -127,11 +148,7 @@
             
             "Value": "Magnetic Gripper" 
           },
-          {
-              "Property": "Dimension(MM)",
-              
-              "Value": ""
-            },
+          
             {
               "Property": "Payload(Kg)",
               
@@ -146,7 +163,22 @@
               "Property": "Feed pressure Max",
               
               "Value": ""
-            }               
+            }  ,
+            {
+              "Property": "DimensionHeight(MM)",
+              
+              "Value": 250
+            },
+            {
+              "Property": "DimensionDepth(MM)",
+              
+              "Value": 380
+            },
+            {
+              "Property": "DimensionWidth(MM)",
+              
+              "Value": 130
+            }              
       ]
      },
      {
@@ -177,11 +209,7 @@
             
             "Value": "Bag Gripper" 
           } ,
-          {
-              "Property": "Dimension(MM)",
-              
-              "Value": ""
-            },
+          
             {
               "Property": "Payload(Kg)",
               
@@ -196,6 +224,21 @@
               "Property": "Feed pressure Max",
               
               "Value": ""
+            }   ,
+            {
+              "Property": "DimensionHeight(MM)",
+              
+              "Value": 120
+            },
+            {
+              "Property": "DimensionDepth(MM)",
+              
+              "Value": 240
+            },
+            {
+              "Property": "DimensionWidth(MM)",
+              
+              "Value": 370
             }               
       ]
      },
@@ -227,11 +270,7 @@
             
             "Value": "Bag Gripper" 
           }   ,
-          {
-              "Property": "Dimension(MM)",
-              
-              "Value": ""
-            },
+          
             {
               "Property": "Payload(Kg)",
               
@@ -246,7 +285,22 @@
               "Property": "Feed pressure Max",
               
               "Value": ""
-            }               
+            }   ,
+            {
+              "Property": "DimensionHeight(MM)",
+              
+              "Value": 320
+            },
+            {
+              "Property": "DimensionDepth(MM)",
+              
+              "Value": 210
+            },
+            {
+              "Property": "DimensionWidth(MM)",
+              
+              "Value": 260
+            }             
       ]
      },
      {
@@ -270,6 +324,7 @@
           {
             "Property": "Type",
             
+            
             "Value": "Electric"
           }  ,
           {
@@ -277,11 +332,7 @@
             
             "Value": "Soft Gripper" 
           }  ,
-          {
-              "Property": "Dimension(MM)",
-              
-              "Value": "11-118"
-            },
+         
             {
               "Property": "Payload(Kg)",
               
@@ -296,12 +347,25 @@
               "Property": "Feed pressure Max",
               
               "Value": ""
-            } 
+            }  ,
+            {
+              "Property": "DimensionHeight(MM)",
+              
+              "Value": 260
+            },
+            {
+              "Property": "DimensionDepth(MM)",
+              
+              "Value": 110
+            },
+            {
+              "Property": "DimensionWidth(MM)",
+              
+              "Value": 360
+            }
               
       ]
      },
-
-     
      {
       "Model Name": "KVG60C",
       "Data": [
@@ -330,11 +394,7 @@
             
             "Value": "Vacuum Gripper"
           } ,
-          {
-              "Property": "Dimension(MM)",
-              
-              "Value": "60-220"
-            },
+         
             {
               "Property": "Payload(Kg)",
               
@@ -349,7 +409,22 @@
               "Property": "Feed pressure Max",
               
               "Value": ""
-            } 
+            } ,
+            {
+              "Property": "DimensionHeight(MM)",
+              
+              "Value": 440
+            },
+            {
+              "Property": "DimensionDepth(MM)",
+              
+              "Value": 130
+            },
+            {
+              "Property": "DimensionWidth(MM)",
+              
+              "Value": 50
+            }
               
       ]
      },
@@ -381,11 +456,7 @@
             
             "Value": "Layer Gripper"
           } ,
-          {
-              "Property": "Dimension(MM)",
-              
-              "Value": ""
-            },
+          
             {
               "Property": "Payload(Kg)",
               
@@ -400,11 +471,25 @@
               "Property": "Feed pressure Max",
               
               "Value": ""
-            } 
+            }  ,
+            {
+              "Property": "DimensionHeight(MM)",
+              
+              "Value": 300
+            },
+            {
+              "Property": "DimensionDepth(MM)",
+              
+              "Value": 160
+            },
+            {
+              "Property": "DimensionWidth(MM)",
+              
+              "Value": 570
+            }
               
       ]
      },
-
      {
       "Model Name": "KCS",
       "Data": [
@@ -433,11 +518,7 @@
             
             "Value": "Small Gripper"
           } ,
-          {
-              "Property": "Dimension(MM)",
-              
-              "Value": ""
-            },
+         
             {
               "Property": "Payload(Kg)",
               
@@ -452,7 +533,22 @@
               "Property": "Feed pressure Max",
               
               "Value": 101.5
-            } 
+            }  ,
+            {
+              "Property": "DimensionHeight(MM)",
+              
+              "Value": 450
+            },
+            {
+              "Property": "DimensionDepth(MM)",
+              
+              "Value": 190
+            },
+            {
+              "Property": "DimensionWidth(MM)",
+              
+              "Value": 280
+            }
               
       ]
      },
@@ -484,11 +580,7 @@
             
             "Value": "Vacuum Gripper" 
           } ,
-          {
-              "Property": "Dimension(MM)",
-              
-              "Value": "120-600"
-            },
+          
             {
               "Property": "Payload(Kg)",
               
@@ -503,7 +595,22 @@
               "Property": "Feed pressure Max",
               
               "Value": ""
-            } 
+            }  ,
+            {
+              "Property": "DimensionHeight(MM)",
+              
+              "Value": 120
+            },
+            {
+              "Property": "DimensionDepth(MM)",
+              
+              "Value": 340
+            },
+            {
+              "Property": "DimensionWidth(MM)",
+              
+              "Value": 276
+            }
               
       ]
      },
@@ -535,11 +642,7 @@
             
             "Value": "Sack Gripper"
           },
-          {
-              "Property": "Dimension(MM)",
-              
-              "Value": "250-400"
-            },
+         
             {
               "Property": "Payload(Kg)",
               
@@ -554,11 +657,25 @@
               "Property": "Feed pressure Max",
               
               "Value": 101.5
-            } 
+            } ,
+            {
+              "Property": "DimensionHeight(MM)",
+              
+              "Value": 230
+            },
+            {
+              "Property": "DimensionDepth(MM)",
+              
+              "Value": 546
+            },
+            {
+              "Property": "DimensionWidth(MM)",
+              
+              "Value": 278
+            }
               
       ]
      },
-     
      {
       "Model Name": "KBC",
       "Data": [
@@ -587,11 +704,7 @@
             
             "Value": "Bag Cup Gripper"
           },
-          {
-              "Property": "Dimension(MM)",
-              
-              "Value": "150-200"
-            },
+          
             {
               "Property": "Payload(Kg)",
               
@@ -606,7 +719,22 @@
               "Property": "Feed pressure Max",
               
               "Value": ""
-            } 
+            }  ,
+            {
+              "Property": "DimensionHeight(MM)",
+              
+              "Value": 290
+            },
+            {
+              "Property": "DimensionDepth(MM)",
+              
+              "Value": 876
+            },
+            {
+              "Property": "DimensionWidth(MM)",
+              
+              "Value": 853
+            }
               
       ]
      },
@@ -638,11 +766,7 @@
             
             "Value": "Area Gripper"
           },
-          {
-              "Property": "Dimension(MM)",
-              
-              "Value": "120-2000"
-            },
+         
             {
               "Property": "Payload(Kg)",
               
@@ -657,10 +781,25 @@
               "Property": "Feed pressure Max",
               
               "Value": ""
-            } 
+            } ,
+            {
+              "Property": "DimensionHeight(MM)",
+              
+              "Value": 547
+            },
+            {
+              "Property": "DimensionDepth(MM)",
+              
+              "Value": 738
+            },
+            {
+              "Property": "DimensionWidth(MM)",
+              
+              "Value": 383
+            }
               
       ]
-     },
+     } ,
      {
       "Model Name": "EGS",
       "Data": [
@@ -689,11 +828,7 @@
             
             "Value": "Rotary Gripper"
           },
-          {
-              "Property": "Dimension(MM)",
-              
-              "Value": "45-88"
-            },
+          
             {
               "Property": "Payload(Kg)",
               
@@ -708,7 +843,22 @@
               "Property": "Feed pressure Max",
               
               "Value": ""
-            } 
+            } ,
+            {
+              "Property": "DimensionHeight(MM)",
+              
+              "Value": 425
+            },
+            {
+              "Property": "DimensionDepth(MM)",
+              
+              "Value": 373
+            },
+            {
+              "Property": "DimensionWidth(MM)",
+              
+              "Value": 373
+            }
               
       ]
      },
@@ -740,11 +890,7 @@
             
             "Value": "Vacuum Gripper"
           },
-          {
-              "Property": "Dimension(MM)",
-              
-              "Value": "26-100"
-            },
+          
             {
               "Property": "Payload(Kg)",
               
@@ -759,7 +905,22 @@
               "Property": "Feed pressure Max",
               
               "Value": ""
-            } 
+            }  ,
+            {
+              "Property": "DimensionHeight(MM)",
+              
+              "Value": 324
+            },
+            {
+              "Property": "DimensionDepth(MM)",
+              
+              "Value": 764
+            },
+            {
+              "Property": "DimensionWidth(MM)",
+              
+              "Value": 738
+            }
               
       ]
      },
@@ -791,11 +952,7 @@
             
             "Value": "Magnetic Gripper" 
           },
-          {
-              "Property": "Dimension(MM)",
-              
-              "Value": "58-60"
-            },
+          
             {
               "Property": "Payload(Kg)",
               
@@ -810,7 +967,22 @@
               "Property": "Feed pressure Max",
               
               "Value": ""
-            } 
+            } ,
+            {
+              "Property": "DimensionHeight(MM)",
+              
+              "Value": 654
+            },
+            {
+              "Property": "DimensionDepth(MM)",
+              
+              "Value": 742
+            },
+            {
+              "Property": "DimensionWidth(MM)",
+              
+              "Value": 123
+            }
               
       ]
      },
@@ -842,11 +1014,7 @@
             
             "Value": "Adhesive gripper" 
           },
-          {
-              "Property": "Dimension(MM)",
-              
-              "Value": "20.8-30.5"
-            },
+         
             {
               "Property": "Payload(Kg)",
               
@@ -861,7 +1029,22 @@
               "Property": "Feed pressure Max",
               
               "Value": ""
-            } 
+            }  ,
+            {
+              "Property": "DimensionHeight(MM)",
+              
+              "Value": 234
+            },
+            {
+              "Property": "DimensionDepth(MM)",
+              
+              "Value": 938
+            },
+            {
+              "Property": "DimensionWidth(MM)",
+              
+              "Value": 342
+            }
               
       ]
      },
@@ -893,11 +1076,7 @@
             
             "Value": "Angular Gripper" 
           },
-          {
-              "Property": "Dimension(MM)",
-              
-              "Value": "28-40.5"
-            },
+          
             {
               "Property": "Payload(Kg)",
               
@@ -912,7 +1091,22 @@
               "Property": "Feed pressure Max",
               
               "Value": ""
-            } 
+            } ,
+            {
+              "Property": "DimensionHeight(MM)",
+              
+              "Value": 637
+            },
+            {
+              "Property": "DimensionDepth(MM)",
+              
+              "Value": 872
+            },
+            {
+              "Property": "DimensionWidth(MM)",
+              
+              "Value": 734
+            }
               
       ]
      },
@@ -944,11 +1138,7 @@
             
             "Value": "Layer Gripper" 
           },
-          {
-              "Property": "Dimension(MM)",
-              
-              "Value": "650-850"
-            },
+          
             {
               "Property": "Payload(Kg)",
               
@@ -963,7 +1153,22 @@
               "Property": "Feed pressure Max",
               
               "Value": ""
-            } 
+            } ,
+            {
+              "Property": "DimensionHeight(MM)",
+              
+              "Value": 635
+            },
+            {
+              "Property": "DimensionDepth(MM)",
+              
+              "Value": 837
+            },
+            {
+              "Property": "DimensionWidth(MM)",
+              
+              "Value": 352
+            }
               
       ]
      },
@@ -995,11 +1200,7 @@
             
             "Value": "Modular Gripper" 
           },
-          {
-              "Property": "Dimension(MM)",
-              
-              "Value": "600-800"
-            },
+          
             {
               "Property": "Payload(Kg)",
               
@@ -1014,7 +1215,22 @@
               "Property": "Feed pressure Max",
               
               "Value": ""
-            } 
+            } ,
+            {
+              "Property": "DimensionHeight(MM)",
+              
+              "Value": 876
+            },
+            {
+              "Property": "DimensionDepth(MM)",
+              
+              "Value": 234
+            },
+            {
+              "Property": "DimensionWidth(MM)",
+              
+              "Value": 376
+            }
               
       ]
      },
@@ -1046,11 +1262,7 @@
             
             "Value": "Soft Gripper" 
           },
-          {
-              "Property": "Dimension(MM)",
-              
-              "Value": ""
-            },
+          
             {
               "Property": "Payload(Kg)",
               
@@ -1065,7 +1277,22 @@
               "Property": "Feed pressure Max",
               
               "Value": ""
-            } 
+            }  ,
+            {
+              "Property": "DimensionHeight(MM)",
+              
+              "Value": 321
+            },
+            {
+              "Property": "DimensionDepth(MM)",
+              
+              "Value": 738
+            },
+            {
+              "Property": "DimensionWidth(MM)",
+              
+              "Value": 839
+            }
               
       ]
      },
@@ -1097,11 +1324,7 @@
             
             "Value": "Sheet Metal Gripper" 
           },
-          {
-              "Property": "Dimension(MM)",
-              
-              "Value": ""
-            },
+         
             {
               "Property": "Payload(Kg)",
               
@@ -1116,7 +1339,22 @@
               "Property": "Feed pressure Max",
               
               "Value": ""
-            } 
+            } ,
+            {
+              "Property": "DimensionHeight(MM)",
+              
+              "Value": 736
+            },
+            {
+              "Property": "DimensionDepth(MM)",
+              
+              "Value": 837
+            },
+            {
+              "Property": "DimensionWidth(MM)",
+              
+              "Value": 387
+            }
               
       ]
      },
@@ -1148,11 +1386,7 @@
             
             "Value": "Parallel Gripper" 
           },
-          {
-              "Property": "Dimension(MM)",
-              
-              "Value": ""
-            },
+          
             {
               "Property": "Payload(Kg)",
               
@@ -1167,7 +1401,22 @@
               "Property": "Feed pressure Max",
               
               "Value": ""
-            } 
+            }  ,
+            {
+              "Property": "DimensionHeight(MM)",
+              
+              "Value": 126
+            },
+            {
+              "Property": "DimensionDepth(MM)",
+              
+              "Value": 846
+            },
+            {
+              "Property": "DimensionWidth(MM)",
+              
+              "Value": 863
+            }
               
       ]
      },
@@ -1199,11 +1448,7 @@
             
             "Value": "Gecko Gripper" 
           } ,
-          {
-              "Property": "Dimension(MM)",
-              
-              "Value": "69-71"
-            },
+         
             {
               "Property": "Payload(Kg)",
               
@@ -1218,7 +1463,22 @@
               "Property": "Feed pressure Max",
               
               "Value": ""
-            } 
+            } ,
+            {
+              "Property": "DimensionHeight(MM)",
+              
+              "Value": 654
+            },
+            {
+              "Property": "DimensionDepth(MM)",
+              
+              "Value": 231
+            },
+            {
+              "Property": "DimensionWidth(MM)",
+              
+              "Value": 982
+            }
               
       ]
      },
@@ -1250,11 +1510,7 @@
             
             "Value": "Electric Gripper" 
           } ,
-          {
-              "Property": "Dimension(MM)",
-              
-              "Value": "121-400"
-            },
+          
             {
               "Property": "Payload(Kg)",
               
@@ -1269,7 +1525,22 @@
               "Property": "Feed pressure Max",
               
               "Value": ""
-            } 
+            } ,
+            {
+              "Property": "DimensionHeight(MM)",
+              
+              "Value": 345
+            },
+            {
+              "Property": "DimensionDepth(MM)",
+              
+              "Value": 765
+            },
+            {
+              "Property": "DimensionWidth(MM)",
+              
+              "Value": 439
+            }
               
       ]
      },
@@ -1301,11 +1572,7 @@
             
             "Value": "Vacuum Gripper" 
           } ,
-          {
-              "Property": "Dimension(MM)",
-              
-              "Value": "105-146"
-            },
+          
             {
               "Property": "Payload(Kg)",
               
@@ -1320,7 +1587,22 @@
               "Property": "Feed pressure Max",
               
               "Value": ""
-            } 
+            }  ,
+            {
+              "Property": "DimensionHeight(MM)",
+              
+              "Value": 543
+            },
+            {
+              "Property": "DimensionDepth(MM)",
+              
+              "Value": 876
+            },
+            {
+              "Property": "DimensionWidth(MM)",
+              
+              "Value": 345
+            }
               
       ]
      },
@@ -1352,11 +1634,7 @@
             
             "Value": "Magnetic Gripper" 
           } ,
-          {
-              "Property": "Dimension(MM)",
-              
-              "Value": "71-80"
-            },
+          
             {
               "Property": "Payload(Kg)",
               
@@ -1371,7 +1649,22 @@
               "Property": "Feed pressure Max",
               
               "Value": ""
-            } 
+            }  ,
+            {
+              "Property": "DimensionHeight(MM)",
+              
+              "Value": 354
+            },
+            {
+              "Property": "DimensionDepth(MM)",
+              
+              "Value": 657
+            },
+            {
+              "Property": "DimensionWidth(MM)",
+              
+              "Value": 756
+            }
               
       ]
      },
@@ -1403,11 +1696,7 @@
             
             "Value": "Three finger gripper" 
           } ,
-          {
-              "Property": "Dimension(MM)",
-              
-              "Value": "156-158"
-            },
+         
             {
               "Property": "Payload(Kg)",
               
@@ -1422,12 +1711,25 @@
               "Property": "Feed pressure Max",
               
               "Value": ""
-            } 
+            }  ,
+            {
+              "Property": "DimensionHeight(MM)",
+              
+              "Value": 543
+            },
+            {
+              "Property": "DimensionDepth(MM)",
+              
+              "Value": 784
+            },
+            {
+              "Property": "DimensionWidth(MM)",
+              
+              "Value": 980
+            }
               
       ]
      },
-
-
      {
       "Model Name": "TXH",
       "Data": [
@@ -1456,11 +1758,7 @@
             
             "Value": "Layer Gripper" 
           } ,
-          {
-              "Property": "Dimension(MM)",
-              
-              "Value": "500-700"
-            },
+         
             {
               "Property": "Payload(Kg)",
               
@@ -1475,7 +1773,22 @@
               "Property": "Feed pressure Max",
               
               "Value": ""
-            } 
+            } ,
+            {
+              "Property": "DimensionHeight(MM)",
+              
+              "Value": 453
+            },
+            {
+              "Property": "DimensionDepth(MM)",
+              
+              "Value": 769
+            },
+            {
+              "Property": "DimensionWidth(MM)",
+              
+              "Value": 180
+            }
               
       ]
      },
@@ -1507,11 +1820,7 @@
             
             "Value": "Wafer Gripper" 
           } ,
-          {
-              "Property": "Dimension(MM)",
-              
-              "Value": "55-100"
-            },
+         
             {
               "Property": "Payload(Kg)",
               
@@ -1526,11 +1835,25 @@
               "Property": "Feed pressure Max",
               
               "Value":"" 
-            } 
+            }  ,
+            {
+              "Property": "DimensionHeight(MM)",
+              
+              "Value": 478
+            },
+            {
+              "Property": "DimensionDepth(MM)",
+              
+              "Value": 800
+            },
+            {
+              "Property": "DimensionWidth(MM)",
+              
+              "Value": 210
+            }
               
       ]
      },
-
      {
       "Model Name": "Guardian Gripper",
       "Data": [
@@ -1559,11 +1882,7 @@
             
             "Value": "Parallel Gripper" 
           } ,
-          {
-              "Property": "Dimension(MM)",
-              
-              "Value": ""
-            },
+          
             {
               "Property": "Payload(Kg)",
               
@@ -1578,11 +1897,25 @@
               "Property": "Feed pressure Max",
               
               "Value": ""
-            } 
+            }  ,
+            {
+              "Property": "DimensionHeight(MM)",
+              
+              "Value": 230
+            },
+            {
+              "Property": "DimensionDepth(MM)",
+              
+              "Value": 190
+            },
+            {
+              "Property": "DimensionWidth(MM)",
+              
+              "Value": 470
+            }
               
       ]
      },
-
      {
       "Model Name": "Amila Vacuum Gripper",
       "Data": [
@@ -1611,11 +1944,7 @@
             
             "Value": "Area Gripper" 
           } ,
-          {
-              "Property": "Dimension(MM)",
-              
-              "Value": ""
-            },
+         
             {
               "Property": "Payload(Kg)",
               
@@ -1630,11 +1959,25 @@
               "Property": "Feed pressure Max",
               
               "Value": ""
-            } 
+            }  ,
+            {
+              "Property": "DimensionHeight(MM)",
+              
+              "Value": 320
+            },
+            {
+              "Property": "DimensionDepth(MM)",
+              
+              "Value": 543
+            },
+            {
+              "Property": "DimensionWidth(MM)",
+              
+              "Value": 970
+            }
               
       ]
      },
-
      {
       "Model Name": "MATD, Large Size custom vacuum gripper",
       "Data": [
@@ -1663,11 +2006,7 @@
             
             "Value": "Layer Gripper" 
           } ,
-          {
-              "Property": "Dimension(MM)",
-              
-              "Value": ""
-            },
+         
             {
               "Property": "Payload(Kg)",
               
@@ -1682,11 +2021,25 @@
               "Property": "Feed pressure Max",
               
               "Value": ""
-            } 
+            }  ,
+            {
+              "Property": "DimensionHeight(MM)",
+              
+              "Value": 437
+            },
+            {
+              "Property": "DimensionDepth(MM)",
+              
+              "Value": 980
+            },
+            {
+              "Property": "DimensionWidth(MM)",
+              
+              "Value": 218
+            }
               
       ]
      },
-
      {
       "Model Name": "CRK-SUS304",
       "Data": [
@@ -1715,11 +2068,7 @@
             
             "Value": "Vacuum Gripper" 
           } ,
-          {
-              "Property": "Dimension(MM)",
-              
-              "Value": ""
-            },
+          
             {
               "Property": "Payload(Kg)",
               
@@ -1734,9 +2083,25 @@
               "Property": "Feed pressure Max",
               
               "Value": ""
-            } 
+            }  ,
+            {
+              "Property": "DimensionHeight(MM)",
+              
+              "Value": 654
+            },
+            {
+              "Property": "DimensionDepth(MM)",
+              
+              "Value": 760
+            },
+            {
+              "Property": "DimensionWidth(MM)",
+              
+              "Value": 1000
+            }
               
       ]
      }
+
 
 ]

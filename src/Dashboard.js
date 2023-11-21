@@ -5,6 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 import './App.css';
+import jsonData from './data.json';
 
 class GripperList extends Component {
 
@@ -56,6 +57,7 @@ class GripperList extends Component {
     dimensionWidth: '',
     showAddGripperForm: false,
     searchTerm: '',
+    jsonData: jsonData,
   };
 
 
@@ -242,39 +244,7 @@ class GripperList extends Component {
     const DimensionWidthValuesMin = parseFloat(selectedFilters.DimensionWidthValuesMin);
     const DimensionWidthValuesMax = parseFloat(selectedFilters.DimensionWidthValuesMax);
 
-    // if (
-
-    //   !isNaN(dimensionMin) && dimensionMin < minMaxValues.dimensionMin ||
-    //   !isNaN(payloadMin) && payloadMin < minMaxValues.payloadMin ||
-    //   !isNaN(forceMin) && forceMin < minMaxValues.forceMin ||
-    //   !isNaN(pressureMin) && pressureMin < minMaxValues.pressureMin ||
-
-    //   !isNaN(dimensionMax) && dimensionMax > minMaxValues.dimensionMax ||
-    //   !isNaN(payloadMax) && payloadMax > minMaxValues.payloadMax ||
-    //   !isNaN(forceMax) && forceMax > minMaxValues.forceMax ||
-    //   !isNaN(pressureMax) && pressureMax > minMaxValues.pressureMax ||
-
-    //   !isNaN(dimensionMin) && dimensionMin > minMaxValues.dimensionMax ||
-    //   !isNaN(payloadMin) && payloadMin > minMaxValues.payloadMax ||
-    //   !isNaN(forceMin) && forceMin > minMaxValues.forceMax ||
-    //   !isNaN(pressureMin) && pressureMin > minMaxValues.pressureMax ||
-
-    //   !isNaN(dimensionMax) && dimensionMax < minMaxValues.dimensionMin ||
-    //   !isNaN(payloadMax) && payloadMax < minMaxValues.payloadMin ||
-    //   !isNaN(forceMax) && forceMax < minMaxValues.forceMin ||
-    //   !isNaN(pressureMax) && pressureMax < minMaxValues.pressureMin
-
-
-    // ) {
-
-    //   this.setState({
-    //     filterError: alert('Invalid range filter  Minimum & minimum values.'),
-    //   });
-    //   return;
-    // }  
-
-
-    // this.setState({ filterError: '' });
+  
 
     if (Object.values(selectedFilters).every((value) => !value)) {
 
@@ -464,41 +434,38 @@ class GripperList extends Component {
 
   // Separate search function
   searchGrippers = () => {
-    const { grippers, searchTerm } = this.state;
+    const { jsonData, searchTerm } = this.state;
   
     if (!searchTerm) {
       // If search term is empty, show all grippers
       this.setState({
-        filteredGrippers: grippers,
+        filteredGrippers: jsonData,
         filtersApplied: false,
       });
     } else {
       // Filter grippers based on the search term
-      const filteredGrippers = grippers.filter((gripper) => {
-        const modelName = gripper['Model Name'].toLowerCase();
-        const imageUrl = gripper.Data.find((data) => data.Property === 'ImageURL')?.Value.toLowerCase();
-        const datasheet = gripper.Data.find((data) => data.Property === 'Datasheet')?.Value.toLowerCase();
-        
+      const filteredGrippers = jsonData.filter((gripper) => {
+        const modelName = (gripper['Model Name'] || '').toLowerCase();
+        const imageUrl = (gripper.Data.find((data) => data.Property === 'ImageURL')?.Value || '').toLowerCase();
+        const datasheet = (gripper.Data.find((data) => data.Property === 'Datasheet')?.Value || '').toLowerCase();
   
         // Check if any property includes the search term
         return (
           modelName.includes(searchTerm.toLowerCase()) ||
           imageUrl.includes(searchTerm.toLowerCase()) ||
           datasheet.includes(searchTerm.toLowerCase()) ||
-          Object.values(gripper.Data).some((data) => {
-            if (typeof data.Value === 'number' && data.Value === parseFloat(searchTerm)) {
-              return true;
-            }
-            if (
-              typeof data.Value === 'string' &&
-              data.Value.toLowerCase().includes(searchTerm.toLowerCase())
-            ) {
-              return true;
+          gripper.Data.some((data) => {
+            const value = data.Value;
+            if (value !== undefined && value !== null) {
+              if (typeof value === 'number' && value.toString().includes(searchTerm)) {
+                return true;
+              }
+              if (typeof value === 'string' && value.toLowerCase().includes(searchTerm.toLowerCase())) {
+                return true;
+              }
             }
             return false;
           })
-          
-
         );
       });
   
@@ -508,6 +475,9 @@ class GripperList extends Component {
       });
     }
   };
+  
+  
+  
   
   
   
@@ -851,45 +821,64 @@ class GripperList extends Component {
             </div>
           ) : null}
 
-          {filteredGrippers.length > 0 ? (
-            filteredGrippers.map((gripper, index) => (
-              <div key={index} className="product-card">
-                <div onClick={() => this.openGripperDetails(gripper)}>
-                  {gripper.Data.find((data) => data.Property === 'ImageURL') ? (
-                    <img
-                      src={gripper.Data.find((data) => data.Property === 'ImageURL').Value}
-                      alt={gripper['Model Name']}
-                    />
-                  ) : (
-                    <p>Image not available</p>
-                  )}
-                  <h2>{gripper['Model Name']}</h2>
-                </div>
-                {gripper.Data.find((data) => data.Property === 'Datasheet') ? (
-                  gripper.Data.find((data) => data.Property === 'Datasheet').Value ? (
-                    <div>
-                      <a
-                        href={gripper.Data.find((data) => data.Property === 'Datasheet').Value}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <FontAwesomeIcon icon={faFilePdf} className="pdf-icon" /> Datasheet PDF
-                      </a>
-                    </div>
-                  ) : (
-                    <p>PDF not available</p>
-                  )
-                ) : (
-                  <p>PDF not available</p>
-                )}
-              </div>
-            ))
-          ) : (
-            <div className="no-data-message">
-              <p>No grippers match the selected criteria.</p>
-              <FontAwesomeIcon icon={faDatabase} className="faDatabase-icon" />
-            </div>
-          )}
+{(
+  filteredGrippers.length > 0 ? (
+    // If there are filtered grippers, use filteredGrippers
+    filteredGrippers
+  ) : (
+    // If no filtered grippers, use jsonData
+    jsonData
+  )
+).length > 0 ? (
+  (
+    filteredGrippers.length > 0 ? (
+      // If there are filtered grippers, use filteredGrippers
+      filteredGrippers
+    ) : (
+      // If no filtered grippers, use jsonData
+      jsonData
+    )
+  ).map((gripper, index) => (
+    <div key={index} className="product-card">
+      <div onClick={() => this.openGripperDetails(gripper)}>
+        {gripper.Data.find((data) => data.Property === 'ImageURL') ? (
+          <img
+            src={gripper.Data.find((data) => data.Property === 'ImageURL').Value}
+            alt={gripper['Model Name']}
+          />
+        ) : (
+          <p>Image not available</p>
+        )}
+        <h2>{gripper['Model Name']}</h2>
+      </div>
+      {gripper.Data.find((data) => data.Property === 'Datasheet') ? (
+        gripper.Data.find((data) => data.Property === 'Datasheet').Value ? (
+          <div>
+            <a
+              href={gripper.Data.find((data) => data.Property === 'Datasheet').Value}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FontAwesomeIcon icon={faFilePdf} className="pdf-icon" /> Datasheet PDF
+            </a>
+          </div>
+        ) : (
+          <p>PDF not available</p>
+        )
+      ) : (
+        <p>PDF not available</p>
+      )}
+    </div>
+  ))
+) : (
+  <div className="no-data-message">
+    <p>No grippers match the selected criteria.</p>
+    <FontAwesomeIcon icon={faDatabase} className="faDatabase-icon" />
+  </div>
+)}
+
+
+
           {selectedGripperDetails && (
             <div className={`modal ${isModalOpen ? 'show' : ''}`}>
               <div className="modal-content">
