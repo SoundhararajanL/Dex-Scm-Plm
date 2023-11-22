@@ -502,11 +502,11 @@ class GripperList extends Component {
     return (
       <div className="gripper-list-container">
         <div className="filter-options">
-          <h2>Filters :</h2>
+          <h2>Filters</h2>
 
           {/* Checkbox inputs for Manufacture Name */}
           <div className="checkbox-section">
-            <label>Manufacture Name:</label>
+            <label>Manufacture  Name:</label>
             {filterOptions.manufactureNames.slice(0, this.state.displayManufactureNames).map((option, index) => (
               <div key={index} className="checkbox-item">
                 <input
