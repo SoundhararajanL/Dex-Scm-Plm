@@ -593,6 +593,7 @@ class GripperList extends Component {
             />
            
 
+
           </div>
           <div>
             <label>Gripping Force</label>
