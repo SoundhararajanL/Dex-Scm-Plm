@@ -10,7 +10,7 @@ import jsonData from './data.json';
 class GripperList extends Component {
 
   state = {
-    filtersApplied: false,
+    filtersApplied:false,
     grippers: [],
     selectedGripper: null,
     filterOptions: {
@@ -48,7 +48,7 @@ class GripperList extends Component {
     manufactureName: '',
     manufactureType: '',
     manufactureCategory: '',
-   
+
     payload: '',
     grippingForce: '',
     feedGrippingForce: '',
@@ -62,7 +62,7 @@ class GripperList extends Component {
 
 
 
-  handleAddGripper = () => {
+  handleAddGripper = async () => {
     const {
       modelName,
       imageUrl,
@@ -70,7 +70,6 @@ class GripperList extends Component {
       manufactureName,
       manufactureType,
       manufactureCategory,
-      
       payload,
       grippingForce,
       feedGrippingForce,
@@ -87,10 +86,9 @@ class GripperList extends Component {
       !manufactureName &&
       !manufactureType &&
       !manufactureCategory &&
-     
       !payload &&
       !grippingForce &&
-      !feedGrippingForce&&
+      !feedGrippingForce &&
       !dimensionHeight &&
       !dimensionDepth &&
       !dimensionWidth
@@ -99,134 +97,81 @@ class GripperList extends Component {
       return;
     }
 
-
-
-    const newData = [
-      {
-        Property: "ImageURL",
-        Value: imageUrl,
-      },
-      {
-        Property: "Datasheet",
-        Value: datasheet,
-      },
-      {
-        Property: "ManufactureName",
-        Value: manufactureName,
-      },
-      {
-        Property: "Type",
-        Value: manufactureType,
-      },
-      {
-        Property: "Category",
-        Value: manufactureCategory,
-      },
-
-      {
-        Property: "Payload(Kg)",
-        Value: payload,
-      },
-      {
-        Property: "Gripping Force",
-        Value: grippingForce,
-      },
-      {
-        Property: "Feed pressure Max",
-        Value: feedGrippingForce,
-      },
-      // dimension:
-      {
-        Property: "DimensionHeight(MM)",
-        Value: dimensionHeight,
-      },
-      {
-        Property: "DimensionDepth(MM)",
-        Value: dimensionDepth,
-      },
-      {
-        Property: "DimensionWidth(MM)",
-        Value: dimensionWidth,
-      },
-    ];
-
-    const newGripperData = {
+    const newGripper = {
       "Model Name": modelName,
-      Data: newData,
+      "Data": [
+        { "Property": "ImageURL", "Value": imageUrl },
+        { "Property": "Datasheet", "Value": datasheet },
+        { "Property": "ManufactureName", "Value": manufactureName },
+        { "Property": "Type", "Value": manufactureType },
+        { "Property": "Category", "Value": manufactureCategory },
+        { "Property": "Payload(Kg)", "Value": payload },
+        { "Property": "Gripping Force", "Value": grippingForce },
+        { "Property": "Feed pressure Max", "Value": feedGrippingForce },
+        { "Property": "DimensionHeight(MM)", "Value": dimensionHeight },
+        { "Property": "DimensionDepth(MM)", "Value": dimensionDepth },
+        { "Property": "DimensionWidth(MM)", "Value": dimensionWidth },
+      ],
     };
-    axios.post('http://localhost:3000/api/grippers', newGripperData)
-      .then((response) => {
 
-        this.setState({
-          modelName: '',
-          imageUrl: '',
-          datasheet: '',
-          manufactureName: '',
-          manufactureType: '',
-          manufactureCategory: '',
+    // Update the data.json file with the new gripper object
+    try {
+      const response = await axios.post('http://localhost:3001/api/updateData', { newGripper }, { headers: { 'Content-Type': 'application/json' } });
 
-          payload: '',
-          grippingForce: '',
-          feedGrippingForce: '',
-          dimensionHeight: '',
-          dimensionDepth: '',
-          dimensionWidth: '',
-          showAddGripperForm: false,
-        });
 
-        toast.success("New Gripper added!", {
-          position: toast.POSITION.TOP_RIGHT,
-          autoClose: 2000,
-        });
-        window.location.reload();
-      })
-      .catch((error) => {
-        console.error('Error adding a gripper:', error);
-
-      });
+      // Assuming your server responds with the updated data.json content
+      // Update your state with the new data
+      this.setState({ gripperData: response.data });
+      toast.success('Gripper details added successfully!');
+    } catch (error) {
+      console.error('Error updating data.json:', error);
+      toast.error('Failed to add gripper details.');
+    }
   };
 
 
-  componentDidMount() {
-    // Fetch gripper data from the server
-    axios.get('http://localhost:3000/api/grippers')
-      .then((response) => {
-        const grippers = response.data;
 
-        const manufactureNames = [...new Set(grippers.map((gripper) => gripper.Data.find((data) => data.Property === 'ManufactureName')?.Value).filter(Boolean))];
-        const types = [...new Set(grippers.map((gripper) => gripper.Data.find((data) => data.Property === 'Type')?.Value).filter(Boolean))];
-        const categories = [...new Set(grippers.map((gripper) => gripper.Data.find((data) => data.Property === 'Category')?.Value).filter(Boolean))];
-        console.log("Manufacture Names:", manufactureNames);
-        // Fetch minimum and maximum values for numeric filters
-        axios.get('http://localhost:3000/api/grippers/minmax')
-          .then((minMaxResponse) => {
-            const minMaxValues = minMaxResponse.data;
+  // componentDidMount() {
+  //   // Fetch gripper data from the server
+  //   axios.get('http://localhost:3000/api/grippers')
+  //     .then((response) => {
+  //       const grippers = response.data;
 
-            // Set the initial state of selectedFilters after fetching minMaxValues
-            this.setState({
-              grippers,
-              filterOptions: {
-                manufactureNames,
-                types,
-                categories,
-              },
-              minMaxValues,
-              filteredGrippers: grippers, // Set filteredGrippers initially to the full data
-            });
-          })
-          .catch((minMaxError) => {
-            console.error('Error fetching min and max values:', minMaxError);
-          });
-      })
-      .catch((error) => {
-        console.error('Error fetching grippers:', error);
-      });
-  }
+  //       const manufactureNames = [...new Set(grippers.map((gripper) => gripper.Data.find((data) => data.Property === 'ManufactureName')?.Value).filter(Boolean))];
+  //       const types = [...new Set(grippers.map((gripper) => gripper.Data.find((data) => data.Property === 'Type')?.Value).filter(Boolean))];
+  //       const categories = [...new Set(grippers.map((gripper) => gripper.Data.find((data) => data.Property === 'Category')?.Value).filter(Boolean))];
+  //       console.log("Manufacture Names:", manufactureNames);
+  //       // Fetch minimum and maximum values for numeric filters
+  //       axios.get('http://localhost:3000/api/grippers/minmax')
+  //         .then((minMaxResponse) => {
+  //           const minMaxValues = minMaxResponse.data;
+
+  //           // Set the initial state of selectedFilters after fetching minMaxValues
+  //           this.setState({
+  //             grippers,
+  //             filterOptions: {
+  //               manufactureNames,
+  //               types,
+  //               categories,
+  //             },
+  //             minMaxValues,
+  //             filteredGrippers: grippers, // Set filteredGrippers initially to the full data
+  //           });
+  //         })
+  //         .catch((minMaxError) => {
+  //           console.error('Error fetching min and max values:', minMaxError);
+  //         });
+  //     })
+  //     .catch((error) => {
+  //       console.error('Error fetching grippers:', error);
+  //     });
+  // }
+
 
 
 
   filterGrippers = () => {
-    const { grippers, selectedFilters, minMaxValues } = this.state;
+    const { jsonData, selectedFilters, minMaxValues } = this.state;
 
 
     const payloadMin = parseFloat(selectedFilters.payloadMin);
@@ -244,16 +189,16 @@ class GripperList extends Component {
     const DimensionWidthValuesMin = parseFloat(selectedFilters.DimensionWidthValuesMin);
     const DimensionWidthValuesMax = parseFloat(selectedFilters.DimensionWidthValuesMax);
 
-  
+
 
     if (Object.values(selectedFilters).every((value) => !value)) {
 
       this.setState({
-        filteredGrippers: grippers,
+        filteredGrippers: jsonData,
         filtersApplied: false,
       });
     } else {
-      const filteredGrippers = grippers.filter((gripper) => {
+      const filteredGrippers = jsonData.filter((gripper) => {
         const manufactureName = selectedFilters.manufactureName;
         const type = selectedFilters.type;
         const category = selectedFilters.category;
@@ -421,6 +366,33 @@ class GripperList extends Component {
     }));
   };
 
+  getManufactureNameCount = (manufactureName) => {
+    const { jsonData } = this.state;
+    return jsonData.filter(gripper =>
+      gripper.Data.some(data =>
+        data.Property === 'ManufactureName' && data.Value === manufactureName
+      )
+    ).length;
+  };
+
+  getTypeCount = (type) => {
+    const { jsonData } = this.state;
+    return jsonData.filter(gripper =>
+      gripper.Data.some(data =>
+        data.Property === 'Type' && data.Value === type
+      )
+    ).length;
+  };
+
+  getCategoryCount = (category) => {
+    const { jsonData } = this.state;
+    return jsonData.filter(gripper =>
+      gripper.Data.some(data =>
+        data.Property === 'Category' && data.Value === category
+      )
+    ).length;
+  };
+
   handleSearchTermChange = (e) => {
     this.setState({ searchTerm: e.target.value });
   };
@@ -435,12 +407,13 @@ class GripperList extends Component {
   // Separate search function
   searchGrippers = () => {
     const { jsonData, searchTerm } = this.state;
-  
+
     if (!searchTerm) {
       // If search term is empty, show all grippers
       this.setState({
         filteredGrippers: jsonData,
         filtersApplied: false,
+        
       });
     } else {
       // Filter grippers based on the search term
@@ -448,7 +421,7 @@ class GripperList extends Component {
         const modelName = (gripper['Model Name'] || '').toLowerCase();
         const imageUrl = (gripper.Data.find((data) => data.Property === 'ImageURL')?.Value || '').toLowerCase();
         const datasheet = (gripper.Data.find((data) => data.Property === 'Datasheet')?.Value || '').toLowerCase();
-  
+
         // Check if any property includes the search term
         return (
           modelName.includes(searchTerm.toLowerCase()) ||
@@ -468,27 +441,110 @@ class GripperList extends Component {
           })
         );
       });
-  
+
       this.setState({
         filteredGrippers: filteredGrippers,
         filtersApplied: true,
+        
       });
     }
   };
+
+
+
+  componentDidMount() {
+    // Extract ManufactureName, Type, and Category from jsonData
+    const { jsonData } = this.state;
+
+    const manufactureNames = jsonData.map(gripper => gripper.Data.find(item => item.Property === 'ManufactureName').Value);
+    const types = jsonData.map(gripper => gripper.Data.find(item => item.Property === 'Type').Value);
+    const categories = jsonData.map(gripper => gripper.Data.find(item => item.Property === 'Category').Value);
+
+    // Remove duplicates and set the state with filter options
+    this.setState({
+      filterOptions: {
+        manufactureNames: [...new Set(manufactureNames)],
+        types: [...new Set(types)],
+        categories: [...new Set(categories)],
+        
+      },
+    });
+  }
+
+
+  
+//   async componentDidMount() {
+//     try {
+//       // Fetch gripper data
+//       const { jsonData } = this.state;
+  
+//       // Fetch min-max values
+//     const minMaxResponse = await axios.get('http://localhost:3001/api/grippers/minmax');
+//     const minMaxValues = minMaxResponse.data;
+
+//     // Extract ManufactureName, Type, and Category from jsonData
+//     const manufactureNames = [...new Set(jsonData.map(gripper => gripper.Data.find(item => item.Property === 'ManufactureName')?.Value).filter(Boolean))];
+//     const types = [...new Set(jsonData.map(gripper => gripper.Data.find(item => item.Property === 'Type')?.Value).filter(Boolean))];
+//     const categories = [...new Set(jsonData.map(gripper => gripper.Data.find(item => item.Property === 'Category')?.Value).filter(Boolean))];
+
+//     this.setState({
+//       jsonData,
+//       filterOptions: {
+//         manufactureNames,
+//         types,
+//         categories,
+//       },
+//       minMaxValues,
+//       filteredGrippers: jsonData,
+//     });
+//   } catch (error) {
+//     console.error('Error fetching data:', error);
+//   }
+// }
   
   
-  
-  
-  
-  
-  
+
+  // componentDidMount() {
+  //   axios.get('http://localhost:3001/api/grippers')
+  //     .then((response) => {
+  //       const jsonData = response.data;
+
+  //       const manufactureNames = [...new Set(jsonData.map(gripper => gripper.Data.find(item => item.Property === 'ManufactureName')?.Value).filter(Boolean))];
+  //       const types = [...new Set(jsonData.map(gripper => gripper.Data.find(item => item.Property === 'Type')?.Value).filter(Boolean))];
+  //       const categories = [...new Set(jsonData.map(gripper => gripper.Data.find(item => item.Property === 'Category')?.Value).filter(Boolean))];
+
+  //       axios.get('http://localhost:3001/api/grippers/minmax')
+  //         .then((minMaxResponse) => {
+  //           const minMaxValues = minMaxResponse.data;
+
+  //           this.setState({
+  //             jsonData,
+  //             filterOptions: {
+  //               manufactureNames,
+  //               types,
+  //               categories,
+  //             },
+  //             minMaxValues,
+  //             filteredGrippers: jsonData,
+  //           });
+  //         })
+  //         .catch((minMaxError) => {
+  //           console.error('Error fetching min and max values:', minMaxError);
+  //         });
+  //     })
+  //     .catch((error) => {
+  //       console.error('Error fetching grippers:', error);
+  //     });
+  // }
+
 
 
   render() {
     const { isModalOpen, selectedGripperDetails } = this.state;
     const { searchTerm } = this.state;
     const { filteredGrippers, filterOptions, selectedFilters } = this.state;
-    const productCount = filteredGrippers.length;
+    const productCount = filteredGrippers.length > 0 ? filteredGrippers.length : jsonData.length; 
+  
     const { minMaxValues } = this.state;
     const { showAddGripperForm } = this.state;
     const {
@@ -509,11 +565,11 @@ class GripperList extends Component {
     return (
       <div className="gripper-list-container">
         <div className="filter-options">
-          <h2>Filters:</h2>
+          <h2>Filters</h2>
 
           {/* Checkbox inputs for Manufacture Name */}
           <div className="checkbox-section">
-            <label>Manufacture Name:</label>
+            <label>Manufacture  Name:</label>
             {filterOptions.manufactureNames.slice(0, this.state.displayManufactureNames).map((option, index) => (
               <div key={index} className="checkbox-item">
                 <input
@@ -523,7 +579,9 @@ class GripperList extends Component {
                   checked={selectedFilters.manufactureName.includes(option)}
                   onChange={() => this.handleFilterChange('manufactureName', option)}
                 />
-                <label htmlFor={`manufactureNameCheckbox${index}`}>{option}</label>
+                <label htmlFor={`manufactureNameCheckbox${index}`}>
+                  {option} ({this.getManufactureNameCount(option)})
+                </label>
               </div>
             ))}
             {filterOptions.manufactureNames.length > this.state.displayManufactureNames && (
@@ -545,7 +603,9 @@ class GripperList extends Component {
                   checked={selectedFilters.type.includes(option)}
                   onChange={() => this.handleFilterChange('type', option)}
                 />
-                <label htmlFor={`typeCheckbox${index}`}>{option}</label>
+                <label htmlFor={`typeCheckbox${index}`}>
+                  {option}({this.getTypeCount(option)})
+                  </label>
               </div>
             ))}
             {filterOptions.types.length > this.state.displayTypes && (
@@ -567,7 +627,9 @@ class GripperList extends Component {
                   checked={selectedFilters.category.includes(option)}
                   onChange={() => this.handleFilterChange('category', option)}
                 />
-                <label htmlFor={`categoryCheckbox${index}`}>{option}</label>
+                <label htmlFor={`categoryCheckbox${index}`}>
+                  {option}({this.getCategoryCount(option)})
+                  </label>
               </div>
             ))}
             {filterOptions.categories.length > this.state.displayCategories && (
@@ -578,7 +640,8 @@ class GripperList extends Component {
           </div>
 
           <div>
-            <label>Payload(Kg) Range:</label>
+            <label>Payload(Kg)</label>
+           
             <input
               type="number"
               placeholder={`Min (${minMaxValues.payloadMin})`}
@@ -591,9 +654,12 @@ class GripperList extends Component {
               value={selectedFilters.payloadMax}
               onChange={(e) => this.handleIntegerFilterChange('payloadMax', e.target.value)}
             />
+           
+
+
           </div>
           <div>
-            <label>Gripping Force Range:</label>
+            <label>Gripping Force</label>
             <input
               type="number"
               placeholder={`Min (${minMaxValues.forceMin})`}
@@ -606,9 +672,10 @@ class GripperList extends Component {
               value={selectedFilters.forceMax}
               onChange={(e) => this.handleIntegerFilterChange('forceMax', e.target.value)}
             />
+           
           </div>
           <div>
-            <label>Feed pressure Max Range:</label>
+            <label>Feed pressure Max</label>
             <input
               type="number"
               placeholder={`Min (${minMaxValues.pressureMin})`}
@@ -621,60 +688,95 @@ class GripperList extends Component {
               value={selectedFilters.pressureMax}
               onChange={(e) => this.handleIntegerFilterChange('pressureMax', e.target.value)}
             />
+
           </div>
 
           {/* dimensionHeight */}
           <div>
             <h2>Dimension</h2>
-            <label>Height:</label>
-            <input
-              type="number"
-              placeholder={`Min (${minMaxValues.DimensionHeightValuesMin})`}
-              value={selectedFilters.DimensionHeightValuesMin}
-              onChange={(e) => this.handleIntegerFilterChange('DimensionHeightValuesMin', e.target.value)}
-            />
-            <input
-              type="number"
-              placeholder={`Max (${minMaxValues.DimensionHeightValuesMax})`}
-              value={selectedFilters.DimensionHeightValuesMax}
-              onChange={(e) => this.handleIntegerFilterChange('DimensionHeightValuesMax', e.target.value)}
-            />
+            <label>Height Range: {minMaxValues.DimensionHeightValuesMin} to {minMaxValues.DimensionHeightValuesMax}</label>
+             {/* range slider */}
+             <div className="range-slider">
+             
+             <input
+               type="range"
+               min={minMaxValues.DimensionHeightValuesMin}
+               max={minMaxValues.DimensionHeightValuesMax}
+               value={selectedFilters.DimensionHeightValuesMin}
+               onChange={(e) => this.handleIntegerFilterChange('DimensionHeightValuesMin', e.target.value)}
+             />
+             <span>
+               Min:{selectedFilters.DimensionHeightValuesMin}
+             </span>
+             <input
+               type="range"
+               min={minMaxValues.DimensionHeightValuesMin}
+               max={minMaxValues.DimensionHeightValuesMax}
+               value={selectedFilters.DimensionHeightValuesMax}
+               onChange={(e) => this.handleIntegerFilterChange('DimensionHeightValuesMax', e.target.value)}
+             />
+              <span>
+               Max:{selectedFilters.DimensionHeightValuesMax}
+             </span>
+           </div>
           </div>
 
           {/* dimensionDepth */}
           <div>
-            <label>Depth</label>
-            <input
-              type="number"
-              placeholder={`Min (${minMaxValues.DimensionDepthValuesMin})`}
-              value={selectedFilters.DimensionDepthValuesMin}
-              onChange={(e) => this.handleIntegerFilterChange('DimensionDepthValuesMin', e.target.value)}
-            />
-            <input
-              type="number"
-              placeholder={`Max (${minMaxValues.DimensionDepthValuesMax})`}
-              value={selectedFilters.DimensionDepthValuesMax}
-              onChange={(e) => this.handleIntegerFilterChange('DimensionDepthValuesMax', e.target.value)}
-            />
+            <label>Depth Range: {minMaxValues.DimensionDepthValuesMin} to {minMaxValues.DimensionDepthValuesMax}</label>
+             {/* range slider */}
+             <div className="range-slider">
+             
+             <input
+               type="range"
+               min={minMaxValues.DimensionDepthValuesMin}
+               max={minMaxValues.DimensionDepthValuesMax}
+               value={selectedFilters.DimensionDepthValuesMin}
+               onChange={(e) => this.handleIntegerFilterChange('DimensionDepthValuesMin', e.target.value)}
+             />
+             <span>
+               Min:{selectedFilters.DimensionDepthValuesMin}
+             </span>
+             <input
+               type="range"
+               min={minMaxValues.DimensionDepthValuesMin}
+               max={minMaxValues.DimensionDepthValuesMax}
+               value={selectedFilters.DimensionDepthValuesMax}
+               onChange={(e) => this.handleIntegerFilterChange('DimensionDepthValuesMax', e.target.value)}
+             />
+              <span>
+               Max:{selectedFilters.DimensionDepthValuesMax}
+             </span>
+           </div>
           </div>
-
           {/* dimensionWidth */}
           <div>
-            <label>Width</label>
-            <input
-              type="number"
-              placeholder={`Min (${minMaxValues.DimensionWidthValuesMin})`}
-              value={selectedFilters.DimensionWidthValuesMin}
-              onChange={(e) => this.handleIntegerFilterChange('DimensionWidthValuesMin', e.target.value)}
-            />
-            <input
-              type="number"
-              placeholder={`Max (${minMaxValues.DimensionWidthValuesMax})`}
-              value={selectedFilters.DimensionWidthValuesMax}
-              onChange={(e) => this.handleIntegerFilterChange('DimensionWidthValuesMax', e.target.value)}
-            />
+            <label>Width Range: {minMaxValues.DimensionWidthValuesMin} to {minMaxValues.DimensionWidthValuesMax}</label>
+            {/* range slider */}
+            <div className="range-slider">
+             
+             <input
+               type="range"
+               min={minMaxValues.DimensionWidthValuesMin}
+               max={minMaxValues.DimensionWidthValuesMax}
+               value={selectedFilters.DimensionWidthValuesMin}
+               onChange={(e) => this.handleIntegerFilterChange('DimensionWidthValuesMin', e.target.value)}
+             />
+             <span>
+               Min:{selectedFilters.DimensionWidthValuesMin}
+             </span>
+             <input
+               type="range"
+               min={minMaxValues.DimensionWidthValuesMin}
+               max={minMaxValues.DimensionWidthValuesMax}
+               value={selectedFilters.DimensionWidthValuesMax}
+               onChange={(e) => this.handleIntegerFilterChange('DimensionWidthValuesMax', e.target.value)}
+             />
+              <span>
+               Max:{selectedFilters.DimensionWidthValuesMax}
+             </span>
+           </div>
           </div>
-
           <button className="clear-filter-button" onClick={this.clearFilter}>
             Clear Filter
           </button>
@@ -685,24 +787,26 @@ class GripperList extends Component {
           </h1>
           <div className="top">Count of Products: {productCount}</div>
           <div className="search-section">
-          <label>Search:</label>
-          <input
-            type="text"
-            placeholder="Search products..."
-            value={searchTerm}
-            onChange={this.handleSearchTermChange}
-          />
-          <button className="search-button" onClick={this.searchGrippers}>
-            Search
-          </button>
-          <button className="clear-search-button" onClick={this.clearSearch}>
-            Clear Search
-          </button>
-        </div>
+            <label>Search:</label>
+            <input
+              type="text"
+              placeholder="Search products..."
+              value={searchTerm}
+              onChange={this.handleSearchTermChange}
+            />
+            <button className="search-button" onClick={this.searchGrippers}>
+              Search
+            </button>
+            <button className="clear-search-button" onClick={this.clearSearch}>
+              Clear Search
+            </button>
+          </div>
           {/* Add the "Add Gripper" button to toggle the form */}
           <button className="add-gripper-button" onClick={this.toggleAddGripperForm}>
             Add Gripper
           </button>
+
+
 
 
           {/* Display the "Add Gripper" form when the state property is true */}
@@ -821,61 +925,61 @@ class GripperList extends Component {
             </div>
           ) : null}
 
-{(
-  filteredGrippers.length > 0 ? (
-    // If there are filtered grippers, use filteredGrippers
-    filteredGrippers
-  ) : (
-    // If no filtered grippers, use jsonData
-    jsonData
-  )
-).length > 0 ? (
-  (
-    filteredGrippers.length > 0 ? (
-      // If there are filtered grippers, use filteredGrippers
-      filteredGrippers
-    ) : (
-      // If no filtered grippers, use jsonData
-      jsonData
-    )
-  ).map((gripper, index) => (
-    <div key={index} className="product-card">
-      <div onClick={() => this.openGripperDetails(gripper)}>
-        {gripper.Data.find((data) => data.Property === 'ImageURL') ? (
-          <img
-            src={gripper.Data.find((data) => data.Property === 'ImageURL').Value}
-            alt={gripper['Model Name']}
-          />
-        ) : (
-          <p>Image not available</p>
-        )}
-        <h2>{gripper['Model Name']}</h2>
-      </div>
-      {gripper.Data.find((data) => data.Property === 'Datasheet') ? (
-        gripper.Data.find((data) => data.Property === 'Datasheet').Value ? (
-          <div>
-            <a
-              href={gripper.Data.find((data) => data.Property === 'Datasheet').Value}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <FontAwesomeIcon icon={faFilePdf} className="pdf-icon" /> Datasheet PDF
-            </a>
-          </div>
-        ) : (
-          <p>PDF not available</p>
-        )
-      ) : (
-        <p>PDF not available</p>
-      )}
-    </div>
-  ))
-) : (
-  <div className="no-data-message">
-    <p>No grippers match the selected criteria.</p>
-    <FontAwesomeIcon icon={faDatabase} className="faDatabase-icon" />
-  </div>
-)}
+          {(
+            filteredGrippers.length > 0 ? (
+              // If there are filtered grippers, use filteredGrippers
+              filteredGrippers
+            ) : (
+              // If no filtered grippers, use jsonData
+              jsonData
+            )
+          ).length > 0 ? (
+            (
+              filteredGrippers.length > 0 ? (
+                // If there are filtered grippers, use filteredGrippers
+                filteredGrippers
+              ) : (
+                // If no filtered grippers, use jsonData
+                jsonData
+              )
+            ).map((gripper, index) => (
+              <div key={index} className="product-card">
+                <div onClick={() => this.openGripperDetails(gripper)}>
+                  {gripper.Data.find((data) => data.Property === 'ImageURL') ? (
+                    <img
+                      src={gripper.Data.find((data) => data.Property === 'ImageURL').Value}
+                      alt={gripper['Model Name']}
+                    />
+                  ) : (
+                    <p>Image not available</p>
+                  )}
+                  <h2>{gripper['Model Name']}</h2>
+                </div>
+                {gripper.Data.find((data) => data.Property === 'Datasheet') ? (
+                  gripper.Data.find((data) => data.Property === 'Datasheet').Value ? (
+                    <div>
+                      <a
+                        href={gripper.Data.find((data) => data.Property === 'Datasheet').Value}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <FontAwesomeIcon icon={faFilePdf} className="pdf-icon" /> Datasheet PDF
+                      </a>
+                    </div>
+                  ) : (
+                    <p>PDF not available</p>
+                  )
+                ) : (
+                  <p>PDF not available</p>
+                )}
+              </div>
+            ))
+          ) : (
+            <div className="no-data-message">
+              <p>No grippers match the selected criteria.</p>
+              <FontAwesomeIcon icon={faDatabase} className="faDatabase-icon" />
+            </div>
+          )}
 
 
 

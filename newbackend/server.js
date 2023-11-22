@@ -1,35 +1,111 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const fs = require('fs');
-const path = require('path');
+const fs = require('fs/promises');
+const cors = require('cors');  // Import the cors middleware
 
 const app = express();
-const port = 3000;
+const port = 3001; // You can change this to your desired port
 
+const corsOptions = {
+  origin: '*',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
+  optionsSuccessStatus: 204,
+};
+
+app.use(cors(corsOptions));
+
+app.use(cors()); 
 app.use(bodyParser.json());
 
-app.post('/api/grippers', (req, res) => {
-  try {
-    const dataFilePath = path.join(__dirname, 'data.json');
+
+
+// app.get('/api/grippers/minmax', async (req, res) => {
+//   try {
+//     const jsonData = await Gripper.find();
+
+//     if (!Array.isArray(jsonData)) {
+//       return res.status(500).json({ error: 'Grippers data is not an array.' });
+//     }
+
+//     const extractNumericValue = (data, property) => {
+//       const valueData = data.find((item) => item.Property === property);
+//       if (valueData && !isNaN(parseFloat(valueData.Value))) {
+//         return parseFloat(valueData.Value);
+//       }
+//       return null;
+//     };
     
-    // Read existing data from data.json
-    const rawData = fs.readFileSync(dataFilePath);
-    const jsonData = JSON.parse(rawData);
 
-    // Add new gripper data to the array
-    const newGripperData = req.body;
-    jsonData.push(newGripperData);
+//     const payloadValues = jsonData.map((gripper) =>
+//       extractNumericValue(gripper.Data, 'Payload(Kg)')
+//     ).filter((value) => value !== null);
 
-    // Write updated data back to data.json
-    fs.writeFileSync(dataFilePath, JSON.stringify(jsonData, null, 2));
+//     const forceValues = jsonData.map((gripper) =>
+//       extractNumericValue(gripper.Data, 'Gripping Force')
+//     ).filter((value) => value !== null);
 
-    res.status(200).json({ message: 'Gripper added successfully' });
+//     const pressureValues = jsonData.map((gripper) =>
+//       extractNumericValue(gripper.Data, 'Feed pressure Max')
+//     ).filter((value) => value !== null);
+
+//     const DimensionHeightValues = jsonData.map((gripper) =>
+//       extractNumericValue(gripper.Data, 'DimensionHeight(MM)')
+//     ).filter((value) => value !== null);
+
+//     const DimensionDepthValues = jsonData.map((gripper) =>
+//       extractNumericValue(gripper.Data, 'DimensionDepth(MM)')
+//     ).filter((value) => value !== null);
+
+//     const DimensionWidthValues = jsonData.map((gripper) =>
+//       extractNumericValue(gripper.Data, 'DimensionWidth(MM)')
+//     ).filter((value) => value !== null);
+
+//     const minMaxValues = {
+//       payloadMin: Math.min(...payloadValues),
+//       payloadMax: Math.max(...payloadValues),
+//       forceMin: Math.min(...forceValues),
+//       forceMax: Math.max(...forceValues),
+//       pressureMin: Math.min(...pressureValues),
+//       pressureMax: Math.max(...pressureValues),
+//       DimensionHeightValuesMin: Math.min(...DimensionHeightValues),
+//       DimensionHeightValuesMax: Math.max(...DimensionHeightValues),
+//       DimensionDepthValuesMin: Math.min(...DimensionDepthValues),
+//       DimensionDepthValuesMax: Math.max(...DimensionDepthValues),
+//       DimensionWidthValuesMin: Math.min(...DimensionWidthValues),
+//       DimensionWidthValuesMax: Math.max(...DimensionWidthValues),
+//     };
+
+//     res.status(200).json(minMaxValues);
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ error: 'Error fetching min and max values.' });
+//   }
+// });
+
+
+
+app.post('/api/updateData', async (req, res) => {
+  try {
+    // Read the existing data.json file
+    const jsonData = await fs.readFile('../src/data.json', 'utf-8');
+    const existingData = JSON.parse(jsonData);
+
+    // Add the new gripper data to the existing data
+    existingData.push(req.body.newGripper);
+
+    // Write the updated data back to data.json
+    await fs.writeFile('../src/data.json', JSON.stringify(existingData, null, 2), 'utf-8');
+
+    // Respond with the updated data (you may choose to send a success message or just the updated data)
+    res.json(existingData);
+    console.log('Data updated successfully.');
   } catch (error) {
-    console.error('Error adding gripper:', error);
-    res.status(500).json({ error: 'Internal server error' });
+    console.error('Error updating data.json:', error);
+    res.status(500).json({ error: `Failed to update data.json: ${error.message}` });
   }
 });
 
 app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+  console.log(`Server is running on http://localhost:${port}`);
 });
