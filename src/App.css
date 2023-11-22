@@ -141,7 +141,7 @@
 }
 
 .filter-options button:hover {
-  background-color: #0056b3;
+  background-color: #0e3d6d;
 }
 
 
@@ -152,9 +152,10 @@
 }
 
 .clear-filter-button {
-  background-color: #f13c3c;
-  /* Other button styles */
+  
+  margin-top: 10%;
   color: #ffffff;
+  width: 10%;
 }
 
 

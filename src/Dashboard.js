@@ -577,142 +577,142 @@ class GripperList extends Component {
           </div>
 
           <div>
-            <label>Payload(Kg) Range:  {minMaxValues.payloadMin} to  {minMaxValues.payloadMax}</label>
+            <label>Payload(Kg)</label>
            
-            {/* range slider */}
-            <div className="range-slider">
-             
-              <input
-                type="range"
-                min={minMaxValues.payloadMin}
-                max={minMaxValues.payloadMax}
-                value={selectedFilters.payloadMin}
-                onChange={(e) => this.handleIntegerFilterChange('payloadMin', e.target.value)}
-              />
-              <span>
-                Min:{selectedFilters.payloadMin}
-              </span>
-              <input
-                type="range"
-                min={minMaxValues.payloadMin}
-                max={minMaxValues.payloadMax}
-                value={selectedFilters.payloadMax}
-                onChange={(e) => this.handleIntegerFilterChange('payloadMax', e.target.value)}
-              />
-               <span>
-                Max:{selectedFilters.payloadMax}
-              </span>
-            </div>
+            <input
+              type="number"
+              placeholder={`Min (${minMaxValues.payloadMin})`}
+              value={selectedFilters.payloadMin}
+              onChange={(e) => this.handleIntegerFilterChange('payloadMin', e.target.value)}
+            />
+            <input
+              type="number"
+              placeholder={`Max (${minMaxValues.payloadMax})`}
+              value={selectedFilters.payloadMax}
+              onChange={(e) => this.handleIntegerFilterChange('payloadMax', e.target.value)}
+            />
+           
 
           </div>
           <div>
-            <label>Gripping Force Range:   {minMaxValues.forceMin} to  {minMaxValues.forceMax}</label>
-             {/* range slider */}
-             <div className="range-slider">
-             
-             <input
-               type="range"
-               min={minMaxValues.forceMin}
-               max={minMaxValues.forceMax}
-               value={selectedFilters.forceMin}
-               onChange={(e) => this.handleIntegerFilterChange('forceMin', e.target.value)}
-             />
-             <span>
-               Min:{selectedFilters.forceMin}
-             </span>
-             <input
-               type="range"
-               min={minMaxValues.forceMin}
-               max={minMaxValues.forceMax}
-               value={selectedFilters.forceMax}
-               onChange={(e) => this.handleIntegerFilterChange('forceMax', e.target.value)}
-             />
-              <span>
-               Max:{selectedFilters.forceMax}
-             </span>
-           </div>
+            <label>Gripping Force</label>
+            <input
+              type="number"
+              placeholder={`Min (${minMaxValues.forceMin})`}
+              value={selectedFilters.forceMin}
+              onChange={(e) => this.handleIntegerFilterChange('forceMin', e.target.value)}
+            />
+            <input
+              type="number"
+              placeholder={`Max (${minMaxValues.forceMax})`}
+              value={selectedFilters.forceMax}
+              onChange={(e) => this.handleIntegerFilterChange('forceMax', e.target.value)}
+            />
+           
           </div>
           <div>
-            <label>Feed pressure Max Range: {minMaxValues.pressureMin} to  {minMaxValues.pressureMax}</label>
-             {/* range slider */}
-             <div className="range-slider">
-             
-             <input
-               type="range"
-               min={minMaxValues.pressureMin}
-               max={minMaxValues.pressureMax}
-               value={selectedFilters.pressureMin}
-               onChange={(e) => this.handleIntegerFilterChange('pressureMin', e.target.value)}
-             />
-             <span>
-               Min:{selectedFilters.pressureMin}
-             </span>
-             <input
-               type="range"
-               min={minMaxValues.pressureMin}
-               max={minMaxValues.pressureMax}
-               value={selectedFilters.pressureMax}
-               onChange={(e) => this.handleIntegerFilterChange('pressureMax', e.target.value)}
-             />
-              <span>
-               Max:{selectedFilters.pressureMax}
-             </span>
-           </div>
+            <label>Feed pressure Max</label>
+            <input
+              type="number"
+              placeholder={`Min (${minMaxValues.pressureMin})`}
+              value={selectedFilters.pressureMin}
+              onChange={(e) => this.handleIntegerFilterChange('pressureMin', e.target.value)}
+            />
+            <input
+              type="number"
+              placeholder={`Max (${minMaxValues.pressureMax})`}
+              value={selectedFilters.pressureMax}
+              onChange={(e) => this.handleIntegerFilterChange('pressureMax', e.target.value)}
+            />
 
           </div>
 
           {/* dimensionHeight */}
           <div>
             <h2>Dimension</h2>
-            <label>Height:</label>
-            <input
-              type="number"
-              placeholder={`Min (${minMaxValues.DimensionHeightValuesMin})`}
-              value={selectedFilters.DimensionHeightValuesMin}
-              onChange={(e) => this.handleIntegerFilterChange('DimensionHeightValuesMin', e.target.value)}
-            />
-            <input
-              type="number"
-              placeholder={`Max (${minMaxValues.DimensionHeightValuesMax})`}
-              value={selectedFilters.DimensionHeightValuesMax}
-              onChange={(e) => this.handleIntegerFilterChange('DimensionHeightValuesMax', e.target.value)}
-            />
+            <label>Height Range: {minMaxValues.DimensionHeightValuesMin} to {minMaxValues.DimensionHeightValuesMax}</label>
+             {/* range slider */}
+             <div className="range-slider">
+             
+             <input
+               type="range"
+               min={minMaxValues.DimensionHeightValuesMin}
+               max={minMaxValues.DimensionHeightValuesMax}
+               value={selectedFilters.DimensionHeightValuesMin}
+               onChange={(e) => this.handleIntegerFilterChange('DimensionHeightValuesMin', e.target.value)}
+             />
+             <span>
+               Min:{selectedFilters.DimensionHeightValuesMin}
+             </span>
+             <input
+               type="range"
+               min={minMaxValues.DimensionHeightValuesMin}
+               max={minMaxValues.DimensionHeightValuesMax}
+               value={selectedFilters.DimensionHeightValuesMax}
+               onChange={(e) => this.handleIntegerFilterChange('DimensionHeightValuesMax', e.target.value)}
+             />
+              <span>
+               Max:{selectedFilters.DimensionHeightValuesMax}
+             </span>
+           </div>
           </div>
 
           {/* dimensionDepth */}
           <div>
-            <label>Depth</label>
-            <input
-              type="number"
-              placeholder={`Min (${minMaxValues.DimensionDepthValuesMin})`}
-              value={selectedFilters.DimensionDepthValuesMin}
-              onChange={(e) => this.handleIntegerFilterChange('DimensionDepthValuesMin', e.target.value)}
-            />
-            <input
-              type="number"
-              placeholder={`Max (${minMaxValues.DimensionDepthValuesMax})`}
-              value={selectedFilters.DimensionDepthValuesMax}
-              onChange={(e) => this.handleIntegerFilterChange('DimensionDepthValuesMax', e.target.value)}
-            />
+            <label>Depth Range: {minMaxValues.DimensionDepthValuesMin} to {minMaxValues.DimensionDepthValuesMax}</label>
+             {/* range slider */}
+             <div className="range-slider">
+             
+             <input
+               type="range"
+               min={minMaxValues.DimensionDepthValuesMin}
+               max={minMaxValues.DimensionDepthValuesMax}
+               value={selectedFilters.DimensionDepthValuesMin}
+               onChange={(e) => this.handleIntegerFilterChange('DimensionDepthValuesMin', e.target.value)}
+             />
+             <span>
+               Min:{selectedFilters.DimensionDepthValuesMin}
+             </span>
+             <input
+               type="range"
+               min={minMaxValues.DimensionDepthValuesMin}
+               max={minMaxValues.DimensionDepthValuesMax}
+               value={selectedFilters.DimensionDepthValuesMax}
+               onChange={(e) => this.handleIntegerFilterChange('DimensionDepthValuesMax', e.target.value)}
+             />
+              <span>
+               Max:{selectedFilters.DimensionDepthValuesMax}
+             </span>
+           </div>
           </div>
-
           {/* dimensionWidth */}
           <div>
-            <label>Width</label>
-            <input
-              type="number"
-              placeholder={`Min (${minMaxValues.DimensionWidthValuesMin})`}
-              value={selectedFilters.DimensionWidthValuesMin}
-              onChange={(e) => this.handleIntegerFilterChange('DimensionWidthValuesMin', e.target.value)}
-            />
-            <input
-              type="number"
-              placeholder={`Max (${minMaxValues.DimensionWidthValuesMax})`}
-              value={selectedFilters.DimensionWidthValuesMax}
-              onChange={(e) => this.handleIntegerFilterChange('DimensionWidthValuesMax', e.target.value)}
-            />
+            <label>Width Range: {minMaxValues.DimensionWidthValuesMin} to {minMaxValues.DimensionWidthValuesMax}</label>
+            {/* range slider */}
+            <div className="range-slider">
+             
+             <input
+               type="range"
+               min={minMaxValues.DimensionWidthValuesMin}
+               max={minMaxValues.DimensionWidthValuesMax}
+               value={selectedFilters.DimensionWidthValuesMin}
+               onChange={(e) => this.handleIntegerFilterChange('DimensionWidthValuesMin', e.target.value)}
+             />
+             <span>
+               Min:{selectedFilters.DimensionWidthValuesMin}
+             </span>
+             <input
+               type="range"
+               min={minMaxValues.DimensionWidthValuesMin}
+               max={minMaxValues.DimensionWidthValuesMax}
+               value={selectedFilters.DimensionWidthValuesMax}
+               onChange={(e) => this.handleIntegerFilterChange('DimensionWidthValuesMax', e.target.value)}
+             />
+              <span>
+               Max:{selectedFilters.DimensionWidthValuesMax}
+             </span>
+           </div>
           </div>
-
           <button className="clear-filter-button" onClick={this.clearFilter}>
             Clear Filter
           </button>
