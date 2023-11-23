@@ -19,69 +19,68 @@ app.use(cors());
 app.use(bodyParser.json());
 
 
+app.get('/api/grippers/minmax', async (req, res) => {
+  try {
+    const jsonData = await fs.readFile('../src/data.json', 'utf-8');
+    const grippers = JSON.parse(jsonData);
 
-// app.get('/api/grippers/minmax', async (req, res) => {
-//   try {
-//     const jsonData = await Gripper.find();
+    if (!Array.isArray(grippers)) {
+      return res.status(500).json({ error: 'Grippers data is not an array.' });
+    }
 
-//     if (!Array.isArray(jsonData)) {
-//       return res.status(500).json({ error: 'Grippers data is not an array.' });
-//     }
+    const extractNumericValue = (data, property) => {
+      const valueData = data.find((item) => item.Property === property);
+      if (valueData && !isNaN(parseFloat(valueData.Value))) {
+        return parseFloat(valueData.Value);
+      }
+      return null;
+    };
 
-//     const extractNumericValue = (data, property) => {
-//       const valueData = data.find((item) => item.Property === property);
-//       if (valueData && !isNaN(parseFloat(valueData.Value))) {
-//         return parseFloat(valueData.Value);
-//       }
-//       return null;
-//     };
-    
+    const payloadValues = grippers.map((gripper) =>
+      extractNumericValue(gripper.Data, 'Payload(Kg)')
+    ).filter((value) => value !== null);
 
-//     const payloadValues = jsonData.map((gripper) =>
-//       extractNumericValue(gripper.Data, 'Payload(Kg)')
-//     ).filter((value) => value !== null);
+    const forceValues = grippers.map((gripper) =>
+      extractNumericValue(gripper.Data, 'Gripping Force')
+    ).filter((value) => value !== null);
 
-//     const forceValues = jsonData.map((gripper) =>
-//       extractNumericValue(gripper.Data, 'Gripping Force')
-//     ).filter((value) => value !== null);
+    const pressureValues = grippers.map((gripper) =>
+      extractNumericValue(gripper.Data, 'Feed pressure Max')
+    ).filter((value) => value !== null);
 
-//     const pressureValues = jsonData.map((gripper) =>
-//       extractNumericValue(gripper.Data, 'Feed pressure Max')
-//     ).filter((value) => value !== null);
+    const DimensionHeightValues = grippers.map((gripper) =>
+      extractNumericValue(gripper.Data, 'DimensionHeight(MM)')
+    ).filter((value) => value !== null);
 
-//     const DimensionHeightValues = jsonData.map((gripper) =>
-//       extractNumericValue(gripper.Data, 'DimensionHeight(MM)')
-//     ).filter((value) => value !== null);
+    const DimensionDepthValues = grippers.map((gripper) =>
+      extractNumericValue(gripper.Data, 'DimensionDepth(MM)')
+    ).filter((value) => value !== null);
 
-//     const DimensionDepthValues = jsonData.map((gripper) =>
-//       extractNumericValue(gripper.Data, 'DimensionDepth(MM)')
-//     ).filter((value) => value !== null);
+    const DimensionWidthValues = grippers.map((gripper) =>
+      extractNumericValue(gripper.Data, 'DimensionWidth(MM)')
+    ).filter((value) => value !== null);
 
-//     const DimensionWidthValues = jsonData.map((gripper) =>
-//       extractNumericValue(gripper.Data, 'DimensionWidth(MM)')
-//     ).filter((value) => value !== null);
+    const minMaxValues = {
+      payloadMin: Math.min(...payloadValues),
+      payloadMax: Math.max(...payloadValues),
+      forceMin: Math.min(...forceValues),
+      forceMax: Math.max(...forceValues),
+      pressureMin: Math.min(...pressureValues),
+      pressureMax: Math.max(...pressureValues),
+      DimensionHeightValuesMin: Math.min(...DimensionHeightValues),
+      DimensionHeightValuesMax: Math.max(...DimensionHeightValues),
+      DimensionDepthValuesMin: Math.min(...DimensionDepthValues),
+      DimensionDepthValuesMax: Math.max(...DimensionDepthValues),
+      DimensionWidthValuesMin: Math.min(...DimensionWidthValues),
+      DimensionWidthValuesMax: Math.max(...DimensionWidthValues),
+    };
 
-//     const minMaxValues = {
-//       payloadMin: Math.min(...payloadValues),
-//       payloadMax: Math.max(...payloadValues),
-//       forceMin: Math.min(...forceValues),
-//       forceMax: Math.max(...forceValues),
-//       pressureMin: Math.min(...pressureValues),
-//       pressureMax: Math.max(...pressureValues),
-//       DimensionHeightValuesMin: Math.min(...DimensionHeightValues),
-//       DimensionHeightValuesMax: Math.max(...DimensionHeightValues),
-//       DimensionDepthValuesMin: Math.min(...DimensionDepthValues),
-//       DimensionDepthValuesMax: Math.max(...DimensionDepthValues),
-//       DimensionWidthValuesMin: Math.min(...DimensionWidthValues),
-//       DimensionWidthValuesMax: Math.max(...DimensionWidthValues),
-//     };
-
-//     res.status(200).json(minMaxValues);
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ error: 'Error fetching min and max values.' });
-//   }
-// });
+    res.status(200).json(minMaxValues);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Error fetching min and max values.' });
+  }
+});
 
 
 

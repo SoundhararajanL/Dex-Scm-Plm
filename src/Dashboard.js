@@ -131,43 +131,6 @@ class GripperList extends Component {
 
 
 
-  // componentDidMount() {
-  //   // Fetch gripper data from the server
-  //   axios.get('http://localhost:3000/api/grippers')
-  //     .then((response) => {
-  //       const grippers = response.data;
-
-  //       const manufactureNames = [...new Set(grippers.map((gripper) => gripper.Data.find((data) => data.Property === 'ManufactureName')?.Value).filter(Boolean))];
-  //       const types = [...new Set(grippers.map((gripper) => gripper.Data.find((data) => data.Property === 'Type')?.Value).filter(Boolean))];
-  //       const categories = [...new Set(grippers.map((gripper) => gripper.Data.find((data) => data.Property === 'Category')?.Value).filter(Boolean))];
-  //       console.log("Manufacture Names:", manufactureNames);
-  //       // Fetch minimum and maximum values for numeric filters
-  //       axios.get('http://localhost:3000/api/grippers/minmax')
-  //         .then((minMaxResponse) => {
-  //           const minMaxValues = minMaxResponse.data;
-
-  //           // Set the initial state of selectedFilters after fetching minMaxValues
-  //           this.setState({
-  //             grippers,
-  //             filterOptions: {
-  //               manufactureNames,
-  //               types,
-  //               categories,
-  //             },
-  //             minMaxValues,
-  //             filteredGrippers: grippers, // Set filteredGrippers initially to the full data
-  //           });
-  //         })
-  //         .catch((minMaxError) => {
-  //           console.error('Error fetching min and max values:', minMaxError);
-  //         });
-  //     })
-  //     .catch((error) => {
-  //       console.error('Error fetching grippers:', error);
-  //     });
-  // }
-
-
 
 
   filterGrippers = () => {
@@ -452,90 +415,59 @@ class GripperList extends Component {
 
 
 
+  
+  // componentDidMount() {
+  //   // Extract ManufactureName, Type, and Category from jsonData
+  //   const { jsonData } = this.state;
+
+  //   const manufactureNames = jsonData.map(gripper => gripper.Data.find(item => item.Property === 'ManufactureName').Value);
+  //   const types = jsonData.map(gripper => gripper.Data.find(item => item.Property === 'Type').Value);
+  //   const categories = jsonData.map(gripper => gripper.Data.find(item => item.Property === 'Category').Value);
+
+  //   // Remove duplicates and set the state with filter options
+  //   this.setState({
+  //     filterOptions: {
+  //       manufactureNames: [...new Set(manufactureNames)],
+  //       types: [...new Set(types)],
+  //       categories: [...new Set(categories)],
+        
+  //     },
+  //   });
+  // }
+  
+
+
   componentDidMount() {
     // Extract ManufactureName, Type, and Category from jsonData
     const { jsonData } = this.state;
-
-    const manufactureNames = jsonData.map(gripper => gripper.Data.find(item => item.Property === 'ManufactureName').Value);
-    const types = jsonData.map(gripper => gripper.Data.find(item => item.Property === 'Type').Value);
-    const categories = jsonData.map(gripper => gripper.Data.find(item => item.Property === 'Category').Value);
-
-    // Remove duplicates and set the state with filter options
-    this.setState({
-      filterOptions: {
-        manufactureNames: [...new Set(manufactureNames)],
-        types: [...new Set(types)],
-        categories: [...new Set(categories)],
-        
-      },
-    });
+  
+    const manufactureNames = jsonData.map((gripper) => gripper.Data.find((item) => item.Property === 'ManufactureName').Value);
+    const types = jsonData.map((gripper) => gripper.Data.find((item) => item.Property === 'Type').Value);
+    const categories = jsonData.map((gripper) => gripper.Data.find((item) => item.Property === 'Category').Value);
+  
+    // Fetch min and max values from the server
+    axios
+      .get('http://localhost:3001/api/grippers/minmax')
+      .then((response) => {
+        const minMaxValues = response.data;
+        console.log('minMaxValues:', minMaxValues);
+  
+        // Update the state with min and max values
+        this.setState({
+          minMaxValues: minMaxValues,
+          filterOptions: {
+            manufactureNames: [...new Set(manufactureNames)],
+            types: [...new Set(types)],
+            categories: [...new Set(categories)],
+          },
+        });
+      })
+      .catch((error) => {
+        console.error('Error fetching min and max values:', error);
+      });
   }
-
-
-  
-//   async componentDidMount() {
-//     try {
-//       // Fetch gripper data
-//       const { jsonData } = this.state;
-  
-//       // Fetch min-max values
-//     const minMaxResponse = await axios.get('http://localhost:3001/api/grippers/minmax');
-//     const minMaxValues = minMaxResponse.data;
-
-//     // Extract ManufactureName, Type, and Category from jsonData
-//     const manufactureNames = [...new Set(jsonData.map(gripper => gripper.Data.find(item => item.Property === 'ManufactureName')?.Value).filter(Boolean))];
-//     const types = [...new Set(jsonData.map(gripper => gripper.Data.find(item => item.Property === 'Type')?.Value).filter(Boolean))];
-//     const categories = [...new Set(jsonData.map(gripper => gripper.Data.find(item => item.Property === 'Category')?.Value).filter(Boolean))];
-
-//     this.setState({
-//       jsonData,
-//       filterOptions: {
-//         manufactureNames,
-//         types,
-//         categories,
-//       },
-//       minMaxValues,
-//       filteredGrippers: jsonData,
-//     });
-//   } catch (error) {
-//     console.error('Error fetching data:', error);
-//   }
-// }
-  
   
 
-  // componentDidMount() {
-  //   axios.get('http://localhost:3001/api/grippers')
-  //     .then((response) => {
-  //       const jsonData = response.data;
-
-  //       const manufactureNames = [...new Set(jsonData.map(gripper => gripper.Data.find(item => item.Property === 'ManufactureName')?.Value).filter(Boolean))];
-  //       const types = [...new Set(jsonData.map(gripper => gripper.Data.find(item => item.Property === 'Type')?.Value).filter(Boolean))];
-  //       const categories = [...new Set(jsonData.map(gripper => gripper.Data.find(item => item.Property === 'Category')?.Value).filter(Boolean))];
-
-  //       axios.get('http://localhost:3001/api/grippers/minmax')
-  //         .then((minMaxResponse) => {
-  //           const minMaxValues = minMaxResponse.data;
-
-  //           this.setState({
-  //             jsonData,
-  //             filterOptions: {
-  //               manufactureNames,
-  //               types,
-  //               categories,
-  //             },
-  //             minMaxValues,
-  //             filteredGrippers: jsonData,
-  //           });
-  //         })
-  //         .catch((minMaxError) => {
-  //           console.error('Error fetching min and max values:', minMaxError);
-  //         });
-  //     })
-  //     .catch((error) => {
-  //       console.error('Error fetching grippers:', error);
-  //     });
-  // }
 
 
 
@@ -567,8 +499,8 @@ class GripperList extends Component {
         <div className="filter-options">
           <h2>Filters</h2>
 
-          {/* Checkbox inputs for Manufacture Name */}
-          <div className="checkbox-section">
+            {/* Checkbox inputs for Manufacture Name */}
+            <div className="checkbox-section">
             <label>Manufacture  Name:</label>
             {filterOptions.manufactureNames.slice(0, this.state.displayManufactureNames).map((option, index) => (
               <div key={index} className="checkbox-item">
@@ -805,6 +737,8 @@ class GripperList extends Component {
           <button className="add-gripper-button" onClick={this.toggleAddGripperForm}>
             Add Gripper
           </button>
+
+          
 
 
 
