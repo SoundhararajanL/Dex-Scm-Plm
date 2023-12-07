@@ -141,7 +141,7 @@
 }
 
 .filter-options button:hover {
-  background-color: #0e3d6d;
+  background-color: #0056b3;
 }
 
 
@@ -152,10 +152,9 @@
 }
 
 .clear-filter-button {
-  
-  margin-top: 10%;
+  background-color: #f13c3c;
+  /* Other button styles */
   color: #ffffff;
-  width: 10%;
 }
 
 
@@ -353,7 +352,8 @@
 .form-row {
   display: flex;
   align-items: center;
-  margin-bottom: 10px;
+  
+  margin-bottom: 3px;
 }
 
 .form-row label {
@@ -389,6 +389,12 @@
   height: 10%;
   margin-top: 2%;
   margin-right: 2%;
+  position: absolute;
+  top: 0; /* Align to the top of gripper-section */
+  right: 1;
+  
+
+  
 }
 
 .add-gripper-button:hover {
@@ -476,7 +482,6 @@
   color: #fff;
   border: none;
   cursor: pointer;
- 
 }
 
 
@@ -486,5 +491,35 @@
   margin-bottom: 20px;
 }
 
+.search-section {
+ margin-left: 500px;
+}
 
 
+
+label {
+  margin-right: 10px;
+}
+
+input {
+  padding: 8px;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.search-button,
+.clear-search-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.search-button:hover,
+.clear-search-button:hover {
+  background-color: #0056b3;
+}
