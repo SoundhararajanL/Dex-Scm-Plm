@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFilePdf, faDatabase } from '@fortawesome/free-solid-svg-icons';
+import { faFilePdf, faDatabase ,faMagnifyingGlass ,faPlus} from '@fortawesome/free-solid-svg-icons';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
@@ -416,26 +416,6 @@ class GripperList extends Component {
 
 
 
-  // componentDidMount() {
-  //   // Extract ManufactureName, Type, and Category from jsonData
-  //   const { jsonData } = this.state;
-
-  //   const manufactureNames = jsonData.map(gripper => gripper.Data.find(item => item.Property === 'ManufactureName').Value);
-  //   const types = jsonData.map(gripper => gripper.Data.find(item => item.Property === 'Type').Value);
-  //   const categories = jsonData.map(gripper => gripper.Data.find(item => item.Property === 'Category').Value);
-
-  //   // Remove duplicates and set the state with filter options
-  //   this.setState({
-  //     filterOptions: {
-  //       manufactureNames: [...new Set(manufactureNames)],
-  //       types: [...new Set(types)],
-  //       categories: [...new Set(categories)],
-
-  //     },
-  //   });
-  // }
-
-
 
   componentDidMount() {
     // Extract ManufactureName, Type, and Category from jsonData
@@ -721,15 +701,15 @@ class GripperList extends Component {
           </h1>
           <div className="top">Count of Products: {productCount}</div>
           <div className="search-section">
-            <label>Search:</label>
+           
             <input
               type="text"
               placeholder="Search products..."
               value={searchTerm}
               onChange={this.handleSearchTermChange}
             />
-            <button className="search-button" onClick={this.searchGrippers}>
-              Search
+            <button className='search' onClick={this.searchGrippers}>
+            <FontAwesomeIcon icon={faMagnifyingGlass} />
             </button>
             <button className="clear-search-button" onClick={this.clearSearch}>
               Clear Search

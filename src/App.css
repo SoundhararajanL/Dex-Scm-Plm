@@ -378,27 +378,28 @@
 
 /* Add CSS styles for the "Add Gripper" button */
 .add-gripper-button {
-  background-color: #007bff; /* Button background color */
+  background-color:#0056b3 ; /* Button background color */
   color: #fff; /* Text color */
   border: none; /* Remove button border */
   padding: 10px 20px; /* Padding for the button */
   border-radius: 4px; /* Rounded corners */
   cursor: pointer; /* Show pointer cursor on hover */
   transition: background-color 0.3s; /* Add a smooth transition effect */
-  width: 10%;
-  height: 10%;
+  width: 120px;
+  height: 31px;
   margin-top: 2%;
   margin-right: 2%;
   position: absolute;
   top: 0; /* Align to the top of gripper-section */
   right: 1;
+  margin-top: 70px;
   
 
   
 }
 
 .add-gripper-button:hover {
-  background-color: #0056b3;
+  background-color: #177e26 ;
  
 }
 
@@ -493,6 +494,8 @@
 
 .search-section {
  margin-left: 500px;
+ height: 42px;
+ 
 }
 
 
@@ -506,20 +509,15 @@ input {
   margin-right: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
+  margin-right: 0px;
 }
 
-.search-button,
-.clear-search-button {
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s;
+
+.clear-search-button{
+  margin-left: 6px;
+  height: 31px;
 }
 
-.search-button:hover,
-.clear-search-button:hover {
-  background-color: #0056b3;
+.search{
+ height: 31px;
 }
