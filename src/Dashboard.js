@@ -10,7 +10,7 @@ import jsonData from './data.json';
 class GripperList extends Component {
 
   state = {
-    filtersApplied:false,
+    filtersApplied: false,
     grippers: [],
     selectedGripper: null,
     filterOptions: {
@@ -376,7 +376,7 @@ class GripperList extends Component {
       this.setState({
         filteredGrippers: jsonData,
         filtersApplied: false,
-        
+
       });
     } else {
       // Filter grippers based on the search term
@@ -408,50 +408,30 @@ class GripperList extends Component {
       this.setState({
         filteredGrippers: filteredGrippers,
         filtersApplied: true,
-        
+
       });
     }
   };
 
 
 
-  
-  // componentDidMount() {
-  //   // Extract ManufactureName, Type, and Category from jsonData
-  //   const { jsonData } = this.state;
-
-  //   const manufactureNames = jsonData.map(gripper => gripper.Data.find(item => item.Property === 'ManufactureName').Value);
-  //   const types = jsonData.map(gripper => gripper.Data.find(item => item.Property === 'Type').Value);
-  //   const categories = jsonData.map(gripper => gripper.Data.find(item => item.Property === 'Category').Value);
-
-  //   // Remove duplicates and set the state with filter options
-  //   this.setState({
-  //     filterOptions: {
-  //       manufactureNames: [...new Set(manufactureNames)],
-  //       types: [...new Set(types)],
-  //       categories: [...new Set(categories)],
-        
-  //     },
-  //   });
-  // }
-  
 
 
   componentDidMount() {
     // Extract ManufactureName, Type, and Category from jsonData
     const { jsonData } = this.state;
-  
+
     const manufactureNames = jsonData.map((gripper) => gripper.Data.find((item) => item.Property === 'ManufactureName').Value);
     const types = jsonData.map((gripper) => gripper.Data.find((item) => item.Property === 'Type').Value);
     const categories = jsonData.map((gripper) => gripper.Data.find((item) => item.Property === 'Category').Value);
-  
+
     // Fetch min and max values from the server
     axios
       .get('http://localhost:3001/api/grippers/minmax')
       .then((response) => {
         const minMaxValues = response.data;
         console.log('minMaxValues:', minMaxValues);
-  
+
         // Update the state with min and max values
         this.setState({
           minMaxValues: minMaxValues,
@@ -466,7 +446,7 @@ class GripperList extends Component {
         console.error('Error fetching min and max values:', error);
       });
   }
-  
+
 
 
 
@@ -474,9 +454,11 @@ class GripperList extends Component {
   render() {
     const { isModalOpen, selectedGripperDetails } = this.state;
     const { searchTerm } = this.state;
-    const { filteredGrippers, filterOptions, selectedFilters } = this.state;
-    const productCount = filteredGrippers.length > 0 ? filteredGrippers.length : jsonData.length; 
-  
+    const {filtersApplied ,filteredGrippers, filterOptions, selectedFilters } = this.state;
+    const productCount = filteredGrippers.length > 0 ? filteredGrippers.length : jsonData.length;
+    const grippersToRender = filtersApplied ? filteredGrippers : jsonData;
+
+
     const { minMaxValues } = this.state;
     const { showAddGripperForm } = this.state;
     const {
@@ -499,8 +481,8 @@ class GripperList extends Component {
         <div className="filter-options">
           <h2>Filters</h2>
 
-            {/* Checkbox inputs for Manufacture Name */}
-            <div className="checkbox-section">
+          {/* Checkbox inputs for Manufacture Name */}
+          <div className="checkbox-section">
             <label>Manufacture  Name:</label>
             {filterOptions.manufactureNames.slice(0, this.state.displayManufactureNames).map((option, index) => (
               <div key={index} className="checkbox-item">
@@ -537,7 +519,7 @@ class GripperList extends Component {
                 />
                 <label htmlFor={`typeCheckbox${index}`}>
                   {option}({this.getTypeCount(option)})
-                  </label>
+                </label>
               </div>
             ))}
             {filterOptions.types.length > this.state.displayTypes && (
@@ -561,7 +543,7 @@ class GripperList extends Component {
                 />
                 <label htmlFor={`categoryCheckbox${index}`}>
                   {option}({this.getCategoryCount(option)})
-                  </label>
+                </label>
               </div>
             ))}
             {filterOptions.categories.length > this.state.displayCategories && (
@@ -573,7 +555,7 @@ class GripperList extends Component {
 
           <div>
             <label>Payload(Kg)</label>
-           
+
             <input
               type="number"
               placeholder={`Min (${minMaxValues.payloadMin})`}
@@ -586,7 +568,7 @@ class GripperList extends Component {
               value={selectedFilters.payloadMax}
               onChange={(e) => this.handleIntegerFilterChange('payloadMax', e.target.value)}
             />
-           
+
 
 
           </div>
@@ -604,7 +586,7 @@ class GripperList extends Component {
               value={selectedFilters.forceMax}
               onChange={(e) => this.handleIntegerFilterChange('forceMax', e.target.value)}
             />
-           
+
           </div>
           <div>
             <label>Feed pressure Max</label>
@@ -627,87 +609,87 @@ class GripperList extends Component {
           <div>
             <h2>Dimension</h2>
             <label>Height Range: {minMaxValues.DimensionHeightValuesMin} to {minMaxValues.DimensionHeightValuesMax}</label>
-             {/* range slider */}
-             <div className="range-slider">
-             
-             <input
-               type="range"
-               min={minMaxValues.DimensionHeightValuesMin}
-               max={minMaxValues.DimensionHeightValuesMax}
-               value={selectedFilters.DimensionHeightValuesMin}
-               onChange={(e) => this.handleIntegerFilterChange('DimensionHeightValuesMin', e.target.value)}
-             />
-             <span>
-               Min:{selectedFilters.DimensionHeightValuesMin}
-             </span>
-             <input
-               type="range"
-               min={minMaxValues.DimensionHeightValuesMin}
-               max={minMaxValues.DimensionHeightValuesMax}
-               value={selectedFilters.DimensionHeightValuesMax}
-               onChange={(e) => this.handleIntegerFilterChange('DimensionHeightValuesMax', e.target.value)}
-             />
+            {/* range slider */}
+            <div className="range-slider">
+
+              <input
+                type="range"
+                min={minMaxValues.DimensionHeightValuesMin}
+                max={minMaxValues.DimensionHeightValuesMax}
+                value={selectedFilters.DimensionHeightValuesMin}
+                onChange={(e) => this.handleIntegerFilterChange('DimensionHeightValuesMin', e.target.value)}
+              />
               <span>
-               Max:{selectedFilters.DimensionHeightValuesMax}
-             </span>
-           </div>
+                Min:{selectedFilters.DimensionHeightValuesMin}
+              </span>
+              <input
+                type="range"
+                min={minMaxValues.DimensionHeightValuesMin}
+                max={minMaxValues.DimensionHeightValuesMax}
+                value={selectedFilters.DimensionHeightValuesMax}
+                onChange={(e) => this.handleIntegerFilterChange('DimensionHeightValuesMax', e.target.value)}
+              />
+              <span>
+                Max:{selectedFilters.DimensionHeightValuesMax}
+              </span>
+            </div>
           </div>
 
           {/* dimensionDepth */}
           <div>
             <label>Depth Range: {minMaxValues.DimensionDepthValuesMin} to {minMaxValues.DimensionDepthValuesMax}</label>
-             {/* range slider */}
-             <div className="range-slider">
-             
-             <input
-               type="range"
-               min={minMaxValues.DimensionDepthValuesMin}
-               max={minMaxValues.DimensionDepthValuesMax}
-               value={selectedFilters.DimensionDepthValuesMin}
-               onChange={(e) => this.handleIntegerFilterChange('DimensionDepthValuesMin', e.target.value)}
-             />
-             <span>
-               Min:{selectedFilters.DimensionDepthValuesMin}
-             </span>
-             <input
-               type="range"
-               min={minMaxValues.DimensionDepthValuesMin}
-               max={minMaxValues.DimensionDepthValuesMax}
-               value={selectedFilters.DimensionDepthValuesMax}
-               onChange={(e) => this.handleIntegerFilterChange('DimensionDepthValuesMax', e.target.value)}
-             />
+            {/* range slider */}
+            <div className="range-slider">
+
+              <input
+                type="range"
+                min={minMaxValues.DimensionDepthValuesMin}
+                max={minMaxValues.DimensionDepthValuesMax}
+                value={selectedFilters.DimensionDepthValuesMin}
+                onChange={(e) => this.handleIntegerFilterChange('DimensionDepthValuesMin', e.target.value)}
+              />
               <span>
-               Max:{selectedFilters.DimensionDepthValuesMax}
-             </span>
-           </div>
+                Min:{selectedFilters.DimensionDepthValuesMin}
+              </span>
+              <input
+                type="range"
+                min={minMaxValues.DimensionDepthValuesMin}
+                max={minMaxValues.DimensionDepthValuesMax}
+                value={selectedFilters.DimensionDepthValuesMax}
+                onChange={(e) => this.handleIntegerFilterChange('DimensionDepthValuesMax', e.target.value)}
+              />
+              <span>
+                Max:{selectedFilters.DimensionDepthValuesMax}
+              </span>
+            </div>
           </div>
           {/* dimensionWidth */}
           <div>
             <label>Width Range: {minMaxValues.DimensionWidthValuesMin} to {minMaxValues.DimensionWidthValuesMax}</label>
             {/* range slider */}
             <div className="range-slider">
-             
-             <input
-               type="range"
-               min={minMaxValues.DimensionWidthValuesMin}
-               max={minMaxValues.DimensionWidthValuesMax}
-               value={selectedFilters.DimensionWidthValuesMin}
-               onChange={(e) => this.handleIntegerFilterChange('DimensionWidthValuesMin', e.target.value)}
-             />
-             <span>
-               Min:{selectedFilters.DimensionWidthValuesMin}
-             </span>
-             <input
-               type="range"
-               min={minMaxValues.DimensionWidthValuesMin}
-               max={minMaxValues.DimensionWidthValuesMax}
-               value={selectedFilters.DimensionWidthValuesMax}
-               onChange={(e) => this.handleIntegerFilterChange('DimensionWidthValuesMax', e.target.value)}
-             />
+
+              <input
+                type="range"
+                min={minMaxValues.DimensionWidthValuesMin}
+                max={minMaxValues.DimensionWidthValuesMax}
+                value={selectedFilters.DimensionWidthValuesMin}
+                onChange={(e) => this.handleIntegerFilterChange('DimensionWidthValuesMin', e.target.value)}
+              />
               <span>
-               Max:{selectedFilters.DimensionWidthValuesMax}
-             </span>
-           </div>
+                Min:{selectedFilters.DimensionWidthValuesMin}
+              </span>
+              <input
+                type="range"
+                min={minMaxValues.DimensionWidthValuesMin}
+                max={minMaxValues.DimensionWidthValuesMax}
+                value={selectedFilters.DimensionWidthValuesMax}
+                onChange={(e) => this.handleIntegerFilterChange('DimensionWidthValuesMax', e.target.value)}
+              />
+              <span>
+                Max:{selectedFilters.DimensionWidthValuesMax}
+              </span>
+            </div>
           </div>
           <button className="clear-filter-button" onClick={this.clearFilter}>
             Clear Filter
@@ -738,7 +720,7 @@ class GripperList extends Component {
             Add Gripper
           </button>
 
-          
+
 
 
 
@@ -859,24 +841,8 @@ class GripperList extends Component {
             </div>
           ) : null}
 
-          {(
-            filteredGrippers.length > 0 ? (
-              // If there are filtered grippers, use filteredGrippers
-              filteredGrippers
-            ) : (
-              // If no filtered grippers, use jsonData
-              jsonData
-            )
-          ).length > 0 ? (
-            (
-              filteredGrippers.length > 0 ? (
-                // If there are filtered grippers, use filteredGrippers
-                filteredGrippers
-              ) : (
-                // If no filtered grippers, use jsonData
-                jsonData
-              )
-            ).map((gripper, index) => (
+          {grippersToRender.length > 0 ? (
+            grippersToRender.map((gripper, index) => (
               <div key={index} className="product-card">
                 <div onClick={() => this.openGripperDetails(gripper)}>
                   {gripper.Data.find((data) => data.Property === 'ImageURL') ? (
@@ -914,8 +880,6 @@ class GripperList extends Component {
               <FontAwesomeIcon icon={faDatabase} className="faDatabase-icon" />
             </div>
           )}
-
-
 
           {selectedGripperDetails && (
             <div className={`modal ${isModalOpen ? 'show' : ''}`}>

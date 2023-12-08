@@ -1,11 +1,9 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const fs = require('fs/promises');
-const cors = require('cors');  // Import the cors middleware
-
+const cors = require('cors');  
 const app = express();
-const port = 3001; // You can change this to your desired port
-
+const port = 3001; 
 const corsOptions = {
   origin: '*',
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
