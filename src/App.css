@@ -18,6 +18,8 @@
   flex-wrap: wrap;
   justify-content: normal;
   margin-left: 20%;
+  margin-right: 10px;
+  margin-top: 10px;
 }
 
 .product-card {
@@ -385,14 +387,16 @@
   border-radius: 4px; /* Rounded corners */
   cursor: pointer; /* Show pointer cursor on hover */
   transition: background-color 0.3s; /* Add a smooth transition effect */
-  width: 120px;
-  height: 31px;
-  margin-top: 2%;
+  width: 160px;
+  height: 33px;
+  margin-top: 4%;
   margin-right: 2%;
+  margin-left: 10px;
   position: absolute;
   top: 0; /* Align to the top of gripper-section */
   right: 1;
-  margin-top: 70px;
+  margin-top: 82px;
+  margin-bottom: 4px;
   
 
   
@@ -493,9 +497,10 @@
 }
 
 .search-section {
- margin-left: 500px;
+ margin-left: 685px;
  height: 42px;
  
+ margin-bottom: 4px;
 }
 
 
@@ -510,14 +515,28 @@ input {
   border: 1px solid #ccc;
   border-radius: 4px;
   margin-right: 0px;
+  
 }
 
 
 .clear-search-button{
   margin-left: 6px;
-  height: 31px;
+  height: 33px;
 }
 
 .search{
- height: 31px;
+ height: 33px;
+}
+
+
+.Manifacturename{
+  background-color: rgba(128, 128, 128, 0.507);
+}
+
+.type{
+  background-color: rgba(128, 128, 128, 0.507);
+}
+
+.category{
+  background-color: rgba(128, 128, 128, 0.507);
 }

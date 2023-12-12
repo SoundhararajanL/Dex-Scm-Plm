@@ -455,8 +455,9 @@ class GripperList extends Component {
     const { isModalOpen, selectedGripperDetails } = this.state;
     const { searchTerm } = this.state;
     const {filtersApplied ,filteredGrippers, filterOptions, selectedFilters } = this.state;
-    const productCount = filteredGrippers.length > 0 ? filteredGrippers.length : jsonData.length;
+  
     const grippersToRender = filtersApplied ? filteredGrippers : jsonData;
+    const productCount = grippersToRender.length;
 
 
     const { minMaxValues } = this.state;
@@ -483,7 +484,7 @@ class GripperList extends Component {
 
           {/* Checkbox inputs for Manufacture Name */}
           <div className="checkbox-section">
-            <label>Manufacture  Name:</label>
+            <label  className='Manifacturename'>Manufacture  Name:</label>
             {filterOptions.manufactureNames.slice(0, this.state.displayManufactureNames).map((option, index) => (
               <div key={index} className="checkbox-item">
                 <input
@@ -507,7 +508,7 @@ class GripperList extends Component {
 
           {/* Checkbox inputs for Type */}
           <div className="checkbox-section">
-            <label>Type:</label>
+            <label  className='type'>Type:</label>
             {filterOptions.types.slice(0, this.state.displayTypes).map((option, index) => (
               <div key={index} className="checkbox-item">
                 <input
@@ -531,7 +532,7 @@ class GripperList extends Component {
 
           {/* Checkbox inputs for Category */}
           <div className="checkbox-section">
-            <label>Category:</label>
+            <label  className='category'>Category:</label>
             {filterOptions.categories.slice(0, this.state.displayCategories).map((option, index) => (
               <div key={index} className="checkbox-item">
                 <input
