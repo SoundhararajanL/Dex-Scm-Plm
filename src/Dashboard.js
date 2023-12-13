@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFilePdf, faDatabase ,faMagnifyingGlass ,faPlus} from '@fortawesome/free-solid-svg-icons';
+import { faFilePdf, faDatabase, faMagnifyingGlass, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
@@ -303,23 +303,10 @@ class GripperList extends Component {
     }));
   };
 
-  handleLoadMoreManufactureNames = () => {
-    this.setState((prevState) => ({
-      displayManufactureNames: prevState.displayManufactureNames + 10,
-    }));
-  };
 
-  handleLoadMoreTypes = () => {
-    this.setState((prevState) => ({
-      displayTypes: prevState.displayTypes + 10,
-    }));
-  };
 
-  handleLoadMoreCategories = () => {
-    this.setState((prevState) => ({
-      displayCategories: prevState.displayCategories + 10,
-    }));
-  };
+
+
   handleIntegerFilterChange = (filterName, value) => {
     this.setState((prevState) => ({
       selectedFilters: {
@@ -448,14 +435,50 @@ class GripperList extends Component {
   }
 
 
+  handleLoadMoreManufactureNames = () => {
+    this.setState((prevState) => ({
+      displayManufactureNames: prevState.displayManufactureNames + 10,
+    }));
+  };
+
+  handleLoadMoreTypes = () => {
+    this.setState((prevState) => ({
+      displayTypes: prevState.displayTypes + 10,
+    }));
+  };
+
+  handleLoadMoreCategories = () => {
+    this.setState((prevState) => ({
+      displayCategories: prevState.displayCategories + 10,
+    }));
+  };
+
+  handleToggleManufactureNames = () => {
+    this.setState((prevState) => ({
+      displayManufactureNames: prevState.displayManufactureNames === 10 ? this.state.filterOptions.manufactureNames.length : 10,
+    }));
+  };
+  
+  handleToggleTypes = () => {
+    this.setState((prevState) => ({
+      displayTypes: prevState.displayTypes === 10 ? this.state.filterOptions.types.length : 10,
+    }));
+  };
+  
+  handleToggleCategories = () => {
+    this.setState((prevState) => ({
+      displayCategories: prevState.displayCategories === 10 ? this.state.filterOptions.categories.length : 10,
+    }));
+  };
+  
 
 
 
   render() {
     const { isModalOpen, selectedGripperDetails } = this.state;
     const { searchTerm } = this.state;
-    const {filtersApplied ,filteredGrippers, filterOptions, selectedFilters } = this.state;
-  
+    const { filtersApplied, filteredGrippers, filterOptions, selectedFilters } = this.state;
+
     const grippersToRender = filtersApplied ? filteredGrippers : jsonData;
     const productCount = grippersToRender.length;
 
@@ -478,13 +501,14 @@ class GripperList extends Component {
     } = this.state;
 
     return (
+
       <div className="gripper-list-container">
         <div className="filter-options">
           <h2>Filters</h2>
 
           {/* Checkbox inputs for Manufacture Name */}
           <div className="checkbox-section">
-            <label  className='Manifacturename'>Manufacture  Name:</label>
+            <label className="Manifacturename">Manufacture Name:</label>
             {filterOptions.manufactureNames.slice(0, this.state.displayManufactureNames).map((option, index) => (
               <div key={index} className="checkbox-item">
                 <input
@@ -499,16 +523,18 @@ class GripperList extends Component {
                 </label>
               </div>
             ))}
-            {filterOptions.manufactureNames.length > this.state.displayManufactureNames && (
-              <button className="load-more-button" onClick={this.handleLoadMoreManufactureNames}>
-                Load More
-              </button>
+            {filterOptions.manufactureNames.length > 10 && (
+              <div className="load-more-buttons">
+                <button className="load-more-button" onClick={this.handleToggleManufactureNames}>
+                  {this.state.displayManufactureNames === 10 ? 'Load More' : 'Less'}
+                </button>
+              </div>
             )}
           </div>
 
           {/* Checkbox inputs for Type */}
           <div className="checkbox-section">
-            <label  className='type'>Type:</label>
+            <label className="type">Type:</label>
             {filterOptions.types.slice(0, this.state.displayTypes).map((option, index) => (
               <div key={index} className="checkbox-item">
                 <input
@@ -523,16 +549,18 @@ class GripperList extends Component {
                 </label>
               </div>
             ))}
-            {filterOptions.types.length > this.state.displayTypes && (
-              <button className="load-more-button" onClick={this.handleLoadMoreTypes}>
-                Load More
-              </button>
+            {filterOptions.types.length > 10 && (
+              <div className="load-more-buttons">
+                <button className="load-more-button" onClick={this.handleToggleTypes}>
+                  {this.state.displayTypes === 10 ? 'Load More' : 'Less'}
+                </button>
+              </div>
             )}
           </div>
 
           {/* Checkbox inputs for Category */}
           <div className="checkbox-section">
-            <label  className='category'>Category:</label>
+            <label className="category">Category:</label>
             {filterOptions.categories.slice(0, this.state.displayCategories).map((option, index) => (
               <div key={index} className="checkbox-item">
                 <input
@@ -547,10 +575,12 @@ class GripperList extends Component {
                 </label>
               </div>
             ))}
-            {filterOptions.categories.length > this.state.displayCategories && (
-              <button className="load-more-button" onClick={this.handleLoadMoreCategories}>
-                Load More
-              </button>
+            {filterOptions.categories.length > 10 && (
+              <div className="load-more-buttons">
+                <button className="load-more-button" onClick={this.handleToggleCategories}>
+                  {this.state.displayCategories === 10 ? 'Load More' : 'Less'}
+                </button>
+              </div>
             )}
           </div>
 
@@ -620,7 +650,7 @@ class GripperList extends Component {
                 value={selectedFilters.DimensionHeightValuesMin}
                 onChange={(e) => this.handleIntegerFilterChange('DimensionHeightValuesMin', e.target.value)}
               />
-              <span>
+              <span >
                 Min:{selectedFilters.DimensionHeightValuesMin}
               </span>
               <input
@@ -702,7 +732,7 @@ class GripperList extends Component {
           </h1>
           <div className="top">Count of Products: {productCount}</div>
           <div className="search-section">
-           
+
             <input
               type="text"
               placeholder="Search products..."
@@ -710,7 +740,7 @@ class GripperList extends Component {
               onChange={this.handleSearchTermChange}
             />
             <button className='search' onClick={this.searchGrippers}>
-            <FontAwesomeIcon icon={faMagnifyingGlass} />
+              <FontAwesomeIcon icon={faMagnifyingGlass} />
             </button>
             <button className="clear-search-button" onClick={this.clearSearch}>
               Clear Search

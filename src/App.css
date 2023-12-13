@@ -128,19 +128,7 @@
  
 }
 
-.filter-options button {
-  display: block;
-  width: 100%;
-  padding: 10px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-bottom: 5%;
-  
- 
-}
+
 
 .filter-options button:hover {
   background-color: #0056b3;
@@ -157,6 +145,7 @@
   background-color: #f13c3c;
   /* Other button styles */
   color: #ffffff;
+  border-radius: 10px;
 }
 
 
@@ -487,6 +476,7 @@
   color: #fff;
   border: none;
   cursor: pointer;
+  border-radius: 10px;
 }
 
 
@@ -540,3 +530,4 @@ input {
 .category{
   background-color: rgba(128, 128, 128, 0.507);
 }
+
