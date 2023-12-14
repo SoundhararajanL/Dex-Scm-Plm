@@ -459,19 +459,19 @@ class GripperList extends Component {
       displayManufactureNames: prevState.displayManufactureNames === 10 ? this.state.filterOptions.manufactureNames.length : 10,
     }));
   };
-  
+
   handleToggleTypes = () => {
     this.setState((prevState) => ({
       displayTypes: prevState.displayTypes === 10 ? this.state.filterOptions.types.length : 10,
     }));
   };
-  
+
   handleToggleCategories = () => {
     this.setState((prevState) => ({
       displayCategories: prevState.displayCategories === 10 ? this.state.filterOptions.categories.length : 10,
     }));
   };
-  
+
 
 
 
@@ -546,7 +546,7 @@ class GripperList extends Component {
                   onChange={() => this.handleFilterChange('type', option)}
                 />
                 <label htmlFor={`typeCheckbox${index}`}>
-                 -{option}({this.getTypeCount(option)})
+                  -{option}({this.getTypeCount(option)})
                 </label>
               </div>
             ))}
@@ -643,7 +643,7 @@ class GripperList extends Component {
             <label>Height Range: {minMaxValues.DimensionHeightValuesMin} to {minMaxValues.DimensionHeightValuesMax}</label>
             {/* range slider */}
             <div className="range-slider">
-
+             
               <Slider
                 type="range"
                 valueLabelDisplay='auto'
@@ -652,17 +652,18 @@ class GripperList extends Component {
                 value={selectedFilters.DimensionHeightValuesMin}
                 onChange={(e) => this.handleIntegerFilterChange('DimensionHeightValuesMin', e.target.value)}
               />
+
              
               <Slider
                 type="range"
                 valueLabelDisplay='auto'
                 min={minMaxValues.DimensionHeightValuesMin}
                 max={minMaxValues.DimensionHeightValuesMax}
-                value={selectedFilters.DimensionHeightValuesMax}
-                onChange={(e) => this.handleIntegerFilterChange('DimensionHeightValuesMax', e.target.value)}
+                value={minMaxValues.DimensionHeightValuesMax - selectedFilters.DimensionHeightValuesMax}
+                onChange={(e) => this.handleIntegerFilterChange('DimensionHeightValuesMax', minMaxValues.DimensionHeightValuesMax - e.target.value)}
               />
-              
             </div>
+
           </div>
 
           {/* dimensionDepth */}
@@ -679,16 +680,16 @@ class GripperList extends Component {
                 value={selectedFilters.DimensionDepthValuesMin}
                 onChange={(e) => this.handleIntegerFilterChange('DimensionDepthValuesMin', e.target.value)}
               />
-             
+
               <Slider
                 type="range"
                 valueLabelDisplay='auto'
                 min={minMaxValues.DimensionDepthValuesMin}
                 max={minMaxValues.DimensionDepthValuesMax}
-                value={selectedFilters.DimensionDepthValuesMax}
-                onChange={(e) => this.handleIntegerFilterChange('DimensionDepthValuesMax', e.target.value)}
+                value={minMaxValues.DimensionDepthValuesMax - selectedFilters.DimensionDepthValuesMax}
+                onChange={(e) => this.handleIntegerFilterChange('DimensionDepthValuesMax', minMaxValues.DimensionDepthValuesMax - e.target.value)}
               />
-              
+
             </div>
           </div>
           {/* dimensionWidth */}
@@ -705,16 +706,16 @@ class GripperList extends Component {
                 value={selectedFilters.DimensionWidthValuesMin}
                 onChange={(e) => this.handleIntegerFilterChange('DimensionWidthValuesMin', e.target.value)}
               />
-              
+
               <Slider
                 type="range"
                 valueLabelDisplay='auto'
                 min={minMaxValues.DimensionWidthValuesMin}
                 max={minMaxValues.DimensionWidthValuesMax}
-                value={selectedFilters.DimensionWidthValuesMax}
-                onChange={(e) => this.handleIntegerFilterChange('DimensionWidthValuesMax', e.target.value)}
+                value={minMaxValues.DimensionWidthValuesMax - selectedFilters.DimensionWidthValuesMax}
+                onChange={(e) => this.handleIntegerFilterChange('DimensionWidthValuesMax', minMaxValues.DimensionWidthValuesMax - e.target.value)}
               />
-              
+
             </div>
           </div>
           <button className="clear-filter-button" onClick={this.clearFilter}>

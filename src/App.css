@@ -536,8 +536,8 @@ input {
 /* Styles for the slider container */
 .range-slider {
   margin-top: 20px;
-  width: 60%;
-  margin-left: 20px;
+  width: 50%;
+  margin-left: 30px;
 }
 
 /* Styles for the slider itself */
