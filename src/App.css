@@ -536,8 +536,8 @@ input {
 /* Styles for the slider container */
 .range-slider {
   margin-top: 20px;
-  width: 70%;
-  margin-left: 10px;
+  width: 60%;
+  margin-left: 20px;
 }
 
 /* Styles for the slider itself */
@@ -559,3 +559,4 @@ input {
 .MuiSlider-valueLabel {
   color: #2196f3; /* Change the color to your preferred color */
 }
+
