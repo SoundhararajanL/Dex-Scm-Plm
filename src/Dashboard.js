@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 import './App.css';
 import jsonData from './data.json';
+import Slider from '@mui/material/Slider';
 
 class GripperList extends Component {
 
@@ -519,7 +520,7 @@ class GripperList extends Component {
                   onChange={() => this.handleFilterChange('manufactureName', option)}
                 />
                 <label htmlFor={`manufactureNameCheckbox${index}`}>
-                  {option} ({this.getManufactureNameCount(option)})
+                  -{option} ({this.getManufactureNameCount(option)})
                 </label>
               </div>
             ))}
@@ -545,7 +546,7 @@ class GripperList extends Component {
                   onChange={() => this.handleFilterChange('type', option)}
                 />
                 <label htmlFor={`typeCheckbox${index}`}>
-                  {option}({this.getTypeCount(option)})
+                 -{option}({this.getTypeCount(option)})
                 </label>
               </div>
             ))}
@@ -571,7 +572,7 @@ class GripperList extends Component {
                   onChange={() => this.handleFilterChange('category', option)}
                 />
                 <label htmlFor={`categoryCheckbox${index}`}>
-                  {option}({this.getCategoryCount(option)})
+                  -{option}({this.getCategoryCount(option)})
                 </label>
               </div>
             ))}
@@ -643,26 +644,24 @@ class GripperList extends Component {
             {/* range slider */}
             <div className="range-slider">
 
-              <input
+              <Slider
                 type="range"
+                valueLabelDisplay='auto'
                 min={minMaxValues.DimensionHeightValuesMin}
                 max={minMaxValues.DimensionHeightValuesMax}
                 value={selectedFilters.DimensionHeightValuesMin}
                 onChange={(e) => this.handleIntegerFilterChange('DimensionHeightValuesMin', e.target.value)}
               />
-              <span >
-                Min:{selectedFilters.DimensionHeightValuesMin}
-              </span>
-              <input
+             
+              <Slider
                 type="range"
+                valueLabelDisplay='auto'
                 min={minMaxValues.DimensionHeightValuesMin}
                 max={minMaxValues.DimensionHeightValuesMax}
                 value={selectedFilters.DimensionHeightValuesMax}
                 onChange={(e) => this.handleIntegerFilterChange('DimensionHeightValuesMax', e.target.value)}
               />
-              <span>
-                Max:{selectedFilters.DimensionHeightValuesMax}
-              </span>
+              
             </div>
           </div>
 
@@ -672,26 +671,24 @@ class GripperList extends Component {
             {/* range slider */}
             <div className="range-slider">
 
-              <input
+              <Slider
                 type="range"
+                valueLabelDisplay='auto'
                 min={minMaxValues.DimensionDepthValuesMin}
                 max={minMaxValues.DimensionDepthValuesMax}
                 value={selectedFilters.DimensionDepthValuesMin}
                 onChange={(e) => this.handleIntegerFilterChange('DimensionDepthValuesMin', e.target.value)}
               />
-              <span>
-                Min:{selectedFilters.DimensionDepthValuesMin}
-              </span>
-              <input
+             
+              <Slider
                 type="range"
+                valueLabelDisplay='auto'
                 min={minMaxValues.DimensionDepthValuesMin}
                 max={minMaxValues.DimensionDepthValuesMax}
                 value={selectedFilters.DimensionDepthValuesMax}
                 onChange={(e) => this.handleIntegerFilterChange('DimensionDepthValuesMax', e.target.value)}
               />
-              <span>
-                Max:{selectedFilters.DimensionDepthValuesMax}
-              </span>
+              
             </div>
           </div>
           {/* dimensionWidth */}
@@ -700,26 +697,24 @@ class GripperList extends Component {
             {/* range slider */}
             <div className="range-slider">
 
-              <input
+              <Slider
+                valueLabelDisplay='auto'
                 type="range"
                 min={minMaxValues.DimensionWidthValuesMin}
                 max={minMaxValues.DimensionWidthValuesMax}
                 value={selectedFilters.DimensionWidthValuesMin}
                 onChange={(e) => this.handleIntegerFilterChange('DimensionWidthValuesMin', e.target.value)}
               />
-              <span>
-                Min:{selectedFilters.DimensionWidthValuesMin}
-              </span>
-              <input
+              
+              <Slider
                 type="range"
+                valueLabelDisplay='auto'
                 min={minMaxValues.DimensionWidthValuesMin}
                 max={minMaxValues.DimensionWidthValuesMax}
                 value={selectedFilters.DimensionWidthValuesMax}
                 onChange={(e) => this.handleIntegerFilterChange('DimensionWidthValuesMax', e.target.value)}
               />
-              <span>
-                Max:{selectedFilters.DimensionWidthValuesMax}
-              </span>
+              
             </div>
           </div>
           <button className="clear-filter-button" onClick={this.clearFilter}>

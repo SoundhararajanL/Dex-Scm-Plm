@@ -531,3 +531,31 @@ input {
   background-color: rgba(128, 128, 128, 0.507);
 }
 
+/* App.css */
+
+/* Styles for the slider container */
+.range-slider {
+  margin-top: 20px;
+  width: 70%;
+  margin-left: 10px;
+}
+
+/* Styles for the slider itself */
+.MuiSlider-root {
+  color: #2196f3; /* Change the color to your preferred color */
+}
+
+/* Styles for the thumb (slider handle) */
+.MuiSlider-thumb {
+  background-color: #2196f3; /* Change the color to your preferred color */
+}
+
+/* Styles for the active part of the slider (track) */
+.MuiSlider-track {
+  background-color: #2196f3; /* Change the color to your preferred color */
+}
+
+/* Styles for the value labels (if displayed) */
+.MuiSlider-valueLabel {
+  color: #2196f3; /* Change the color to your preferred color */
+}
