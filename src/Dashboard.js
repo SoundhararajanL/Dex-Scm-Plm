@@ -509,7 +509,7 @@ class GripperList extends Component {
 
           {/* Checkbox inputs for Manufacture Name */}
           <div className="checkbox-section">
-            <label className="Manifacturename">Manufacture Name:</label>
+            <label className="Manifacturename">Manufacture Name</label>
             {filterOptions.manufactureNames.slice(0, this.state.displayManufactureNames).map((option, index) => (
               <div key={index} class="checkbox-wrapper-47">
                 <input
@@ -536,7 +536,7 @@ class GripperList extends Component {
 
           {/* Checkbox inputs for Type */}
           <div className="checkbox-section">
-            <label className="type">Type:</label>
+            <label className="type">Type</label>
             {filterOptions.types.slice(0, this.state.displayTypes).map((option, index) => (
               <div key={index} class="checkbox-wrapper-47">
                 <input
@@ -563,7 +563,7 @@ class GripperList extends Component {
 
           {/* Checkbox inputs for Category */}
           <div className="checkbox-section">
-            <label className="category">Category:</label>
+            <label className="category">Category</label>
             {filterOptions.categories.slice(0, this.state.displayCategories).map((option, index) => (
               <div key={index} class="checkbox-wrapper-47">
                 <input

@@ -1,3 +1,9 @@
+body {
+  margin: 0;
+  font-family: 'Nunito';
+}
+
+
 .top {
   max-width: 1200px;
   margin: 0 auto;
@@ -520,15 +526,69 @@ input {
 
 
 .Manifacturename{
-  background-color: rgba(128, 128, 128, 0.507);
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.025rem;
+  font-style: normal;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  background-color: #1631a8c4;
+  border-radius: 0rem;
+  -webkit-border-radius: 0rem;
+  -moz-border-radius: 0rem;
+  padding: 0.35rem 0.5rem;
+  border-style: none;
+  border-width: 0rem;
+  border-color: #EF2D56;
+  webkit-box-shadow: inset 32px -8px 0px -16px rgba(51,51,51,1);
+  moz-box-shadow: inset 32px -8px 0px -16px rgba(51,51,51,1);
+  box-shadow: inset 32px -8px 0px -16px rgba(51,51,51,1);
 }
 
+
 .type{
-  background-color: rgba(128, 128, 128, 0.507);
+ 
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.025rem;
+  font-style: normal;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  background-color: #1631a8c4;
+  border-radius: 0rem;
+  -webkit-border-radius: 0rem;
+  -moz-border-radius: 0rem;
+  padding: 0.35rem 0.5rem;
+  border-style: none;
+  border-width: 0rem;
+  border-color: #EF2D56;
+  webkit-box-shadow: inset 32px -8px 0px -16px rgba(51,51,51,1);
+  moz-box-shadow: inset 32px -8px 0px -16px rgba(51,51,51,1);
+  box-shadow: inset 32px -8px 0px -16px rgba(51,51,51,1);
 }
 
 .category{
-  background-color: rgba(128, 128, 128, 0.507);
+  
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.025rem;
+  font-style: normal;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  background-color: #1631a8c4;
+  border-radius: 0rem;
+  -webkit-border-radius: 0rem;
+  -moz-border-radius: 0rem;
+  padding: 0.35rem 0.5rem;
+  border-style: none;
+  border-width: 0rem;
+  border-color: #EF2D56;
+  webkit-box-shadow: inset 32px -8px 0px -16px rgba(51,51,51,1);
+  moz-box-shadow: inset 32px -8px 0px -16px rgba(51,51,51,1);
+  box-shadow: inset 32px -8px 0px -16px rgba(51,51,51,1);
 }
 
 /* App.css */
