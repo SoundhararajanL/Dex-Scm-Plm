@@ -511,16 +511,19 @@ class GripperList extends Component {
           <div className="checkbox-section">
             <label className="Manifacturename">Manufacture Name</label>
             {filterOptions.manufactureNames.slice(0, this.state.displayManufactureNames).map((option, index) => (
-              <div key={index} class="checkbox-wrapper-47">
+              <div key={index} class="checkbox-wrapper-1">
                 <input
+                
+               
                   type="checkbox"
-                  name="cb"
+                  class="substituted"
+                  aria-hidden="true" 
                   id={`manufactureNameCheckbox${index}`}
                   value={option}
                   checked={selectedFilters.manufactureName.includes(option)}
                   onChange={() => this.handleFilterChange('manufactureName', option)}
                 />
-                <label for="cb-47" htmlFor={`manufactureNameCheckbox${index}`}>
+                <label for="example-1" htmlFor={`manufactureNameCheckbox${index}`}>
                   {option} ({this.getManufactureNameCount(option)})
                 </label>
               </div>
@@ -538,16 +541,17 @@ class GripperList extends Component {
           <div className="checkbox-section">
             <label className="type">Type</label>
             {filterOptions.types.slice(0, this.state.displayTypes).map((option, index) => (
-              <div key={index} class="checkbox-wrapper-47">
+              <div key={index} class="checkbox-wrapper-1">
                 <input
                   type="checkbox"
-                  name="cb"
+                  class="substituted"
+                  aria-hidden="true" 
                   id={`typeCheckbox${index}`}
                   value={option}
                   checked={selectedFilters.type.includes(option)}
                   onChange={() => this.handleFilterChange('type', option)}
                 />
-                <label for="cb-47" htmlFor={`typeCheckbox${index}`}>
+                <label  for="example-1" htmlFor={`typeCheckbox${index}`}>
                   {option}({this.getTypeCount(option)})
                 </label>
               </div>
@@ -565,16 +569,17 @@ class GripperList extends Component {
           <div className="checkbox-section">
             <label className="category">Category</label>
             {filterOptions.categories.slice(0, this.state.displayCategories).map((option, index) => (
-              <div key={index} class="checkbox-wrapper-47">
+              <div key={index} class="checkbox-wrapper-1">
                 <input
                   type="checkbox"
-                  name="cb"
+                  class="substituted"
+                  aria-hidden="true" 
                   id={`categoryCheckbox${index}`}
                   value={option}
                   checked={selectedFilters.category.includes(option)}
                   onChange={() => this.handleFilterChange('category', option)}
                 />
-                <label for="cb-47" htmlFor={`categoryCheckbox${index}`}>
+                <label  for="example-1" htmlFor={`categoryCheckbox${index}`}>
                   {option}({this.getCategoryCount(option)})
                 </label>
               </div>
