@@ -8,14 +8,17 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
-  font-family: monospace;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   margin-left: 20%;
- 
+  font-weight: bold;
+  font-family: sans-serif;
+  letter-spacing: 3px;
+  height: auto;
 }
 
 .title {
   text-align: center;
-  font-size: 32px;
+  font-size: 20px;
   margin-bottom: 20px;
 }
 
@@ -670,3 +673,4 @@ input {
   .checkbox-wrapper-47 label::before {
     transition: 0.25s all ease;
   }
+

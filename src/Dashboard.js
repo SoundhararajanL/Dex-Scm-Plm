@@ -521,7 +521,7 @@ class GripperList extends Component {
                   onChange={() => this.handleFilterChange('manufactureName', option)}
                 />
                 <label for="cb-47" htmlFor={`manufactureNameCheckbox${index}`}>
-                  -{option} ({this.getManufactureNameCount(option)})
+                  {option} ({this.getManufactureNameCount(option)})
                 </label>
               </div>
             ))}
@@ -548,7 +548,7 @@ class GripperList extends Component {
                   onChange={() => this.handleFilterChange('type', option)}
                 />
                 <label for="cb-47" htmlFor={`typeCheckbox${index}`}>
-                  -{option}({this.getTypeCount(option)})
+                  {option}({this.getTypeCount(option)})
                 </label>
               </div>
             ))}
@@ -575,7 +575,7 @@ class GripperList extends Component {
                   onChange={() => this.handleFilterChange('category', option)}
                 />
                 <label for="cb-47" htmlFor={`categoryCheckbox${index}`}>
-                  -{option}({this.getCategoryCount(option)})
+                  {option}({this.getCategoryCount(option)})
                 </label>
               </div>
             ))}
