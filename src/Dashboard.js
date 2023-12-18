@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFilePdf, faDatabase ,faMagnifyingGlass ,faPlus} from '@fortawesome/free-solid-svg-icons';
+import { faFilePdf, faDatabase, faMagnifyingGlass, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 import './App.css';
 import jsonData from './data.json';
+import Slider from '@mui/material/Slider';
 
 class GripperList extends Component {
 
@@ -303,23 +304,10 @@ class GripperList extends Component {
     }));
   };
 
-  handleLoadMoreManufactureNames = () => {
-    this.setState((prevState) => ({
-      displayManufactureNames: prevState.displayManufactureNames + 10,
-    }));
-  };
 
-  handleLoadMoreTypes = () => {
-    this.setState((prevState) => ({
-      displayTypes: prevState.displayTypes + 10,
-    }));
-  };
 
-  handleLoadMoreCategories = () => {
-    this.setState((prevState) => ({
-      displayCategories: prevState.displayCategories + 10,
-    }));
-  };
+
+
   handleIntegerFilterChange = (filterName, value) => {
     this.setState((prevState) => ({
       selectedFilters: {
@@ -448,15 +436,52 @@ class GripperList extends Component {
   }
 
 
+  handleLoadMoreManufactureNames = () => {
+    this.setState((prevState) => ({
+      displayManufactureNames: prevState.displayManufactureNames + 10,
+    }));
+  };
+
+  handleLoadMoreTypes = () => {
+    this.setState((prevState) => ({
+      displayTypes: prevState.displayTypes + 10,
+    }));
+  };
+
+  handleLoadMoreCategories = () => {
+    this.setState((prevState) => ({
+      displayCategories: prevState.displayCategories + 10,
+    }));
+  };
+
+  handleToggleManufactureNames = () => {
+    this.setState((prevState) => ({
+      displayManufactureNames: prevState.displayManufactureNames === 10 ? this.state.filterOptions.manufactureNames.length : 10,
+    }));
+  };
+
+  handleToggleTypes = () => {
+    this.setState((prevState) => ({
+      displayTypes: prevState.displayTypes === 10 ? this.state.filterOptions.types.length : 10,
+    }));
+  };
+
+  handleToggleCategories = () => {
+    this.setState((prevState) => ({
+      displayCategories: prevState.displayCategories === 10 ? this.state.filterOptions.categories.length : 10,
+    }));
+  };
+
 
 
 
   render() {
     const { isModalOpen, selectedGripperDetails } = this.state;
     const { searchTerm } = this.state;
-    const {filtersApplied ,filteredGrippers, filterOptions, selectedFilters } = this.state;
-    const productCount = filteredGrippers.length > 0 ? filteredGrippers.length : jsonData.length;
+    const { filtersApplied, filteredGrippers, filterOptions, selectedFilters } = this.state;
+
     const grippersToRender = filtersApplied ? filteredGrippers : jsonData;
+    const productCount = grippersToRender.length;
 
 
     const { minMaxValues } = this.state;
@@ -477,79 +502,94 @@ class GripperList extends Component {
     } = this.state;
 
     return (
+
       <div className="gripper-list-container">
         <div className="filter-options">
           <h2>Filters</h2>
 
           {/* Checkbox inputs for Manufacture Name */}
           <div className="checkbox-section">
-            <label>Manufacture  Name:</label>
+            <label className="Manifacturename">Manufacture Name</label>
             {filterOptions.manufactureNames.slice(0, this.state.displayManufactureNames).map((option, index) => (
-              <div key={index} className="checkbox-item">
+              <div key={index} class="checkbox-wrapper-1">
                 <input
+                
+               
                   type="checkbox"
+                  class="substituted"
+                  aria-hidden="true" 
                   id={`manufactureNameCheckbox${index}`}
                   value={option}
                   checked={selectedFilters.manufactureName.includes(option)}
                   onChange={() => this.handleFilterChange('manufactureName', option)}
                 />
-                <label htmlFor={`manufactureNameCheckbox${index}`}>
+                <label for="example-1" htmlFor={`manufactureNameCheckbox${index}`}>
                   {option} ({this.getManufactureNameCount(option)})
                 </label>
               </div>
             ))}
-            {filterOptions.manufactureNames.length > this.state.displayManufactureNames && (
-              <button className="load-more-button" onClick={this.handleLoadMoreManufactureNames}>
-                Load More
-              </button>
+            {filterOptions.manufactureNames.length > 10 && (
+              <div className="load-more-buttons">
+                <button className="load-more-button" onClick={this.handleToggleManufactureNames}>
+                  {this.state.displayManufactureNames === 10 ? 'Load More' : 'Less'}
+                </button>
+              </div>
             )}
           </div>
 
           {/* Checkbox inputs for Type */}
           <div className="checkbox-section">
-            <label>Type:</label>
+            <label className="type">Type</label>
             {filterOptions.types.slice(0, this.state.displayTypes).map((option, index) => (
-              <div key={index} className="checkbox-item">
+              <div key={index} class="checkbox-wrapper-1">
                 <input
                   type="checkbox"
+                  class="substituted"
+                  aria-hidden="true" 
                   id={`typeCheckbox${index}`}
                   value={option}
                   checked={selectedFilters.type.includes(option)}
                   onChange={() => this.handleFilterChange('type', option)}
                 />
-                <label htmlFor={`typeCheckbox${index}`}>
+                <label  for="example-1" htmlFor={`typeCheckbox${index}`}>
                   {option}({this.getTypeCount(option)})
                 </label>
               </div>
             ))}
-            {filterOptions.types.length > this.state.displayTypes && (
-              <button className="load-more-button" onClick={this.handleLoadMoreTypes}>
-                Load More
-              </button>
+            {filterOptions.types.length > 10 && (
+              <div className="load-more-buttons">
+                <button className="load-more-button" onClick={this.handleToggleTypes}>
+                  {this.state.displayTypes === 10 ? 'Load More' : 'Less'}
+                </button>
+              </div>
             )}
           </div>
 
           {/* Checkbox inputs for Category */}
           <div className="checkbox-section">
-            <label>Category:</label>
+            <label className="category">Category</label>
             {filterOptions.categories.slice(0, this.state.displayCategories).map((option, index) => (
-              <div key={index} className="checkbox-item">
+              <div key={index} class="checkbox-wrapper-1">
                 <input
                   type="checkbox"
+                  class="substituted"
+                  aria-hidden="true" 
                   id={`categoryCheckbox${index}`}
                   value={option}
                   checked={selectedFilters.category.includes(option)}
                   onChange={() => this.handleFilterChange('category', option)}
                 />
-                <label htmlFor={`categoryCheckbox${index}`}>
+                <label  for="example-1" htmlFor={`categoryCheckbox${index}`}>
                   {option}({this.getCategoryCount(option)})
                 </label>
               </div>
             ))}
-            {filterOptions.categories.length > this.state.displayCategories && (
-              <button className="load-more-button" onClick={this.handleLoadMoreCategories}>
-                Load More
-              </button>
+            {filterOptions.categories.length > 10 && (
+              <div className="load-more-buttons">
+                <button className="load-more-button" onClick={this.handleToggleCategories}>
+                  {this.state.displayCategories === 10 ? 'Load More' : 'Less'}
+                </button>
+              </div>
             )}
           </div>
 
@@ -611,28 +651,27 @@ class GripperList extends Component {
             <label>Height Range: {minMaxValues.DimensionHeightValuesMin} to {minMaxValues.DimensionHeightValuesMax}</label>
             {/* range slider */}
             <div className="range-slider">
-
-              <input
+             
+              <Slider
                 type="range"
+                valueLabelDisplay='auto'
                 min={minMaxValues.DimensionHeightValuesMin}
                 max={minMaxValues.DimensionHeightValuesMax}
                 value={selectedFilters.DimensionHeightValuesMin}
                 onChange={(e) => this.handleIntegerFilterChange('DimensionHeightValuesMin', e.target.value)}
               />
-              <span>
-                Min:{selectedFilters.DimensionHeightValuesMin}
-              </span>
-              <input
+
+             
+              <Slider
                 type="range"
+                valueLabelDisplay='auto'
                 min={minMaxValues.DimensionHeightValuesMin}
                 max={minMaxValues.DimensionHeightValuesMax}
-                value={selectedFilters.DimensionHeightValuesMax}
-                onChange={(e) => this.handleIntegerFilterChange('DimensionHeightValuesMax', e.target.value)}
+                value={minMaxValues.DimensionHeightValuesMax - selectedFilters.DimensionHeightValuesMax}
+                onChange={(e) => this.handleIntegerFilterChange('DimensionHeightValuesMax', minMaxValues.DimensionHeightValuesMax - e.target.value)}
               />
-              <span>
-                Max:{selectedFilters.DimensionHeightValuesMax}
-              </span>
             </div>
+
           </div>
 
           {/* dimensionDepth */}
@@ -641,26 +680,24 @@ class GripperList extends Component {
             {/* range slider */}
             <div className="range-slider">
 
-              <input
+              <Slider
                 type="range"
+                valueLabelDisplay='auto'
                 min={minMaxValues.DimensionDepthValuesMin}
                 max={minMaxValues.DimensionDepthValuesMax}
                 value={selectedFilters.DimensionDepthValuesMin}
                 onChange={(e) => this.handleIntegerFilterChange('DimensionDepthValuesMin', e.target.value)}
               />
-              <span>
-                Min:{selectedFilters.DimensionDepthValuesMin}
-              </span>
-              <input
+
+              <Slider
                 type="range"
+                valueLabelDisplay='auto'
                 min={minMaxValues.DimensionDepthValuesMin}
                 max={minMaxValues.DimensionDepthValuesMax}
-                value={selectedFilters.DimensionDepthValuesMax}
-                onChange={(e) => this.handleIntegerFilterChange('DimensionDepthValuesMax', e.target.value)}
+                value={minMaxValues.DimensionDepthValuesMax - selectedFilters.DimensionDepthValuesMax}
+                onChange={(e) => this.handleIntegerFilterChange('DimensionDepthValuesMax', minMaxValues.DimensionDepthValuesMax - e.target.value)}
               />
-              <span>
-                Max:{selectedFilters.DimensionDepthValuesMax}
-              </span>
+
             </div>
           </div>
           {/* dimensionWidth */}
@@ -669,26 +706,24 @@ class GripperList extends Component {
             {/* range slider */}
             <div className="range-slider">
 
-              <input
+              <Slider
+                valueLabelDisplay='auto'
                 type="range"
                 min={minMaxValues.DimensionWidthValuesMin}
                 max={minMaxValues.DimensionWidthValuesMax}
                 value={selectedFilters.DimensionWidthValuesMin}
                 onChange={(e) => this.handleIntegerFilterChange('DimensionWidthValuesMin', e.target.value)}
               />
-              <span>
-                Min:{selectedFilters.DimensionWidthValuesMin}
-              </span>
-              <input
+
+              <Slider
                 type="range"
+                valueLabelDisplay='auto'
                 min={minMaxValues.DimensionWidthValuesMin}
                 max={minMaxValues.DimensionWidthValuesMax}
-                value={selectedFilters.DimensionWidthValuesMax}
-                onChange={(e) => this.handleIntegerFilterChange('DimensionWidthValuesMax', e.target.value)}
+                value={minMaxValues.DimensionWidthValuesMax - selectedFilters.DimensionWidthValuesMax}
+                onChange={(e) => this.handleIntegerFilterChange('DimensionWidthValuesMax', minMaxValues.DimensionWidthValuesMax - e.target.value)}
               />
-              <span>
-                Max:{selectedFilters.DimensionWidthValuesMax}
-              </span>
+
             </div>
           </div>
           <button className="clear-filter-button" onClick={this.clearFilter}>
@@ -701,7 +736,7 @@ class GripperList extends Component {
           </h1>
           <div className="top">Count of Products: {productCount}</div>
           <div className="search-section">
-           
+
             <input
               type="text"
               placeholder="Search products..."
@@ -709,7 +744,7 @@ class GripperList extends Component {
               onChange={this.handleSearchTermChange}
             />
             <button className='search' onClick={this.searchGrippers}>
-            <FontAwesomeIcon icon={faMagnifyingGlass} />
+              <FontAwesomeIcon icon={faMagnifyingGlass} />
             </button>
             <button className="clear-search-button" onClick={this.clearSearch}>
               Clear Search
