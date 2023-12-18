@@ -490,8 +490,8 @@ body {
 
 
 .checkbox-section {
-  display: flex;
-  flex-wrap: wrap;
+  display:unset;
+  
   margin-bottom: 20px;
 }
 
@@ -547,6 +547,8 @@ input {
   webkit-box-shadow: inset 32px -8px 0px -16px rgba(51,51,51,1);
   moz-box-shadow: inset 32px -8px 0px -16px rgba(51,51,51,1);
   box-shadow: inset 32px -8px 0px -16px rgba(51,51,51,1);
+  text-align: center;
+  border-radius: 10px;
 }
 
 
@@ -570,6 +572,8 @@ input {
   webkit-box-shadow: inset 32px -8px 0px -16px rgba(51,51,51,1);
   moz-box-shadow: inset 32px -8px 0px -16px rgba(51,51,51,1);
   box-shadow: inset 32px -8px 0px -16px rgba(51,51,51,1);
+  text-align: center;
+  border-radius: 10px;
 }
 
 .category{
@@ -592,6 +596,8 @@ input {
   webkit-box-shadow: inset 32px -8px 0px -16px rgba(51,51,51,1);
   moz-box-shadow: inset 32px -8px 0px -16px rgba(51,51,51,1);
   box-shadow: inset 32px -8px 0px -16px rgba(51,51,51,1);
+  text-align: center;
+  border-radius: 10px;
 }
 
 /* App.css */
