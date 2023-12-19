@@ -890,53 +890,55 @@ class GripperList extends Component {
             </div>
           ) : null}
 
-          {grippersToRender.length > 0 ? (
-            grippersToRender.map((gripper, index) => (
-              <div key={index} className="product-card">
-                <div className="product-header">
-                  <FontAwesomeIcon
-                    icon={faTrash}
-                    onClick={() => this.confirmDeleteGripper(gripper)}
-                    className="trash-icon"
-                  />
-                 
-                </div>
-                <div className="product-content">
-                  {gripper.Data.find((data) => data.Property === 'ImageURL') ? (
-                    <img
-                      src={gripper.Data.find((data) => data.Property === 'ImageURL').Value}
-                      alt={gripper['Model Name']}
-                    />
-                  ) : (
-                    <p>Image not available</p>
-                  )}
-                  <h2>{gripper['Model Name']}</h2>
-                </div>
-                {gripper.Data.find((data) => data.Property === 'Datasheet') ? (
-                  gripper.Data.find((data) => data.Property === 'Datasheet').Value ? (
-                    <div>
-                      <a
-                        href={gripper.Data.find((data) => data.Property === 'Datasheet').Value}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <FontAwesomeIcon icon={faFilePdf} className="pdf-icon" /> Datasheet PDF
-                      </a>
-                    </div>
-                  ) : (
-                    <p>PDF not available</p>
-                  )
-                ) : (
-                  <p>PDF not available</p>
-                )}
-              </div>
-            ))
-          ) : (
-            <div className="no-data-message">
-              <p>No grippers match the selected criteria.</p>
-              <FontAwesomeIcon icon={faDatabase} className="faDatabase-icon" />
-            </div>
-          )}
+{grippersToRender.length > 0 ? (
+  grippersToRender.map((gripper, index) => (
+    <div key={index} className="product-card">
+      <div className="product-header">
+        <FontAwesomeIcon
+          icon={faTrash}
+          onClick={(e) => {
+            e.stopPropagation(); // Stop the event from propagating to the product card
+            this.confirmDeleteGripper(gripper);
+          }}
+          className="trash-icon"
+        />
+      </div>
+      <div className="product-content" onClick={() => this.openGripperDetails(gripper)}>
+        {gripper.Data.find((data) => data.Property === 'ImageURL') ? (
+          <img
+            src={gripper.Data.find((data) => data.Property === 'ImageURL').Value}
+            alt={gripper['Model Name']}
+          />
+        ) : (
+          <p>Image not available</p>
+        )}
+        <h2>{gripper['Model Name']}</h2>
+      </div>
+      {gripper.Data.find((data) => data.Property === 'Datasheet') ? (
+        gripper.Data.find((data) => data.Property === 'Datasheet').Value ? (
+          <div>
+            <a
+              href={gripper.Data.find((data) => data.Property === 'Datasheet').Value}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FontAwesomeIcon icon={faFilePdf} className="pdf-icon" /> Datasheet PDF
+            </a>
+          </div>
+        ) : (
+          <p>PDF not available</p>
+        )
+      ) : (
+        <p>PDF not available</p>
+      )}
+    </div>
+  ))
+) : (
+  <div className="no-data-message">
+    <p>No grippers match the selected criteria.</p>
+    <FontAwesomeIcon icon={faDatabase} className="faDatabase-icon" />
+  </div>
+)}
 
 
           {selectedGripperDetails && (
