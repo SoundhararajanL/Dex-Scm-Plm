@@ -7,7 +7,7 @@ import axios from 'axios';
 import './App.css';
 import jsonData from './data.json';
 import Slider from '@mui/material/Slider';
-import { Slider } from '@mui/material';
+
 
 class GripperList extends Component {
 
