@@ -79,23 +79,46 @@ class GripperList extends Component {
       dimensionWidth,
     } = this.state;
 
-    // Check if at least one field is filled
-    if (
-      !modelName &&
-      !imageUrl &&
-      !datasheet &&
-      !manufactureName &&
-      !manufactureType &&
-      !manufactureCategory &&
-      !payload &&
-      !grippingForce &&
-      !feedGrippingForce &&
-      !dimensionHeight &&
-      !dimensionDepth &&
-      !dimensionWidth
-    ) {
-      alert('At least one field is required');
+  
+
+  // Check if at least one other field is filled
+  if (
+    !imageUrl &&
+    !datasheet &&
+    !manufactureName &&
+    !manufactureType &&
+    !manufactureCategory &&
+    !payload &&
+    !grippingForce &&
+    !feedGrippingForce &&
+    !dimensionHeight &&
+    !dimensionDepth &&
+    !dimensionWidth
+  ) {
+    alert('At least one field is required');
+    return;
+  }
+
+    // Check if Model Name is empty
+    if (!modelName) {
+      alert('Model Name is required');
       return;
+    }
+
+    const numericFields = [
+      { value: payload, name: 'Payload(Kg)' },
+      { value: grippingForce, name: 'Gripping Force' },
+      { value: feedGrippingForce, name: 'Feed Gripping Force' },
+      { value: dimensionHeight, name: 'Dimension Height' },
+      { value: dimensionDepth, name: 'Dimension Depth' },
+      { value: dimensionWidth, name: 'Dimension Width' },
+    ];
+  
+    for (const field of numericFields) {
+      if (!field.value || isNaN(field.value)) {
+        alert(`${field.name} must be a valid number`);
+        return;
+      }
     }
 
     const newGripper = {
@@ -861,7 +884,7 @@ class GripperList extends Component {
                 <div className="form-row">
                   <label>Payload(Kg) :</label>
                   <input
-                    type="text"
+                    type="number"
                     value={payload}
                     onChange={(e) => this.setState({ payload: e.target.value })}
                   />
@@ -869,7 +892,7 @@ class GripperList extends Component {
                 <div className="form-row">
                   <label>Gripping Force:</label>
                   <input
-                    type="text"
+                    type="number"
                     value={grippingForce}
                     onChange={(e) => this.setState({ grippingForce: e.target.value })}
                   />
@@ -877,7 +900,7 @@ class GripperList extends Component {
                 <div className="form-row">
                   <label>Feed Gripping Force:</label>
                   <input
-                    type="text"
+                    type="number"
                     value={feedGrippingForce}
                     onChange={(e) => this.setState({ feedGrippingForce: e.target.value })}
                   />
@@ -887,7 +910,7 @@ class GripperList extends Component {
                 <div className="form-row">
                   <label>Height</label>
                   <input
-                    type="text"
+                    type="number"
                     value={dimensionHeight}
                     onChange={(e) => this.setState({ dimensionHeight: e.target.value })}
                   />
@@ -896,7 +919,7 @@ class GripperList extends Component {
                 <div className="form-row">
                   <label>Depth</label>
                   <input
-                    type="text"
+                    type="number"
                     value={dimensionDepth}
                     onChange={(e) => this.setState({ dimensionDepth: e.target.value })}
                   />
@@ -905,7 +928,7 @@ class GripperList extends Component {
                 <div className="form-row">
                   <label>width</label>
                   <input
-                    type="text"
+                    type="number"
                     value={dimensionWidth}
                     onChange={(e) => this.setState({ dimensionWidth: e.target.value })}
                   />
