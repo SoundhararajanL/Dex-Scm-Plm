@@ -105,21 +105,7 @@ class GripperList extends Component {
       return;
     }
 
-    const numericFields = [
-      { value: payload, name: 'Payload(Kg)' },
-      { value: grippingForce, name: 'Gripping Force' },
-      { value: feedGrippingForce, name: 'Feed Gripping Force' },
-      { value: dimensionHeight, name: 'Dimension Height' },
-      { value: dimensionDepth, name: 'Dimension Depth' },
-      { value: dimensionWidth, name: 'Dimension Width' },
-    ];
-  
-    for (const field of numericFields) {
-      if (!field.value || isNaN(field.value)) {
-        alert(`${field.name} must be a valid number`);
-        return;
-      }
-    }
+    
 
     const newGripper = {
       "Model Name": modelName,
