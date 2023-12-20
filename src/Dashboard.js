@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFilePdf, faDatabase, faMagnifyingGlass, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faFilePdf, faDatabase, faMagnifyingGlass, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
@@ -473,7 +473,50 @@ class GripperList extends Component {
   };
 
 
+  confirmDeleteGripper = (gripper) => {
+    const isConfirmed = window.confirm(`Are you sure you want to delete ${gripper['Model Name']}?`);
+    if (isConfirmed) {
+     
+      this.deleteGripper(gripper);
+    }
+  }
+  
+  
+  
 
+  deleteGripper = async (gripper) => {
+    try {
+      // Send a request to the server to delete the gripper
+      const response = await fetch(`http://localhost:3001/api/deleteGripper/${gripper['Model Name']}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+  
+      if (response.ok) {
+        console.log(`Gripper ${gripper['Model Name']} deleted successfully.`);
+        // Refresh the grippers data after deletion
+        this.fetchGrippersData();
+      } else {
+        console.error(`Failed to delete gripper ${gripper['Model Name']}.`);
+      }
+    } catch (error) {
+      console.error('Error deleting gripper:', error);
+    }
+  };
+  
+  
+
+  
+  
+
+  
+  
+  
+  
+  
+  
 
   render() {
     const { isModalOpen, selectedGripperDetails } = this.state;
@@ -513,11 +556,11 @@ class GripperList extends Component {
             {filterOptions.manufactureNames.slice(0, this.state.displayManufactureNames).map((option, index) => (
               <div key={index} class="checkbox-wrapper-1">
                 <input
-                
-               
+
+
                   type="checkbox"
                   class="substituted"
-                  aria-hidden="true" 
+                  aria-hidden="true"
                   id={`manufactureNameCheckbox${index}`}
                   value={option}
                   checked={selectedFilters.manufactureName.includes(option)}
@@ -545,13 +588,13 @@ class GripperList extends Component {
                 <input
                   type="checkbox"
                   class="substituted"
-                  aria-hidden="true" 
+                  aria-hidden="true"
                   id={`typeCheckbox${index}`}
                   value={option}
                   checked={selectedFilters.type.includes(option)}
                   onChange={() => this.handleFilterChange('type', option)}
                 />
-                <label  for="example-1" htmlFor={`typeCheckbox${index}`}>
+                <label for="example-1" htmlFor={`typeCheckbox${index}`}>
                   {option}({this.getTypeCount(option)})
                 </label>
               </div>
@@ -573,13 +616,13 @@ class GripperList extends Component {
                 <input
                   type="checkbox"
                   class="substituted"
-                  aria-hidden="true" 
+                  aria-hidden="true"
                   id={`categoryCheckbox${index}`}
                   value={option}
                   checked={selectedFilters.category.includes(option)}
                   onChange={() => this.handleFilterChange('category', option)}
                 />
-                <label  for="example-1" htmlFor={`categoryCheckbox${index}`}>
+                <label for="example-1" htmlFor={`categoryCheckbox${index}`}>
                   {option}({this.getCategoryCount(option)})
                 </label>
               </div>
@@ -651,7 +694,7 @@ class GripperList extends Component {
             <label>Height Range: {minMaxValues.DimensionHeightValuesMin} to {minMaxValues.DimensionHeightValuesMax}</label>
             {/* range slider */}
             <div className="range-slider">
-             
+
               <Slider
                 type="range"
                 valueLabelDisplay='auto'
@@ -661,7 +704,7 @@ class GripperList extends Component {
                 onChange={(e) => this.handleIntegerFilterChange('DimensionHeightValuesMin', e.target.value)}
               />
 
-             
+
               <Slider
                 type="range"
                 valueLabelDisplay='auto'
@@ -876,45 +919,56 @@ class GripperList extends Component {
             </div>
           ) : null}
 
-          {grippersToRender.length > 0 ? (
-            grippersToRender.map((gripper, index) => (
-              <div key={index} className="product-card">
-                <div onClick={() => this.openGripperDetails(gripper)}>
-                  {gripper.Data.find((data) => data.Property === 'ImageURL') ? (
-                    <img
-                      src={gripper.Data.find((data) => data.Property === 'ImageURL').Value}
-                      alt={gripper['Model Name']}
-                    />
-                  ) : (
-                    <p>Image not available</p>
-                  )}
-                  <h2>{gripper['Model Name']}</h2>
-                </div>
-                {gripper.Data.find((data) => data.Property === 'Datasheet') ? (
-                  gripper.Data.find((data) => data.Property === 'Datasheet').Value ? (
-                    <div>
-                      <a
-                        href={gripper.Data.find((data) => data.Property === 'Datasheet').Value}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <FontAwesomeIcon icon={faFilePdf} className="pdf-icon" /> Datasheet PDF
-                      </a>
-                    </div>
-                  ) : (
-                    <p>PDF not available</p>
-                  )
-                ) : (
-                  <p>PDF not available</p>
-                )}
-              </div>
-            ))
-          ) : (
-            <div className="no-data-message">
-              <p>No grippers match the selected criteria.</p>
-              <FontAwesomeIcon icon={faDatabase} className="faDatabase-icon" />
-            </div>
-          )}
+{grippersToRender.length > 0 ? (
+  grippersToRender.map((gripper, index) => (
+    <div key={index} className="product-card">
+      <div className="product-header">
+        <FontAwesomeIcon
+          icon={faTrash}
+          onClick={(e) => {
+            e.stopPropagation(); // Stop the event from propagating to the product card
+            this.confirmDeleteGripper(gripper);
+          }}
+          className="trash-icon"
+        />
+      </div>
+      <div className="product-content" onClick={() => this.openGripperDetails(gripper)}>
+        {gripper.Data.find((data) => data.Property === 'ImageURL') ? (
+          <img
+            src={gripper.Data.find((data) => data.Property === 'ImageURL').Value}
+            alt={gripper['Model Name']}
+          />
+        ) : (
+          <p>Image not available</p>
+        )}
+        <h2>{gripper['Model Name']}</h2>
+      </div>
+      {gripper.Data.find((data) => data.Property === 'Datasheet') ? (
+        gripper.Data.find((data) => data.Property === 'Datasheet').Value ? (
+          <div>
+            <a
+              href={gripper.Data.find((data) => data.Property === 'Datasheet').Value}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FontAwesomeIcon icon={faFilePdf} className="pdf-icon" /> Datasheet PDF
+            </a>
+          </div>
+        ) : (
+          <p>PDF not available</p>
+        )
+      ) : (
+        <p>PDF not available</p>
+      )}
+    </div>
+  ))
+) : (
+  <div className="no-data-message">
+    <p>No grippers match the selected criteria.</p>
+    <FontAwesomeIcon icon={faDatabase} className="faDatabase-icon" />
+  </div>
+)}
+
 
           {selectedGripperDetails && (
             <div className={`modal ${isModalOpen ? 'show' : ''}`}>

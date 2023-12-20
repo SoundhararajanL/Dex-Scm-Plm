@@ -140,7 +140,7 @@ body {
 
 
 .filter-options button:hover {
-  background-color: #0056b3;
+  background-color: #9ea8b2;
 }
 
 
@@ -481,12 +481,14 @@ body {
 .load-more-button {
   margin-top: 10px;
   padding: 5px 10px;
-  background-color: #007bff;
-  color: #fff;
+  background-color: #04080c6f;
+ 
   border: none;
   cursor: pointer;
-  border-radius: 10px;
+  border-radius: 2px;
+  margin-bottom: 10px;
 }
+
 
 
 .checkbox-section {
@@ -708,4 +710,24 @@ input {
   .checkbox-wrapper-1 [type=checkbox].substituted.dark:checked:enabled + label:active:before {
     background-color: #c68035;
     color: rgba(0, 0, 0, 0.275);
+  }
+
+
+  .product-header {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    margin-bottom: 4px;
+
+ 
+  }
+  
+  .trash-icon {
+    cursor: pointer;
+    transition: box-shadow 0.3s ease;
+    color: rgb(93, 92, 92);
+  }
+  
+  .trash-icon:hover {
+    box-shadow: 0 0 10px 0px #0b0b0b;
   }
