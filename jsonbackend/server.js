@@ -103,6 +103,44 @@ app.post('/api/updateData', async (req, res) => {
   }
 });
 
+app.delete('/api/deleteGripper/:modelName', async (req, res) => {
+  try {
+    const modelNameToDelete = req.params.modelName;
+
+    // Read the existing data.json file
+    const jsonData = await fs.readFile('../src/data.json', 'utf-8');
+    const existingData = JSON.parse(jsonData);
+
+    // Find the index of the gripper with the specified model name
+    const gripperIndexToDelete = existingData.findIndex(
+      (gripper) => gripper['Model Name'] === modelNameToDelete
+    );
+
+    // If the gripper is found, remove it from the array
+    if (gripperIndexToDelete !== -1) {
+      existingData.splice(gripperIndexToDelete, 1);
+
+      // Write the updated data back to data.json
+      await fs.writeFile('../src/data.json', JSON.stringify(existingData, null, 2), 'utf-8');
+
+      // Respond with the updated data (you may choose to send a success message or just the updated data)
+      res.json(existingData);
+      console.log(`Gripper ${modelNameToDelete} deleted successfully.`);
+    } else {
+      // Gripper not found
+      res.status(404).json({ error: `Gripper ${modelNameToDelete} not found.` });
+    }
+  } catch (error) {
+    console.error('Error deleting gripper:', error);
+    res.status(500).json({ error: `Failed to delete gripper: ${error.message}` });
+  }
+});
+
+
+
+
+
+
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });

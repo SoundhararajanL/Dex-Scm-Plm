@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFilePdf, faDatabase, faMagnifyingGlass, faTrash, faMobile, faDesktop } from '@fortawesome/free-solid-svg-icons';
+import { faFilePdf, faDatabase, faMagnifyingGlass, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
@@ -18,9 +18,6 @@ class GripperList extends Component {
       manufactureNames: [],
       types: [],
       categories: [],
-       isMobileView: true,
-       setMobileView: true,
-
     },
     displayManufactureNames: 10,
     displayTypes: 10,
@@ -62,8 +59,6 @@ class GripperList extends Component {
     showAddGripperForm: false,
     searchTerm: '',
     jsonData: jsonData,
-   
-    
   };
 
 
@@ -84,24 +79,33 @@ class GripperList extends Component {
       dimensionWidth,
     } = this.state;
 
-    // Check if at least one field is filled
-    if (
-      !modelName &&
-      !imageUrl &&
-      !datasheet &&
-      !manufactureName &&
-      !manufactureType &&
-      !manufactureCategory &&
-      !payload &&
-      !grippingForce &&
-      !feedGrippingForce &&
-      !dimensionHeight &&
-      !dimensionDepth &&
-      !dimensionWidth
-    ) {
-      alert('At least one field is required');
+  
+
+  // Check if at least one other field is filled
+  if (
+    !imageUrl &&
+    !datasheet &&
+    !manufactureName &&
+    !manufactureType &&
+    !manufactureCategory &&
+    !payload &&
+    !grippingForce &&
+    !feedGrippingForce &&
+    !dimensionHeight &&
+    !dimensionDepth &&
+    !dimensionWidth
+  ) {
+    alert('At least one field is required');
+    return;
+  }
+
+    // Check if Model Name is empty
+    if (!modelName) {
+      alert('Model Name is required');
       return;
     }
+
+    
 
     const newGripper = {
       "Model Name": modelName,
@@ -478,39 +482,50 @@ class GripperList extends Component {
   };
 
 
-
   confirmDeleteGripper = (gripper) => {
     const isConfirmed = window.confirm(`Are you sure you want to delete ${gripper['Model Name']}?`);
     if (isConfirmed) {
-
+     
       this.deleteGripper(gripper);
     }
   }
+  
+  
+  
 
-  deleteGripper = (gripper) => {
-
-    console.log(`Deleting gripper: ${gripper['Model Name']}`);
-
-  }
-
-  handleMobileClick = () => {
-    this.setState({ isMobileView: true });
+  deleteGripper = async (gripper) => {
+    try {
+      // Send a request to the server to delete the gripper
+      const response = await fetch(`http://localhost:3001/api/deleteGripper/${gripper['Model Name']}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+  
+      if (response.ok) {
+        console.log(`Gripper ${gripper['Model Name']} deleted successfully.`);
+        // Refresh the grippers data after deletion
+        this.fetchGrippersData();
+      } else {
+        console.error(`Failed to delete gripper ${gripper['Model Name']}.`);
+      }
+    } catch (error) {
+      console.error('Error deleting gripper:', error);
+    }
   };
+  
+  
 
-  handleDesktopClick = () => {
-    this.setState({ isMobileView: false });
-  };
+  
+  
 
-
-  renderMobileUI() {
-    
-    return <div></div>;
-  }
-
-  renderDesktopUI() {
-   
-    return <div></div>;
-  }
+  
+  
+  
+  
+  
+  
 
   render() {
     const { isModalOpen, selectedGripperDetails } = this.state;
@@ -520,7 +535,6 @@ class GripperList extends Component {
     const grippersToRender = filtersApplied ? filteredGrippers : jsonData;
     const productCount = grippersToRender.length;
 
-    const { isMobileView } = this.state;
 
     const { minMaxValues } = this.state;
     const { showAddGripperForm } = this.state;
@@ -542,7 +556,6 @@ class GripperList extends Component {
     return (
 
       <div className="gripper-list-container">
-
         <div className="filter-options">
           <h2>Filters</h2>
 
@@ -769,21 +782,8 @@ class GripperList extends Component {
             Clear Filter
           </button>
         </div>
-        <div>
-        <div className='view'>
-          <div className={`icon-box ${isMobileView ? 'active' : ''}`} onClick={this.handleMobileClick}>
-            <FontAwesomeIcon icon={faMobile} />
-          </div>
-          <div className={`icon-box ${!isMobileView ? 'active' : ''}`} onClick={this.handleDesktopClick}>
-            <FontAwesomeIcon icon={faDesktop} />
-          </div>
-        </div>
-
-        {isMobileView ? this.renderMobileUI() : this.renderDesktopUI()}
-      </div>
         <div className="product-list">
           <h1 className="top">
-
             Grippers List <FontAwesomeIcon icon={faDatabase} />
           </h1>
           <div className="top">Count of Products: {productCount}</div>
@@ -870,7 +870,7 @@ class GripperList extends Component {
                 <div className="form-row">
                   <label>Payload(Kg) :</label>
                   <input
-                    type="text"
+                    type="number"
                     value={payload}
                     onChange={(e) => this.setState({ payload: e.target.value })}
                   />
@@ -878,7 +878,7 @@ class GripperList extends Component {
                 <div className="form-row">
                   <label>Gripping Force:</label>
                   <input
-                    type="text"
+                    type="number"
                     value={grippingForce}
                     onChange={(e) => this.setState({ grippingForce: e.target.value })}
                   />
@@ -886,7 +886,7 @@ class GripperList extends Component {
                 <div className="form-row">
                   <label>Feed Gripping Force:</label>
                   <input
-                    type="text"
+                    type="number"
                     value={feedGrippingForce}
                     onChange={(e) => this.setState({ feedGrippingForce: e.target.value })}
                   />
@@ -896,7 +896,7 @@ class GripperList extends Component {
                 <div className="form-row">
                   <label>Height</label>
                   <input
-                    type="text"
+                    type="number"
                     value={dimensionHeight}
                     onChange={(e) => this.setState({ dimensionHeight: e.target.value })}
                   />
@@ -905,7 +905,7 @@ class GripperList extends Component {
                 <div className="form-row">
                   <label>Depth</label>
                   <input
-                    type="text"
+                    type="number"
                     value={dimensionDepth}
                     onChange={(e) => this.setState({ dimensionDepth: e.target.value })}
                   />
@@ -914,7 +914,7 @@ class GripperList extends Component {
                 <div className="form-row">
                   <label>width</label>
                   <input
-                    type="text"
+                    type="number"
                     value={dimensionWidth}
                     onChange={(e) => this.setState({ dimensionWidth: e.target.value })}
                   />
@@ -928,55 +928,55 @@ class GripperList extends Component {
             </div>
           ) : null}
 
-          {grippersToRender.length > 0 ? (
-            grippersToRender.map((gripper, index) => (
-              <div key={index} className="product-card">
-                <div className="product-header">
-                  <FontAwesomeIcon
-                    icon={faTrash}
-                    onClick={(e) => {
-                      e.stopPropagation(); // Stop the event from propagating to the product card
-                      this.confirmDeleteGripper(gripper);
-                    }}
-                    className="trash-icon"
-                  />
-                </div>
-                <div className="product-content" onClick={() => this.openGripperDetails(gripper)}>
-                  {gripper.Data.find((data) => data.Property === 'ImageURL') ? (
-                    <img
-                      src={gripper.Data.find((data) => data.Property === 'ImageURL').Value}
-                      alt={gripper['Model Name']}
-                    />
-                  ) : (
-                    <p>Image not available</p>
-                  )}
-                  <h2>{gripper['Model Name']}</h2>
-                </div>
-                {gripper.Data.find((data) => data.Property === 'Datasheet') ? (
-                  gripper.Data.find((data) => data.Property === 'Datasheet').Value ? (
-                    <div>
-                      <a
-                        href={gripper.Data.find((data) => data.Property === 'Datasheet').Value}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <FontAwesomeIcon icon={faFilePdf} className="pdf-icon" /> Datasheet PDF
-                      </a>
-                    </div>
-                  ) : (
-                    <p>PDF not available</p>
-                  )
-                ) : (
-                  <p>PDF not available</p>
-                )}
-              </div>
-            ))
-          ) : (
-            <div className="no-data-message">
-              <p>No grippers match the selected criteria.</p>
-              <FontAwesomeIcon icon={faDatabase} className="faDatabase-icon" />
-            </div>
-          )}
+{grippersToRender.length > 0 ? (
+  grippersToRender.map((gripper, index) => (
+    <div key={index} className="product-card">
+      <div className="product-header">
+        <FontAwesomeIcon
+          icon={faTrash}
+          onClick={(e) => {
+            e.stopPropagation(); // Stop the event from propagating to the product card
+            this.confirmDeleteGripper(gripper);
+          }}
+          className="trash-icon"
+        />
+      </div>
+      <div className="product-content" onClick={() => this.openGripperDetails(gripper)}>
+        {gripper.Data.find((data) => data.Property === 'ImageURL') ? (
+          <img
+            src={gripper.Data.find((data) => data.Property === 'ImageURL').Value}
+            alt={gripper['Model Name']}
+          />
+        ) : (
+          <p>Image not available</p>
+        )}
+        <h2>{gripper['Model Name']}</h2>
+      </div>
+      {gripper.Data.find((data) => data.Property === 'Datasheet') ? (
+        gripper.Data.find((data) => data.Property === 'Datasheet').Value ? (
+          <div>
+            <a
+              href={gripper.Data.find((data) => data.Property === 'Datasheet').Value}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FontAwesomeIcon icon={faFilePdf} className="pdf-icon" /> Datasheet PDF
+            </a>
+          </div>
+        ) : (
+          <p>PDF not available</p>
+        )
+      ) : (
+        <p>PDF not available</p>
+      )}
+    </div>
+  ))
+) : (
+  <div className="no-data-message">
+    <p>No grippers match the selected criteria.</p>
+    <FontAwesomeIcon icon={faDatabase} className="faDatabase-icon" />
+  </div>
+)}
 
 
           {selectedGripperDetails && (
