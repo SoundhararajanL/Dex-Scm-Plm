@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const fs = require('fs/promises');
 const cors = require('cors');  
 const app = express();
-const port = 3001; 
+const port = 3000; 
 const corsOptions = {
   origin: '*',
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
