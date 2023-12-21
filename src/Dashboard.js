@@ -566,7 +566,7 @@ class GripperList extends Component {
 
       <div className="gripper-list-container">
         <div className="filter-options">
-          <h2>filters</h2>
+          <h2>Filters</h2>
 
           {/* Checkbox inputs for Manufacture Name */}
           <div className="checkbox-section">
@@ -818,7 +818,7 @@ class GripperList extends Component {
         </div>
         <div className="product-list">
           <h1 className="top">
-            Grippers List <FontAwesomeIcon icon={faDatabase} />
+            Grippers <FontAwesomeIcon icon={faDatabase} />
           </h1>
           <div className="top">Count of Products: {productCount}</div>
           <div className="search-section">
