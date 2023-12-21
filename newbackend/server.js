@@ -28,6 +28,14 @@ app.get('/api/grippers/minmax', async (req, res) => {
 
     const extractNumericValue = (data, property) => {
       const valueData = data.find((item) => item.Property === property);
+      // Skip null or empty values for specific properties
+      if (
+        (property === 'ManufactureName' || property === 'Type' || property === 'Category') &&
+        (!valueData || !valueData.Value)
+      ) {
+        return null;
+      }
+
       if (valueData && !isNaN(parseFloat(valueData.Value))) {
         return parseFloat(valueData.Value);
       }

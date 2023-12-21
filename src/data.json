@@ -1664,54 +1664,5 @@
         "Value": 1000
       }
     ]
-  },
-  {
-    "Model Name": "kgts",
-    "Data": [
-      {
-        "Property": "ImageURL",
-        "Value": "js"
-      },
-      {
-        "Property": "Datasheet",
-        "Value": "ss"
-      },
-      {
-        "Property": "ManufactureName",
-        "Value": "ss"
-      },
-      {
-        "Property": "Type",
-        "Value": "ss"
-      },
-      {
-        "Property": "Category",
-        "Value": ""
-      },
-      {
-        "Property": "Payload(Kg)",
-        "Value": ""
-      },
-      {
-        "Property": "Gripping Force",
-        "Value": ""
-      },
-      {
-        "Property": "Feed pressure Max",
-        "Value": ""
-      },
-      {
-        "Property": "DimensionHeight(MM)",
-        "Value": ""
-      },
-      {
-        "Property": "DimensionDepth(MM)",
-        "Value": ""
-      },
-      {
-        "Property": "DimensionWidth(MM)",
-        "Value": ""
-      }
-    ]
   }
 ]

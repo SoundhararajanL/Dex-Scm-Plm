@@ -8,6 +8,7 @@ import './App.css';
 import jsonData from './data.json';
 import Slider from '@mui/material/Slider';
 
+
 class GripperList extends Component {
 
   state = {
@@ -79,25 +80,26 @@ class GripperList extends Component {
       dimensionWidth,
     } = this.state;
 
-  
 
-  // Check if at least one other field is filled
-  if (
-    !imageUrl &&
-    !datasheet &&
-    !manufactureName &&
-    !manufactureType &&
-    !manufactureCategory &&
-    !payload &&
-    !grippingForce &&
-    !feedGrippingForce &&
-    !dimensionHeight &&
-    !dimensionDepth &&
-    !dimensionWidth
-  ) {
-    alert('At least one field is required');
-    return;
-  }
+
+    // Check if at least one other field is filled
+    if (
+      !modelName&&
+      !imageUrl &&
+      !datasheet &&
+      !manufactureName &&
+      !manufactureType &&
+      !manufactureCategory &&
+      !payload &&
+      !grippingForce &&
+      !feedGrippingForce &&
+      !dimensionHeight &&
+      !dimensionDepth &&
+      !dimensionWidth
+    ) {
+      alert('Model Name is required');
+      return;
+    }
 
     // Check if Model Name is empty
     if (!modelName) {
@@ -105,7 +107,7 @@ class GripperList extends Component {
       return;
     }
 
-    
+
 
     const newGripper = {
       "Model Name": modelName,
@@ -418,10 +420,17 @@ class GripperList extends Component {
     // Extract ManufactureName, Type, and Category from jsonData
     const { jsonData } = this.state;
 
-    const manufactureNames = jsonData.map((gripper) => gripper.Data.find((item) => item.Property === 'ManufactureName').Value);
-    const types = jsonData.map((gripper) => gripper.Data.find((item) => item.Property === 'Type').Value);
-    const categories = jsonData.map((gripper) => gripper.Data.find((item) => item.Property === 'Category').Value);
+    const manufactureNames = jsonData
+    .map((gripper) => gripper.Data.find((item) => item.Property === 'ManufactureName').Value)
+    .filter(value => value !== ''); // Filter out empty values
 
+  const types = jsonData
+    .map((gripper) => gripper.Data.find((item) => item.Property === 'Type').Value)
+    .filter(value => value !== ''); // Filter out empty values
+
+  const categories = jsonData
+    .map((gripper) => gripper.Data.find((item) => item.Property === 'Category').Value)
+    .filter(value => value !== ''); // Filter out empty values
     // Fetch min and max values from the server
     axios
       .get('http://localhost:3001/api/grippers/minmax')
@@ -485,13 +494,13 @@ class GripperList extends Component {
   confirmDeleteGripper = (gripper) => {
     const isConfirmed = window.confirm(`Are you sure you want to delete ${gripper['Model Name']}?`);
     if (isConfirmed) {
-     
+
       this.deleteGripper(gripper);
     }
   }
-  
-  
-  
+
+
+
 
   deleteGripper = async (gripper) => {
     try {
@@ -502,7 +511,7 @@ class GripperList extends Component {
           'Content-Type': 'application/json',
         },
       });
-  
+
       if (response.ok) {
         console.log(`Gripper ${gripper['Model Name']} deleted successfully.`);
         // Refresh the grippers data after deletion
@@ -514,18 +523,18 @@ class GripperList extends Component {
       console.error('Error deleting gripper:', error);
     }
   };
-  
-  
 
-  
-  
 
-  
-  
-  
-  
-  
-  
+
+
+
+
+
+
+
+
+
+
 
   render() {
     const { isModalOpen, selectedGripperDetails } = this.state;
@@ -562,24 +571,31 @@ class GripperList extends Component {
           {/* Checkbox inputs for Manufacture Name */}
           <div className="checkbox-section">
             <label className="Manifacturename">Manufacture Name</label>
-            {filterOptions.manufactureNames.slice(0, this.state.displayManufactureNames).map((option, index) => (
-              <div key={index} class="checkbox-wrapper-1">
-                <input
+            {filterOptions.manufactureNames
+              .slice(0, this.state.displayManufactureNames)
+              .map((option, index) => {
+                // Skip rendering if the option is an empty string
+                if (option === '') {
+                  return null;
+                }
 
-
-                  type="checkbox"
-                  class="substituted"
-                  aria-hidden="true"
-                  id={`manufactureNameCheckbox${index}`}
-                  value={option}
-                  checked={selectedFilters.manufactureName.includes(option)}
-                  onChange={() => this.handleFilterChange('manufactureName', option)}
-                />
-                <label for="example-1" htmlFor={`manufactureNameCheckbox${index}`}>
-                  {option} ({this.getManufactureNameCount(option)})
-                </label>
-              </div>
-            ))}
+                return (
+                  <div key={index} className="checkbox-wrapper-1">
+                    <input
+                      type="checkbox"
+                      className="substituted"
+                      aria-hidden="true"
+                      id={`manufactureNameCheckbox${index}`}
+                      value={option}
+                      checked={selectedFilters.manufactureName.includes(option)}
+                      onChange={() => this.handleFilterChange('manufactureName', option)}
+                    />
+                    <label htmlFor={`manufactureNameCheckbox${index}`}>
+                      {option} ({this.getManufactureNameCount(option)})
+                    </label>
+                  </div>
+                );
+              })}
             {filterOptions.manufactureNames.length > 10 && (
               <div className="load-more-buttons">
                 <button className="load-more-button" onClick={this.handleToggleManufactureNames}>
@@ -592,22 +608,31 @@ class GripperList extends Component {
           {/* Checkbox inputs for Type */}
           <div className="checkbox-section">
             <label className="type">Type</label>
-            {filterOptions.types.slice(0, this.state.displayTypes).map((option, index) => (
-              <div key={index} class="checkbox-wrapper-1">
-                <input
-                  type="checkbox"
-                  class="substituted"
-                  aria-hidden="true"
-                  id={`typeCheckbox${index}`}
-                  value={option}
-                  checked={selectedFilters.type.includes(option)}
-                  onChange={() => this.handleFilterChange('type', option)}
-                />
-                <label for="example-1" htmlFor={`typeCheckbox${index}`}>
-                  {option}({this.getTypeCount(option)})
-                </label>
-              </div>
-            ))}
+            {filterOptions.types
+              .slice(0, this.state.displayTypes)
+              .map((option, index) => {
+                // Skip rendering if the option is an empty string
+                if (option === '') {
+                  return null;
+                }
+
+                return (
+                  <div key={index} className="checkbox-wrapper-1">
+                    <input
+                      type="checkbox"
+                      className="substituted"
+                      aria-hidden="true"
+                      id={`typeCheckbox${index}`}
+                      value={option}
+                      checked={selectedFilters.type.includes(option)}
+                      onChange={() => this.handleFilterChange('type', option)}
+                    />
+                    <label htmlFor={`typeCheckbox${index}`}>
+                      {option} ({this.getTypeCount(option)})
+                    </label>
+                  </div>
+                );
+              })}
             {filterOptions.types.length > 10 && (
               <div className="load-more-buttons">
                 <button className="load-more-button" onClick={this.handleToggleTypes}>
@@ -620,22 +645,31 @@ class GripperList extends Component {
           {/* Checkbox inputs for Category */}
           <div className="checkbox-section">
             <label className="category">Category</label>
-            {filterOptions.categories.slice(0, this.state.displayCategories).map((option, index) => (
-              <div key={index} class="checkbox-wrapper-1">
-                <input
-                  type="checkbox"
-                  class="substituted"
-                  aria-hidden="true"
-                  id={`categoryCheckbox${index}`}
-                  value={option}
-                  checked={selectedFilters.category.includes(option)}
-                  onChange={() => this.handleFilterChange('category', option)}
-                />
-                <label for="example-1" htmlFor={`categoryCheckbox${index}`}>
-                  {option}({this.getCategoryCount(option)})
-                </label>
-              </div>
-            ))}
+            {filterOptions.categories
+              .slice(0, this.state.displayCategories)
+              .map((option, index) => {
+                // Skip rendering if the option is an empty string
+                if (option === '') {
+                  return null;
+                }
+
+                return (
+                  <div key={index} className="checkbox-wrapper-1">
+                    <input
+                      type="checkbox"
+                      className="substituted"
+                      aria-hidden="true"
+                      id={`categoryCheckbox${index}`}
+                      value={option}
+                      checked={selectedFilters.category.includes(option)}
+                      onChange={() => this.handleFilterChange('category', option)}
+                    />
+                    <label htmlFor={`categoryCheckbox${index}`}>
+                      {option} ({this.getCategoryCount(option)})
+                    </label>
+                  </div>
+                );
+              })}
             {filterOptions.categories.length > 10 && (
               <div className="load-more-buttons">
                 <button className="load-more-button" onClick={this.handleToggleCategories}>
@@ -820,7 +854,8 @@ class GripperList extends Component {
                 <span className="close" onClick={this.toggleAddGripperForm}>&times;</span>
                 <h2>Add Gripper</h2>
                 <div className="form-row">
-                  <label>Model Name:</label>
+                  <spam className="required">* </spam>
+                  <label> Model Name:</label>
                   <input
                     type="text"
                     value={modelName}
@@ -852,7 +887,7 @@ class GripperList extends Component {
                   />
                 </div>
                 <div className="form-row">
-                  <label>Manufacture Type:</label>
+                  <label>Type:</label>
                   <input
                     type="text"
                     value={manufactureType}
@@ -860,7 +895,7 @@ class GripperList extends Component {
                   />
                 </div>
                 <div className="form-row">
-                  <label>Manufacture Category:</label>
+                  <label>Category:</label>
                   <input
                     type="text"
                     value={manufactureCategory}
@@ -928,55 +963,55 @@ class GripperList extends Component {
             </div>
           ) : null}
 
-{grippersToRender.length > 0 ? (
-  grippersToRender.map((gripper, index) => (
-    <div key={index} className="product-card">
-      <div className="product-header">
-        <FontAwesomeIcon
-          icon={faTrash}
-          onClick={(e) => {
-            e.stopPropagation(); // Stop the event from propagating to the product card
-            this.confirmDeleteGripper(gripper);
-          }}
-          className="trash-icon"
-        />
-      </div>
-      <div className="product-content" onClick={() => this.openGripperDetails(gripper)}>
-        {gripper.Data.find((data) => data.Property === 'ImageURL') ? (
-          <img
-            src={gripper.Data.find((data) => data.Property === 'ImageURL').Value}
-            alt={gripper['Model Name']}
-          />
-        ) : (
-          <p>Image not available</p>
-        )}
-        <h2>{gripper['Model Name']}</h2>
-      </div>
-      {gripper.Data.find((data) => data.Property === 'Datasheet') ? (
-        gripper.Data.find((data) => data.Property === 'Datasheet').Value ? (
-          <div>
-            <a
-              href={gripper.Data.find((data) => data.Property === 'Datasheet').Value}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <FontAwesomeIcon icon={faFilePdf} className="pdf-icon" /> Datasheet PDF
-            </a>
-          </div>
-        ) : (
-          <p>PDF not available</p>
-        )
-      ) : (
-        <p>PDF not available</p>
-      )}
-    </div>
-  ))
-) : (
-  <div className="no-data-message">
-    <p>No grippers match the selected criteria.</p>
-    <FontAwesomeIcon icon={faDatabase} className="faDatabase-icon" />
-  </div>
-)}
+          {grippersToRender.length > 0 ? (
+            grippersToRender.map((gripper, index) => (
+              <div key={index} className="product-card">
+                <div className="product-header">
+                  <FontAwesomeIcon
+                    icon={faTrash}
+                    onClick={(e) => {
+                      e.stopPropagation(); // Stop the event from propagating to the product card
+                      this.confirmDeleteGripper(gripper);
+                    }}
+                    className="trash-icon"
+                  />
+                </div>
+                <div className="product-content" onClick={() => this.openGripperDetails(gripper)}>
+                  {gripper.Data.find((data) => data.Property === 'ImageURL') ? (
+                    <img
+                      src={gripper.Data.find((data) => data.Property === 'ImageURL').Value}
+                      alt={gripper['Model Name']}
+                    />
+                  ) : (
+                    <p>Image not available</p>
+                  )}
+                  <h2>{gripper['Model Name']}</h2>
+                </div>
+                {gripper.Data.find((data) => data.Property === 'Datasheet') ? (
+                  gripper.Data.find((data) => data.Property === 'Datasheet').Value ? (
+                    <div>
+                      <a
+                        href={gripper.Data.find((data) => data.Property === 'Datasheet').Value}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <FontAwesomeIcon icon={faFilePdf} className="pdf-icon" /> Datasheet PDF
+                      </a>
+                    </div>
+                  ) : (
+                    <p>PDF not available</p>
+                  )
+                ) : (
+                  <p>PDF not available</p>
+                )}
+              </div>
+            ))
+          ) : (
+            <div className="no-data-message">
+              <p>No grippers match the selected criteria.</p>
+              <FontAwesomeIcon icon={faDatabase} className="faDatabase-icon" />
+            </div>
+          )}
 
 
           {selectedGripperDetails && (

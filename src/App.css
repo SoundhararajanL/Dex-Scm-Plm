@@ -731,3 +731,33 @@ input {
   .trash-icon:hover {
     box-shadow: 0 0 10px 0px #0b0b0b;
   }
+
+
+  .view{
+    position: absolute;
+    margin-left: 20px;
+    display: flex;
+    justify-content: space-between;
+    width: auto; /* Set the desired width */
+    border: 1px solid #000; /* Set border style as needed */
+    height: auto;
+  }
+  
+  .icon-box {
+    flex: 1;
+    text-align: center;
+    padding: 10px; /* Add padding as needed */
+    border-right: 1px solid #000; /* Set border style as needed */
+    &.active {
+      background-color: #ccc;
+    }
+  }
+  
+  .icon-box:last-child {
+    border-right: none; /* Remove right border for the last icon-box */
+  }
+
+
+  .required{
+    color: red;
+  }
