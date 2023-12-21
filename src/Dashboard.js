@@ -128,7 +128,7 @@ class GripperList extends Component {
 
     // Update the data.json file with the new gripper object
     try {
-      const response = await axios.post('http://localhost:3000/api/updateData', { newGripper }, { headers: { 'Content-Type': 'application/json' } });
+      const response = await axios.post('http://localhost:3001/api/updateData', { newGripper }, { headers: { 'Content-Type': 'application/json' } });
 
 
       // Assuming your server responds with the updated data.json content
@@ -146,7 +146,7 @@ class GripperList extends Component {
 
 
   filterGrippers = () => {
-    const { jsonData, selectedFilters, minMaxValues } = this.state;
+    const { jsonData, selectedFilters } = this.state;
 
 
     const payloadMin = parseFloat(selectedFilters.payloadMin);
@@ -433,7 +433,7 @@ class GripperList extends Component {
     .filter(value => value !== ''); // Filter out empty values
     // Fetch min and max values from the server
     axios
-      .get('http://localhost:3000/api/grippers/minmax')
+      .get('http://localhost:3001/api/grippers/minmax')
       .then((response) => {
         const minMaxValues = response.data;
         console.log('minMaxValues:', minMaxValues);
@@ -505,7 +505,7 @@ class GripperList extends Component {
   deleteGripper = async (gripper) => {
     try {
       // Send a request to the server to delete the gripper
-      const response = await fetch(`http://localhost:3000/api/deleteGripper/${gripper['Model Name']}`, {
+      const response = await fetch(`http://localhost:3001/api/deleteGripper/${gripper['Model Name']}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
