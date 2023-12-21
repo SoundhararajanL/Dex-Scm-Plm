@@ -150,5 +150,5 @@ app.delete('/api/deleteGripper/:modelName', async (req, res) => {
 
 
 app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
+  console.log(`Server is running on http://18.143.33.193:${port}`);
 });
