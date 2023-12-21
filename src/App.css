@@ -756,3 +756,8 @@ input {
   .icon-box:last-child {
     border-right: none; /* Remove right border for the last icon-box */
   }
+
+
+  .required{
+    color: red;
+  }
