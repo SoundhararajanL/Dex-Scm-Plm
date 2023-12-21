@@ -8,6 +8,7 @@ import './App.css';
 import jsonData from './data.json';
 import Slider from '@mui/material/Slider';
 
+
 class GripperList extends Component {
 
   state = {
