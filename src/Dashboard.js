@@ -818,7 +818,7 @@ class GripperList extends Component {
         </div>
         <div className="product-list">
           <h1 className="top">
-            Grippers list <FontAwesomeIcon icon={faDatabase} />
+            Grippers List <FontAwesomeIcon icon={faDatabase} />
           </h1>
           <div className="top">Count of Products: {productCount}</div>
           <div className="search-section">
